@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CustomerChat from './messenger.js';
+import ChatWindow from './chat-window.js';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           Learn React
         </a>
       </header>
+      {/* <CustomerChat /> */}
+      <ChatWindow />
     </div>
   );
 }
