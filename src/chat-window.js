@@ -1,6 +1,54 @@
 import React, {Component} from 'react';
 import {Launcher} from 'react-chat-window';
 
+import { CometChat } from "@cometchat-pro/chat";
+
+/////initialize cometChat
+
+var appID = "162528093d8ef33";
+var region = "us";
+var appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
+CometChat.init(appID, appSetting).then(
+  () => {
+    console.log("Initialization completed successfully");
+    // You can now call login function.
+  },
+  error => {
+    console.log("Initialization failed with error:", error);
+    // Check the reason for error and take appropriate action.
+  }
+);
+
+////////create user
+
+let apiKey = "d9acdcf72ee2eef8fb5181a7403440902f7abb3f";
+var uid = "user1";
+var name = "Param";
+
+var user = new CometChat.User(uid);
+
+user.setName(name);
+
+CometChat.createUser(user, apiKey).then(
+    user => {
+        console.log("user created", user);
+    },error => {
+        console.log("error", error);
+    }
+)
+
+/////////login
+var UID = "SUPERHERO1";
+//var apiKey = "API_KEY";
+
+CometChat.login(UID, apiKey).then(
+  user => {
+    console.log("Login Successful:", { user });    
+  },
+  error => {
+    console.log("Login failed with exception:", { error });    
+  }
+);
 
 //class for react-chat-window
 class ChatWindow extends Component {
