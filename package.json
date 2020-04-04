@@ -15,6 +15,7 @@
     "react-chat-window": "^1.2.1",
     "react-dom": "^16.13.1",
     "react-messenger-customer-chat": "^0.7.2",
+    "react-messenger-send-to-messenger": "^0.2.0",
     "react-relay": "^9.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1"
