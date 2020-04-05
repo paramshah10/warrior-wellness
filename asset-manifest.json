@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/patient_dashboard/static/css/main.5f361e03.chunk.css",
+    "main.js": "/patient_dashboard/static/js/main.4817ae25.chunk.js",
+    "main.js.map": "/patient_dashboard/static/js/main.4817ae25.chunk.js.map",
+    "runtime-main.js": "/patient_dashboard/static/js/runtime-main.4b17b686.js",
+    "runtime-main.js.map": "/patient_dashboard/static/js/runtime-main.4b17b686.js.map",
+    "static/css/2.27c434bd.chunk.css": "/patient_dashboard/static/css/2.27c434bd.chunk.css",
+    "static/js/2.d5c6a159.chunk.js": "/patient_dashboard/static/js/2.d5c6a159.chunk.js",
+    "static/js/2.d5c6a159.chunk.js.map": "/patient_dashboard/static/js/2.d5c6a159.chunk.js.map",
+    "index.html": "/patient_dashboard/index.html",
+    "precache-manifest.21cf8b8535e989d0e8ff0e2d9a4a9d3d.js": "/patient_dashboard/precache-manifest.21cf8b8535e989d0e8ff0e2d9a4a9d3d.js",
+    "service-worker.js": "/patient_dashboard/service-worker.js",
+    "static/css/2.27c434bd.chunk.css.map": "/patient_dashboard/static/css/2.27c434bd.chunk.css.map",
+    "static/css/main.5f361e03.chunk.css.map": "/patient_dashboard/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.d5c6a159.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/2.d5c6a159.chunk.js.LICENSE.txt",
+    "static/media/chat-icon.svg": "/patient_dashboard/static/media/chat-icon.e0d2b748.svg",
+    "static/media/logo-no-bg.svg": "/patient_dashboard/static/media/logo-no-bg.7718b3e3.svg",
+    "static/media/notification.mp3": "/patient_dashboard/static/media/notification.0d062b33.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4b17b686.js",
+    "static/css/2.27c434bd.chunk.css",
+    "static/js/2.d5c6a159.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.4817ae25.chunk.js"
+  ]
+}
