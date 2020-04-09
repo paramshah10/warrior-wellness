@@ -7,14 +7,12 @@ import Messenger from './messenger.js';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <Messenger />
+      <div>
+          {/* <Messenger /> */}
 
-          {/* <ChatWindow />  */}
+          <ChatWindow />
 
           {/* <ChatWidget /> */}
-        </header>
       </div>
     );
   }

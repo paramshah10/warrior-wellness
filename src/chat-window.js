@@ -120,7 +120,7 @@ class ChatWindow extends Component {
         isOpen={this.state.isOpen}
         showEmoji
       />
-      <form onSubmit={(e)=> {
+      {/* <form onSubmit={(e)=> {
             e.preventDefault();
             this._sendMessage(this.textArea.value);         //use _send message to reply to messages
             this.textArea.value = '';
@@ -132,7 +132,7 @@ class ChatWindow extends Component {
             placeholder="Write a test message...."
         />
         <button> Send Message! </button>
-    </form>
+      </form> */}
     </div>
     )
   }
