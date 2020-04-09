@@ -44,7 +44,6 @@ class Messenger extends Component {
             <MessengerCustomerChat
             pageId="100902811579573"
             appId="203947964382425"
-            version="6.0"
           />
         )
     }
