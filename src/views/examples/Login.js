@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -113,9 +113,12 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Button className="my-4" color="primary" type="button">
-                    Sign in
-                  </Button>
+                  <Link
+                  className="nav-link-icon"
+                  to="/"
+                  >
+                    <Button className="my-4" color="primary" type="button">Sign In</Button>
+                  </Link>
                 </div>
               </Form>
             </CardBody>
@@ -131,13 +134,12 @@ class Login extends React.Component {
               </a>
             </Col>
             <Col className="text-right" xs="6">
-              <a
+              <Link
                 className="text-light"
-                href="#pablo"
-                onClick={e => e.preventDefault()}
+                to="/auth/register"
               >
                 <small>Create new account</small>
-              </a>
+              </Link>
             </Col>
           </Row>
         </Col>

@@ -28,7 +28,7 @@ class Login extends React.Component {
         <footer className="py-5">
           <Container>
             <Row className="align-items-center justify-content-xl-between">
-              <Col xl="6">
+              {/* <Col xl="6">
                 <div className="copyright text-center text-xl-left text-muted">
                   © 2018{" "}
                   <a
@@ -39,8 +39,8 @@ class Login extends React.Component {
                     Creative Tim
                   </a>
                 </div>
-              </Col>
-              <Col xl="6">
+              </Col> */}
+              {/* <Col xl="6">
                 <Nav className="nav-footer justify-content-center justify-content-xl-end">
                   <NavItem>
                     <NavLink
@@ -75,7 +75,7 @@ class Login extends React.Component {
                     </NavLink>
                   </NavItem>
                 </Nav>
-              </Col>
+              </Col> */}
             </Row>
           </Container>
         </footer>

@@ -59,6 +59,9 @@ class Index extends React.Component {
       parseOptions(Chart, chartOptions());
     }
   }
+  componentDidUpdate() {
+    window.scrollTo(0,0);
+  }
   toggleNavs = (e, index) => {
     e.preventDefault();
     this.setState({
