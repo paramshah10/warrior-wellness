@@ -16,6 +16,7 @@
 
 */
 import React from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -138,9 +139,14 @@ class Register extends React.Component {
                   </Col>
                 </Row>
                 <div className="text-center">
-                  <Button className="mt-4" color="primary" type="button">
-                    Create account
-                  </Button>
+                  <Link
+                    className="nav-link-icon"
+                    to="/"
+                  >
+                    <Button className="mt-4" color="primary" type="button">
+                      Create account
+                    </Button>
+                  </Link>
                 </div>
               </Form>
             </CardBody>
