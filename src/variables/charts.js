@@ -115,7 +115,7 @@ Chart.elements.Rectangle.prototype.draw = function() {
     let x = corners[1][0];
     let y = corners[1][1];
     // eslint-disable-next-line
-    var radius: any = cornerRadius;
+    var radius = cornerRadius;
 
     // Fix radius being too large
     if (radius > height / 2) {
@@ -313,8 +313,8 @@ let chartExample1 = {
           },
           ticks: {
             callback: function(value) {
-              if (!(value % 10)) {
-                return "$" + value + "k";
+              if (!(value % 5)) {
+                return value;
               }
             }
           }
@@ -332,30 +332,42 @@ let chartExample1 = {
             content += label;
           }
 
-          content += "$" + yLabel + "k";
+          // content += '$' + yLabel + 'k';
+          content += yLabel;
           return content;
         }
       }
     }
   },
-  data1: canvas => {
+  data1: canvas => {//Stress score by month
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["12am", "3am", "6am", "9am", "12am", "3pm", "6pm", "9pm", "12am"],
       datasets: [
         {
-          label: "Performance",
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+          label: "Stress Score by Day",
+          data: [3, 0, 0, 3, 12, 22, 14, 10, 4]
         }
       ]
     };
   },
-  data2: canvas => {
+  data2: canvas => {//Stress score by week
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       datasets: [
         {
-          label: "Performance",
-          data: [0, 20, 5, 25, 10, 30, 15, 40, 40]
+          label: "Stress Score by Week",
+          data: [20, 18, 15, 20, 21, 24, 19]
+        }
+      ]
+    };
+  },
+  data3: canvas => {//Stress score by day
+    return {
+      labels: ["1st", "2nd", "4th", "6th", "8th", "10th", "12th", "14th", "16th", "18th", "20th", "22nd", "24th", "26th", "28th", "30th"],
+      datasets: [
+        {
+          label: "Stress Score by Month",
+          data: [10, 16, 18, 15, 20, 21, 24, 19, 13, 14, 11, 20, 21, 24, 19, 13]
         }
       ]
     };

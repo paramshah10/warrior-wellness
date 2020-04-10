@@ -59,16 +59,31 @@ class Index extends React.Component {
       parseOptions(Chart, chartOptions());
     }
   }
-  componentDidUpdate() {
+  componentDidMount() {
     window.scrollTo(0,0);
   }
   toggleNavs = (e, index) => {
     e.preventDefault();
     this.setState({
-      activeNav: index,
-      chartExample1Data:
-        this.state.chartExample1Data === "data1" ? "data2" : "data1"
+      activeNav: index
     });
+    if (index == 1){
+      this.setState({
+        chartExample1Data:
+          this.state.chartExample1Data = "data1"
+      });
+    } else if (index == 2){
+      this.setState({
+        chartExample1Data:
+          this.state.chartExample1Data = "data2"
+      });
+    } else {
+      this.setState({
+        chartExample1Data:
+          this.state.chartExample1Data = "data3"
+      });
+    }
+
   };
   render() {
     return (
@@ -85,7 +100,7 @@ class Index extends React.Component {
                       <h6 className="text-uppercase text-light ls-1 mb-1">
                         Overview
                       </h6>
-                      <h2 className="text-white mb-0">Sales value</h2>
+                      <h2 className="text-white mb-0">Stress Score</h2>
                     </div>
                     <div className="col">
                       <Nav className="justify-content-end" pills>
@@ -97,8 +112,8 @@ class Index extends React.Component {
                             href="#pablo"
                             onClick={e => this.toggleNavs(e, 1)}
                           >
-                            <span className="d-none d-md-block">Month</span>
-                            <span className="d-md-none">M</span>
+                            <span className="d-none d-md-block">Day</span>
+                            <span className="d-md-none">D</span>
                           </NavLink>
                         </NavItem>
                         <NavItem>
@@ -112,6 +127,18 @@ class Index extends React.Component {
                           >
                             <span className="d-none d-md-block">Week</span>
                             <span className="d-md-none">W</span>
+                          </NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink
+                            className={classnames("py-2 px-3", {
+                              active: this.state.activeNav === 3
+                            })}
+                            href="#pablo"
+                            onClick={e => this.toggleNavs(e, 3)}
+                          >
+                            <span className="d-none d-md-block">Month</span>
+                            <span className="d-md-none">M</span>
                           </NavLink>
                         </NavItem>
                       </Nav>
