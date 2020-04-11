@@ -129,7 +129,7 @@ class Header extends React.Component {
                             Overall Performance
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            49,65%
+                            49.65%
                           </span>
                         </div>
                         <Col className="col-auto">

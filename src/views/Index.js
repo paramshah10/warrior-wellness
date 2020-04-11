@@ -240,9 +240,9 @@ class Index extends React.Component {
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
                     <div className="col">
-                      <h3 className="mb-0">Page visits</h3>
+                      <h3 className="mb-0">Recent High Stress Incidents</h3>
                     </div>
-                    <div className="col text-right">
+                    {/* <div className="col text-right">
                       <Button
                         color="primary"
                         href="#pablo"
@@ -251,62 +251,73 @@ class Index extends React.Component {
                       >
                         See all
                       </Button>
-                    </div>
+                    </div> */}
                   </Row>
                 </CardHeader>
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
                     <tr>
-                      <th scope="col">Page name</th>
-                      <th scope="col">Visitors</th>
-                      <th scope="col">Unique users</th>
-                      <th scope="col">Bounce rate</th>
+                      <th scope="col">Reason</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Description</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">/argon/</th>
-                      <td>4,569</td>
-                      <td>340</td>
+                      <th scope="row">Work</th>
+                      <td>04/11/2020</td>
+                      <td>2:00 PM</td>
                       <td>
-                        <i className="fas fa-arrow-up text-success mr-3" />{" "}
-                        46,53%
+                        {/* <i className="fas fa-arrow-up text-success mr-3" />{" "} */}
+                        Heard a rumour in the office that the higher authorities were cutting jobs.
+                        <br/>
+                        Scared that I would be let go from the company.
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">/argon/index.html</th>
-                      <td>3,985</td>
-                      <td>319</td>
+                      <th scope="row">Work</th>
+                      <td>02/11/2020</td>
+                      <td>3:40 PM</td>
                       <td>
-                        <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                        46,53%
+                        {/* <i className="fas fa-arrow-up text-success mr-3" />{" "} */}
+                        Boss assigned me more work when I was already drowing in the current work.
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">/argon/charts.html</th>
-                      <td>3,513</td>
-                      <td>294</td>
+                      <th scope="row">Family</th>
+                      <td>01/11/2020</td>
+                      <td>7:20 PM</td>
                       <td>
-                        <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                        36,49%
+                        {/* <i className="fas fa-arrow-down text-warning mr-3" />{" "} */}
+                        Daughter broke her new iphone and demanded to buy her a new one.
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">/argon/tables.html</th>
-                      <td>2,050</td>
-                      <td>147</td>
+                      <th scope="row">Money</th>
+                      <td>18/03/2020</td>
+                      <td>4:20 PM</td>
                       <td>
-                        <i className="fas fa-arrow-up text-success mr-3" />{" "}
-                        50,87%
+                        {/* <i className="fas fa-arrow-down text-warning mr-3" />{" "} */}
+                        Rent due in 2 days but haven't been able to gather the money yet.
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">/argon/profile.html</th>
-                      <td>1,795</td>
-                      <td>190</td>
+                      <th scope="row">Work</th>
+                      <td>12/03/2020</td>
+                      <td>4:12 PM</td>
                       <td>
-                        <i className="fas fa-arrow-down text-danger mr-3" />{" "}
-                        46,53%
+                        {/* <i className="fas fa-arrow-down text-danger mr-3" />{" "} */}
+                        Project due at the end of the month but worried will meet all deadlines.
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Family</th>
+                      <td>02/03/2020</td>
+                      <td>8:19 PM</td>
+                      <td>
+                        {/* <i className="fas fa-arrow-down text-danger mr-3" />{" "} */}
+                        Just got in a fight with my wife over small a issue.
                       </td>
                     </tr>
                   </tbody>
@@ -320,7 +331,7 @@ class Index extends React.Component {
                     <div className="col">
                       <h3 className="mb-0">Social traffic</h3>
                     </div>
-                    <div className="col text-right">
+                    {/* <div className="col text-right">
                       <Button
                         color="primary"
                         href="#pablo"
@@ -329,7 +340,7 @@ class Index extends React.Component {
                       >
                         See all
                       </Button>
-                    </div>
+                    </div> */}
                   </Row>
                 </CardHeader>
                 <Table className="align-items-center table-flush" responsive>
