@@ -34,6 +34,9 @@ import {
 } from "reactstrap";
 
 class Login extends React.Component {
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
   render() {
     return (
       <>
