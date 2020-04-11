@@ -382,7 +382,7 @@ let chartExample2 = {
         {
           ticks: {
             callback: function(value) {
-              if (!(value % 10)) {
+              if (!(value % 2)) {
                 //return '$' + value + 'k'
                 return value;
               }
@@ -406,15 +406,29 @@ let chartExample2 = {
       }
     }
   },
-  data: {
-    labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Sales",
-        data: [25, 20, 30, 22, 17, 29],
-        maxBarThickness: 10
-      }
-    ]
+  data1: canvas => {//Sleep by week
+    return {
+      labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
+      datasets: [
+        {
+          label: "Sleep by Week",
+          data: [7.2, 7, 7.5, 7.3, 7.9, 8.2, 8.3],
+          maxBarThickness: 10
+        }
+      ]
+    };
+  },
+  data2: canvas => { //sleep by month
+    return {  
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      datasets: [
+        {
+          label: "Sleep by Month",
+          data: [8.2, 7.9, 8.1, 8.5],
+          maxBarThickness: 10
+        }
+      ]
+    };
   }
 };
 
