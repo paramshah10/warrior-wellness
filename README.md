@@ -25,7 +25,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run deploy'
+### `npm run deploy`
 
 Build and deploy your app to the gh-pages branch which has been hosted on github pages.
 
