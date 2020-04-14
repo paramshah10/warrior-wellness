@@ -1,31 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "11deb5b99329a2d22424d3cc0afaf1b3",
+    "revision": "ac676cfb08c19ffde0d88ab00727b0e9",
     "url": "/patient_dashboard/index.html"
   },
   {
-    "revision": "35a558f0dc6aa3c4985c",
+    "revision": "6ef1c535c3dbc71f43fc",
     "url": "/patient_dashboard/static/css/2.28e9ad45.chunk.css"
   },
   {
-    "revision": "3fafc4df8b3a245e6bf3",
+    "revision": "4982258474eccc5980b6",
     "url": "/patient_dashboard/static/css/main.3e1f8d51.chunk.css"
   },
   {
-    "revision": "35a558f0dc6aa3c4985c",
-    "url": "/patient_dashboard/static/js/2.14155a83.chunk.js"
+    "revision": "6ef1c535c3dbc71f43fc",
+    "url": "/patient_dashboard/static/js/2.afbd5c86.chunk.js"
   },
   {
     "revision": "259bbfe91f4712a1a3c0ef176eaae51f",
-    "url": "/patient_dashboard/static/js/2.14155a83.chunk.js.LICENSE.txt"
+    "url": "/patient_dashboard/static/js/2.afbd5c86.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3fafc4df8b3a245e6bf3",
-    "url": "/patient_dashboard/static/js/main.77d14c45.chunk.js"
+    "revision": "4982258474eccc5980b6",
+    "url": "/patient_dashboard/static/js/main.4823e608.chunk.js"
   },
   {
     "revision": "8d0d562f4ec3c131ac27d52de65ecd17",
-    "url": "/patient_dashboard/static/js/main.77d14c45.chunk.js.LICENSE.txt"
+    "url": "/patient_dashboard/static/js/main.4823e608.chunk.js.LICENSE.txt"
   },
   {
     "revision": "4e6f3227a076b8e15c3b",
