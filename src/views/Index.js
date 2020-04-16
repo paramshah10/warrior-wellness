@@ -329,7 +329,7 @@ class Index extends React.Component {
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
                     <div className="col">
-                      <h3 className="mb-0">Social traffic</h3>
+                      <h3 className="mb-0">Additional Analysis</h3>
                     </div>
                     {/* <div className="col text-right">
                       <Button
@@ -346,15 +346,15 @@ class Index extends React.Component {
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
                     <tr>
-                      <th scope="col">Referral</th>
-                      <th scope="col">Visitors</th>
+                      <th scope="col">Feature 1</th>
+                      <th scope="col">Feature 2</th>
                       <th scope="col" />
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">Facebook</th>
-                      <td>1,480</td>
+                      <th scope="row">Label #1</th>
+                      <td>Data #1</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">60%</span>
@@ -369,8 +369,8 @@ class Index extends React.Component {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Facebook</th>
-                      <td>5,480</td>
+                      <th scope="row">Label #2</th>
+                      <td>Data #2</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">70%</span>
@@ -385,8 +385,8 @@ class Index extends React.Component {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Google</th>
-                      <td>4,807</td>
+                      <th scope="row">Label #3</th>
+                      <td>Data #3</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">80%</span>
@@ -397,8 +397,8 @@ class Index extends React.Component {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Instagram</th>
-                      <td>3,678</td>
+                      <th scope="row">Label #4</th>
+                      <td>Data #4</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">75%</span>
@@ -413,8 +413,8 @@ class Index extends React.Component {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">twitter</th>
-                      <td>2,645</td>
+                      <th scope="row">Label #5</th>
+                      <td>Data #5</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <span className="mr-2">30%</span>
