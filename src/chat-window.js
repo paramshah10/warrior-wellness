@@ -3,53 +3,6 @@ import {Launcher} from 'react-chat-window';
 
 import { CometChat } from "@cometchat-pro/chat";
 
-/////initialize cometChat
-
-var appID = "162528093d8ef33";
-var region = "us";
-var appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
-CometChat.init(appID, appSetting).then(
-  () => {
-    console.log("Initialization completed successfully");
-    // You can now call login function.
-  },
-  error => {
-    console.log("Initialization failed with error:", error);
-    // Check the reason for error and take appropriate action.
-  }
-);
-
-////////create user
-
-let apiKey = "d9acdcf72ee2eef8fb5181a7403440902f7abb3f";
-var uid = "user1";
-var name = "Param";
-
-var user = new CometChat.User(uid);
-
-user.setName(name);
-
-CometChat.createUser(user, apiKey).then(
-    user => {
-        console.log("user created", user);
-    },error => {
-        console.log("error", error);
-    }
-)
-
-/////////login
-var UID = "SUPERHERO1";
-//var apiKey = "API_KEY";
-
-CometChat.login(UID, apiKey).then(
-  user => {
-    console.log("Login Successful:", { user });    
-  },
-  error => {
-    console.log("Login failed with exception:", { error });    
-  }
-);
-
 //class for react-chat-window
 class ChatWindow extends Component {
  
@@ -61,25 +14,50 @@ class ChatWindow extends Component {
       isOpen: false,
     };
   }
- 
-  _onMessageWasSent(message) {
-    this.setState({
-      messageList: [...this.state.messageList, message]
-    })
-    console.log(`New message`);
-  }
- 
-  _onFilesSelected(fileList) {
-    const objectURL = window.URL.createObjectURL(fileList[0]);
-    this.setState({
-      messageList: [...this.state.messageList, {
-        type: 'file', author: 'me',
-        data: {
-          url: objectURL,
-          fileName: fileList[0].name
-        }
-      }]
-    });
+
+  componentDidMount(){
+    /////initialize cometChat
+    var appID = "162528093d8ef33";
+    var region = "us";
+    var appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
+    CometChat.init(appID, appSetting).then(
+      () => {
+        console.log("Initialization completed successfully");
+        // You can now call login function.
+      },
+      error => {
+        console.log("Initialization failed with error:", error);
+        // Check the reason for error and take appropriate action.
+      }
+    );
+
+    ////////create user and authentication
+    var apiKey = "d9acdcf72ee2eef8fb5181a7403440902f7abb3f";
+    var UID = "user1";
+    var name = "Param";
+
+    var user = new CometChat.User(UID);
+
+    user.setName(name);
+
+    // if (the first time logging in)
+    // CometChat.createUser(user, apiKey).then(
+    //     user => {
+    //         console.log("user created", user);
+    //     },error => {
+    //         console.log("error", error);
+    //     }
+    // )
+
+    /////////login
+    CometChat.login(UID, apiKey).then(
+      user => {
+        console.log("Login Successful:", { user });    
+      },
+      error => {
+        console.log("Login failed with exception:", { error });    
+      }
+    );
   }
 
   _sendMessage(text) {
@@ -97,6 +75,57 @@ class ChatWindow extends Component {
     }
   }
  
+  componentDidUpdate() {
+    var listenerID = "user1";
+    CometChat.addMessageListener(
+      listenerID, 
+      new CometChat.MessageListener({
+        onTextMessageReceived: message => {
+          console.log("Message received successfully:", message);
+          this._sendMessage(message.data.text);
+        }
+      })
+    );
+  }
+
+  _onMessageWasSent(message) {
+    this.setState({
+      messageList: [...this.state.messageList, message]
+    })
+    console.log(`New message`);
+
+    // var receiverID = user1; 
+    var messageText = message.data.text; 
+    var receiverType = CometChat.RECEIVER_TYPE.USER; 
+    var receiverID = "user1";
+
+    var textMessage = new CometChat.TextMessage(receiverID, messageText, receiverType);      
+    
+    CometChat.sendMessage(textMessage).then( 
+      message => { 
+          console.log("Message sent successfully:", message); 
+          // Do something with message 
+      }, 
+      error => { 
+          console.log("Message sending failed with error:", error); 
+          // Handle any error 
+      } 
+    );
+  }
+ 
+  _onFilesSelected(fileList) {
+    const objectURL = window.URL.createObjectURL(fileList[0]);
+    this.setState({
+      messageList: [...this.state.messageList, {
+        type: 'file', author: 'me',
+        data: {
+          url: objectURL,
+          fileName: fileList[0].name
+        }
+      }]
+    });
+  }
+
   _handleClick() {
     this.setState({
       isOpen: !this.state.isOpen,
@@ -120,19 +149,6 @@ class ChatWindow extends Component {
         isOpen={this.state.isOpen}
         showEmoji
       />
-      {/* <form onSubmit={(e)=> {
-            e.preventDefault();
-            this._sendMessage(this.textArea.value);         //use _send message to reply to messages
-            this.textArea.value = '';
-        }}>
-        <div>Test the chat window by sending a message:</div>
-        <textarea
-            ref={(e) => { this.textArea = e; }}
-            className="demo-test-area--text"
-            placeholder="Write a test message...."
-        />
-        <button> Send Message! </button>
-      </form> */}
     </div>
     )
   }
