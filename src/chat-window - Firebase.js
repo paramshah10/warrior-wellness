@@ -6,7 +6,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/messaging";
 
-
+var app;
 
 //class for react-chat-window
 class ChatWindow extends Component {
@@ -17,6 +17,7 @@ class ChatWindow extends Component {
       messageList: [],
       newMessagesCount: 0,
       isOpen: false,
+      didInitialize: false,
     };
   }
  
@@ -35,49 +36,79 @@ class ChatWindow extends Component {
     };
 
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    app = firebase.initializeApp(firebaseConfig);
 
-    const messaging = firebase.messaging();
-    messaging.usePublicVapidKey('BC2Wcv7Y2Ac5wOXNYMrIRMpCHfwR4uq0DzEVfIcDBdFJ7PwxQQrLo_zxx5vbvmkJwXLGxvL-8dWm2YXwCg99Wps');
+  //   const messaging = firebase.messaging();
+  //   messaging.usePublicVapidKey('BC2Wcv7Y2Ac5wOXNYMrIRMpCHfwR4uq0DzEVfIcDBdFJ7PwxQQrLo_zxx5vbvmkJwXLGxvL-8dWm2YXwCg99Wps');
 
-    messaging.requestPermission()
-    .then(function() {
-      console.log('Have persmission');
-      return messaging.getToken();
-    })
-    .then(function(token) {
-      console.log(token);   //normally send it to server so you can actually send a message to that token later on
-    })
-    .catch(function(err){
-      console.log('Error occured!');
-    })
+  //   messaging.requestPermission()
+  //   .then(function() {
+  //     console.log('Have persmission');
+  //     return messaging.getToken();
+  //   })
+  //   .then(function(token) {
+  //     console.log(token);   //normally send it to server so you can actually send a message to that token later on
+  //   })
+  //   .catch(function(err){
+  //     console.log('Error occured!', err);
+  //   })
 
-    // Get Instance ID token. Initially this makes a network call, once retrieved
-    // subsequent calls to getToken will return from cache.
-    messaging.getToken().then((currentToken) => {
-      if (currentToken) {
-        console.log(currentToken);
-        // sendTokenToServer(currentToken);
-        // updateUIForPushEnabled(currentToken);
-      } else {
-        // Show permission request.
-        console.log('No Instance ID token available. Request permission to generate one.');
-        // Show permission UI.
-        // updateUIForPushPermissionRequired();
-        // setTokenSentToServer(false);
-      }
-    }).catch((err) => {
-      console.log('An error occurred while retrieving token. ', err);
-      // showToken('Error retrieving Instance ID token. ', err);
-      // setTokenSentToServer(false);
-    });
+  //   // Get Instance ID token. Initially this makes a network call, once retrieved
+  //   // subsequent calls to getToken will return from cache.
+  //   messaging.getToken().then((currentToken) => {
+  //     if (currentToken) {
+  //       console.log(currentToken);
+  //       // sendTokenToServer(currentToken);
+  //       // updateUIForPushEnabled(currentToken);
+  //     } else {
+  //       // Show permission request.
+  //       console.log('No Instance ID token available. Request permission to generate one.');
+  //       // Show permission UI.
+  //       // updateUIForPushPermissionRequired();
+  //       // setTokenSentToServer(false);
+  //     }
+  //   }).catch((err) => {
+  //     console.log('An error occurred while retrieving token. ', err);
+  //     // showToken('Error retrieving Instance ID token. ', err);
+  //     // setTokenSentToServer(false);
+  //   });
+  }
+
+  componentWillUnmount(){
+    app.delete();
   }
 
   _onMessageWasSent(message) {
     this.setState({
       messageList: [...this.state.messageList, message]
     })
-    console.log(`New message`);
+    console.log(`New message`, message);
+
+    var key = 'AAAAJIEH5Wg:APA91bEbq9v54jyJkBpBo6OMC-QhLFN8KGHNz4tbRbA_rmzQcgfDbP7Y6SmSoLK_PexoEKwqzkUfJ772r8xVQiyckck-UYpwU6JiAeE0M3SouAFyNzXaZcBgcai-6Fgb_TkSLBcmZGVQ';
+    var to = 'flYM3Wwx73RzGV7KxYz6bE:APA91bGgt7vyucez9ZZKmBaHuZ5_-9QrZb641SKARgmv9FfMuWApGoszJ6ssRb81WxPjfsw8gQEVPbC-exB5QZJI__5aLrOUu1mUdbaHzpmSvmiLosawjFKeMXV8uYPm1yvY-ujZZ37C';
+    var notification = {
+      'title': 'Portugal vs. Denmark',
+      'body': '5 to 1',
+      'icon': 'firebase-logo.png',
+      'click_action': 'http://localhost:8081'
+    };
+
+    fetch('https://fcm.googleapis.com/fcm/send', {
+      'method': 'POST',
+      'headers': {
+        'Authorization': 'key=' + key,
+        'Content-Type': 'application/json'
+      },
+      'body': JSON.stringify({
+        'notification': notification,
+        'to': to
+      })
+    }).then(function(response) {
+      console.log(response);
+    }).catch(function(error) {
+      console.error(error);
+    })
+
   }
  
   _onFilesSelected(fileList) {
