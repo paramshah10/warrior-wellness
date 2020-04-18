@@ -118,7 +118,7 @@ class Login extends React.Component {
                 <div className="text-center">
                   <Link
                   className="nav-link-icon"
-                  to="/"
+                  to="/admin/index"
                   >
                     <Button className="my-4" color="primary" type="button">Sign In</Button>
                   </Link>

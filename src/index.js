@@ -19,8 +19,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import "assets/plugins/nucleo/css/nucleo.css";
@@ -33,14 +31,11 @@ import AuthLayout from "layouts/Auth.js";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
       <Route path="/auth" render={props => <AuthLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" />
+      <Route path="/admin" render={props => <AdminLayout {...props} />} />
     </Switch>
-    <App />
+    <Redirect from="*" to="/auth" />
   </BrowserRouter>,
-  // <React.StrictMode>
-  // </React.StrictMode>,
   document.getElementById('root')
 );
 

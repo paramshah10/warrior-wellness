@@ -23,6 +23,7 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import App from '../App';
 
 import routes from "routes.js";
 
@@ -70,7 +71,7 @@ class Admin extends React.Component {
           routes={routes}
           logo={{
             innerLink: "/admin/index",
-            imgSrc: require("assets/img/brand/argon-react.png"),
+            imgSrc: require("assets/img/theme/react.jpg"),
             imgAlt: "..."
           }}
         />
@@ -87,6 +88,7 @@ class Admin extends React.Component {
             <AdminFooter />
           </Container>
         </div>
+        <App />
       </>
     );
   }
