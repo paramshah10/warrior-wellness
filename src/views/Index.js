@@ -16,13 +16,7 @@
 
 */
 import React from "react";
-// node.js library that concatenates classes (strings)
-import classnames from "classnames";
-// javascipt plugin for creating charts
-import Chart from "chart.js";
-// react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
-// reactstrap components
+
 import {
   Button,
   Card,
@@ -35,207 +29,33 @@ import {
   Table,
   Container,
   Row,
-  Col
+  Col,
+  FormGroup,
+  Label,
+  Input,
+  InputGroup,
+  CustomInput,
 } from "reactstrap";
 
-// core components
-import {
-  chartOptions,
-  parseOptions,
-  chartExample1,
-  chartExample2
-} from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
+import Graphs from "./graphs.js"
 
 class Index extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      activeNav1: 1,
-      activeNav2: 1,
-      chartExample1Data: "data1",
-      chartExample2Data: "data1",
-    };
-    if (window.Chart) {
-      parseOptions(Chart, chartOptions());
-    }
-  }
+  
   componentDidMount() {
     window.scrollTo(0,0);
   }
-  toggleNavs = (e, col, data) => {
-    e.preventDefault();
-    if (col == 1){ //stress
-      this.setState({
-        activeNav1: data
-      });
-      if (data == 1){
-        this.setState({
-          chartExample1Data:
-            this.state.chartExample1Data = "data1"
-        });
-      }
-      else if (data == 2){
-        this.setState({
-          chartExample1Data:
-            this.state.chartExample1Data = "data2"
-        });
-      }
-      else{
-        this.setState({
-          chartExample1Data:
-            this.state.chartExample1Data = "data3"
-        });
-      }
-    }
-    else{ //sleep
-      this.setState({
-        activeNav2: data
-      });
-      if (data == 1){
-        this.setState({
-          chartExample2Data:
-            this.state.chartExample2Data = "data1"
-        });
-      }
-      else {
-        this.setState({
-          chartExample2Data:
-            this.state.chartExample2Data = "data2"
-        });
-      }
-    }
-  };
-
+  
   render() {
     return (
       <>
         <Header />
         {/* Page content */}
         <Container className="mt--7" fluid>
-          <Row>
-            <Col className="mb-5 mb-xl-0" xl="8">
-              <Card className="bg-gradient-default shadow">
-                <CardHeader className="bg-transparent">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h6 className="text-uppercase text-light ls-1 mb-1">
-                        Overview
-                      </h6>
-                      <h2 className="text-white mb-0">Stress Score</h2>
-                    </div>
-                    <div className="col">
-                      <Nav className="justify-content-end" pills>
-                        <NavItem>
-                          <NavLink
-                            className={classnames("py-2 px-3", {
-                              active: this.state.activeNav1 === 1
-                            })}
-                            href="#pablo"
-                            onClick={e => this.toggleNavs(e, 1, 1)}
-                          >
-                            <span className="d-none d-md-block">Day</span>
-                            <span className="d-md-none">D</span>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink
-                            className={classnames("py-2 px-3", {
-                              active: this.state.activeNav1 === 2
-                            })}
-                            data-toggle="tab"
-                            href="#pablo"
-                            onClick={e => this.toggleNavs(e, 1, 2)}
-                          >
-                            <span className="d-none d-md-block">Week</span>
-                            <span className="d-md-none">W</span>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink
-                            className={classnames("py-2 px-3", {
-                              active: this.state.activeNav1 === 3
-                            })}
-                            href="#pablo"
-                            onClick={e => this.toggleNavs(e, 1, 3)}
-                          >
-                            <span className="d-none d-md-block">Month</span>
-                            <span className="d-md-none">M</span>
-                          </NavLink>
-                        </NavItem>
-                      </Nav>
-                    </div>
-                  </Row>
-                </CardHeader>
-                <CardBody>
-                  {/* Chart */}
-                  <div className="chart">
-                    <Line
-                      data={chartExample1[this.state.chartExample1Data]}
-                      options={chartExample1.options}
-                      getDatasetAtEvent={e => console.log(e)}
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col xl="4">
-              <Card className="shadow">
-                <CardHeader className="bg-transparent">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h6 className="text-uppercase text-muted ls-1 mb-1">
-                        Overview
-                      </h6>
-                      <h2 className="mb-0">Sleep</h2>
-                    </div>
-                    <div className="col">
-                      <Nav className="justify-content-end" pills>
-                        <NavItem>
-                          <NavLink
-                            className={classnames("py-2 px-3", {
-                              active: this.state.activeNav2 === 1
-                            })}
-                            href="#pablo"
-                            onClick={e => this.toggleNavs(e, 2, 1)}
-                            >
-                            <span className="d-none d-md-block">Week</span>
-                            <span className="d-md-none">W</span>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink
-                            className={classnames("py-2 px-3", {
-                              active: this.state.activeNav2 === 2
-                            })}
-                            href="#pablo"
-                            onClick={e => this.toggleNavs(e, 2, 2)}
-                            >
-                            <span className="d-none d-md-block">Month</span>
-                            <span className="d-md-none">M</span>
-                          </NavLink>
-                        </NavItem>
-                      </Nav>
-                    </div>
-                  </Row>
-                </CardHeader>
-                <CardBody>
-                  {/* Chart */}
-                  <div className="chart">
-                    <Bar
-                      data={chartExample2[this.state.chartExample2Data]}
-                      options={chartExample2.options}
-                      getDatasetAtEvent={e => console.log(e)}
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          
+          <Graphs />
           <Row className="mt-5">
-            <Col className="mb-5 mb-xl-0" xl="8">
+            <Col className="mb-5 mb-xl-0" xl="12">
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
@@ -260,61 +80,150 @@ class Index extends React.Component {
                       <th scope="col">Reason</th>
                       <th scope="col">Date</th>
                       <th scope="col">Time</th>
+                      <th scopr="col">Stress Score</th> 
                       <th scope="col">Description</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">Work</th>
+                      <th scope="row">
+                      <CustomInput type="select" className="mr-3" id="stressSelect">
+                        <option>Work</option>
+                        <option>Social</option>
+                        <option>Money</option>
+                        <option>Family</option>
+                        <option>Other</option>
+                      </CustomInput>
+                      </th>
                       <td>04/11/2020</td>
                       <td>2:00 PM</td>
                       <td>
+                        <span className="mt-3 text-md">
+                          High
+                        </span>
+                      </td>
+                      <td>
                         {/* <i className="fas fa-arrow-up text-success mr-3" />{" "} */}
-                        Heard a rumour in the office that the higher authorities were cutting jobs.
+                        {/* Heard a rumour in the office that the higher authorities were cutting jobs.
                         <br/>
-                        Scared that I would be let go from the company.
+                        Scared that I would be let go from the company. */}
+                        {/* <FormGroup>
+                          <Label for="exampleText" />
+                          <Input type="textarea" name="text" id="exampleText" />
+                        </FormGroup> */}
+                        <Input type="textarea" defaultValue="Heard a rumour in the office that the higher authorities were cutting jobs.
+                        Scared that I would be let go from the company."/>
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Work</th>
+                      <th scope="row">
+                        <CustomInput type="select" className="mr-3" id="stressSelect" plaintext="false" defaultValue="Work">
+                        <option>Work</option>
+                        <option>Social</option>
+                        <option>Money</option>
+                        <option>Family</option>
+                        <option>Other</option>
+                        </CustomInput>
+                      </th>
                       <td>02/11/2020</td>
                       <td>3:40 PM</td>
                       <td>
+                        <span className="mt-3 text-md">
+                        High
+                        </span>
+                      </td>
+                      <td>
                         {/* <i className="fas fa-arrow-up text-success mr-3" />{" "} */}
-                        Boss assigned me more work when I was already drowing in the current work.
+                        {/* Boss assigned me more work when I was already drowing in the current work. */}
+                        <Input type="textarea" plaintext
+                          //onChange={(e) => console.log(e.target.value)}
+                          defaultValue="Boss assigned me more work when I was already drowning in the current work."
+                        />
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Family</th>
+                      <th scope="row">
+                        <CustomInput type="select" className="mr-3" id="stressSelect" defaultValue="Family">
+                        <option>Work</option>
+                        <option>Social</option>
+                        <option>Money</option>
+                        <option>Family</option>
+                        <option>Other</option>
+                        </CustomInput>
+                      </th>
                       <td>01/11/2020</td>
                       <td>7:20 PM</td>
+                      <td>
+                      <span className="mt-3 text-md">
+                        Moderate
+                        </span>
+                      </td>
                       <td>
                         {/* <i className="fas fa-arrow-down text-warning mr-3" />{" "} */}
                         Daughter broke her new iphone and demanded to buy her a new one.
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Money</th>
+                      <th scope="row">
+                        <CustomInput type="select" className="mr-3" id="stressSelect" defaultValue="Money">
+                        <option>Work</option>
+                        <option>Social</option>
+                        <option>Money</option>
+                        <option>Family</option>
+                        <option>Other</option>
+                        </CustomInput>
+                      </th>
                       <td>18/03/2020</td>
                       <td>4:20 PM</td>
+                      <td>
+                        <span className="mt-3 text-md">
+                        Very High
+                        </span>
+                      </td>
                       <td>
                         {/* <i className="fas fa-arrow-down text-warning mr-3" />{" "} */}
                         Rent due in 2 days but haven't been able to gather the money yet.
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Work</th>
+                      <th scope="row">
+                        <CustomInput type="select" className="mr-3" id="stressSelect" defaultValue="work">
+                        <option>Work</option>
+                        <option>Social</option>
+                        <option>Money</option>
+                        <option>Family</option>
+                        <option>Other</option>
+                        </CustomInput>
+                      </th>
                       <td>12/03/2020</td>
                       <td>4:12 PM</td>
+                      <td>
+                        <span className="mt-3 text-md">
+                        Very High
+                        </span>
+                      </td>
                       <td>
                         {/* <i className="fas fa-arrow-down text-danger mr-3" />{" "} */}
                         Project due at the end of the month but worried will meet all deadlines.
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Family</th>
+                      <th scope="row">
+                        <CustomInput type="select" className="mr-3" id="stressSelect" defaultValue="Family">
+                        <option>Work</option>
+                        <option>Social</option>
+                        <option>Money</option>
+                        <option>Family</option>
+                        <option>Other</option>
+                        </CustomInput>
+                      </th>
                       <td>02/03/2020</td>
                       <td>8:19 PM</td>
+                      <td>
+                        <span className="mt-3 text-md">
+                        High
+                        </span>
+                      </td>
                       <td>
                         {/* <i className="fas fa-arrow-down text-danger mr-3" />{" "} */}
                         Just got in a fight with my wife over small a issue.
@@ -324,14 +233,14 @@ class Index extends React.Component {
                 </Table>
               </Card>
             </Col>
-            <Col xl="4">
+            {/* <Col xl="4">
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
                     <div className="col">
                       <h3 className="mb-0">Additional Analysis</h3>
                     </div>
-                    {/* <div className="col text-right">
+                    <div className="col text-right">
                       <Button
                         color="primary"
                         href="#pablo"
@@ -340,7 +249,7 @@ class Index extends React.Component {
                       >
                         See all
                       </Button>
-                    </div> */}
+                    </div>
                   </Row>
                 </CardHeader>
                 <Table className="align-items-center table-flush" responsive>
@@ -431,7 +340,7 @@ class Index extends React.Component {
                   </tbody>
                 </Table>
               </Card>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </>
