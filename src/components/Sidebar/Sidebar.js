@@ -81,19 +81,21 @@ class Sidebar extends React.Component {
   // creates the links that appear in the left menu / Sidebar
   createLinks = routes => {
     return routes.map((prop, key) => {
-      return (
-        <NavItem key={key}>
-          <NavLink
-            to={prop.layout + prop.path}
-            tag={NavLinkRRD}
-            onClick={this.closeCollapse}
-            activeClassName="active"
-          >
-            <i className={prop.icon} />
-            {prop.name}
-          </NavLink>
-        </NavItem>
-      );
+      if (prop.name == "Dashboard" || prop.name == "User Profile"){     //don't want to create a sidebar link to login and register (can't delete from routes.js so this)
+        return (
+          <NavItem key={key}>
+            <NavLink
+              to={prop.layout + prop.path}
+              tag={NavLinkRRD}
+              onClick={this.closeCollapse}
+              activeClassName="active"
+            >
+              <i className={prop.icon} />
+              {prop.name}
+            </NavLink>
+          </NavItem>
+        );
+      }
     });
   };
   render() {
@@ -222,7 +224,7 @@ class Sidebar extends React.Component {
               </Row>
             </div>
             {/* Form */}
-            <Form className="mt-4 mb-3 d-md-none">
+            {/* <Form className="mt-4 mb-3 d-md-none">
               <InputGroup className="input-group-rounded input-group-merge">
                 <Input
                   aria-label="Search"
@@ -236,7 +238,7 @@ class Sidebar extends React.Component {
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
-            </Form>
+            </Form> */}
             {/* Navigation */}
             <Nav navbar>{this.createLinks(routes)}</Nav>
             {/* Divider */}
