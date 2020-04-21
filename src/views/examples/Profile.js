@@ -99,20 +99,20 @@ class Profile extends React.Component {
                   </Row>
                   <div className="text-center">
                     <h3>
-                      Jessica Jones
-                      <span className="font-weight-light">, 27</span>
+                      Your Name
+                      <span className="font-weight-light">, 19</span>
                     </h3>
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2" />
-                      Bucharest, Romania
+                      Los Angeles, United States
                     </div>
                     <div className="h5 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                      Solution Manager - Creative Tim Officer
+                      Your Work Title
                     </div>
                     <div>
                       <i className="ni education_hat mr-2" />
-                      University of Computer Science
+                      University of California, Los Angeles
                     </div>
                     <hr className="my-4" />
                     <p>
@@ -163,7 +163,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="lucky.jesse"
                               id="input-username"
                               placeholder="Username"
                               type="text"
@@ -181,7 +180,7 @@ class Profile extends React.Component {
                             <Input
                               className="form-control-alternative"
                               id="input-email"
-                              placeholder="jesse@example.com"
+                              placeholder="example@example.com"
                               type="email"
                             />
                           </FormGroup>
@@ -198,7 +197,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Lucky"
                               id="input-first-name"
                               placeholder="First name"
                               type="text"
@@ -215,7 +213,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Jesse"
                               id="input-last-name"
                               placeholder="Last name"
                               type="text"
@@ -241,7 +238,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                               id="input-address"
                               placeholder="Home Address"
                               type="text"
@@ -260,7 +256,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="New York"
                               id="input-city"
                               placeholder="City"
                               type="text"
@@ -277,7 +272,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="United States"
                               id="input-country"
                               placeholder="Country"
                               type="text"
@@ -312,8 +306,6 @@ class Profile extends React.Component {
                           className="form-control-alternative"
                           placeholder="A few words about you ..."
                           rows="4"
-                          defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                          Open Source."
                           type="textarea"
                         />
                       </FormGroup>
