@@ -23,10 +23,16 @@ import { Container, Row, Col } from "reactstrap";
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
-
+import AdminLayout from "./Admin.js";
 import routes from "routes.js";
 
 class Auth extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      loggedIn: false,
+    }
+  }
   componentDidMount() {
     document.body.classList.add("bg-default");
   }
@@ -51,7 +57,16 @@ class Auth extends React.Component {
   componentDidUpdate() {
     window.scrollTo(0,0);
   }
+
+  logInSuccessful() {
+    console.log("Login Successful");
+    window.location.href = "/admin/index"
+  }
+
   render() {
+    if (this.state.loggedIn == true){
+      this.logInSuccessful();
+    }
     return (
       <>
         <div className="main-content">
