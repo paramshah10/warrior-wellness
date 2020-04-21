@@ -33,8 +33,8 @@ ReactDOM.render(
     <Switch>
       <Route path="/auth" render={props => <AuthLayout {...props} />} />
       <Route path="/admin" render={props => <AdminLayout {...props} />} />
+      <Redirect from="*" to="/auth" />
     </Switch>
-    {/* <Redirect from="*" to="/auth" /> Uncomment this to route to login page on loading  */}
   </BrowserRouter>,
   document.getElementById('root')
 );
