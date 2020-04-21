@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/patient_dashboard/static/css/main.c84168f5.chunk.css",
-    "main.js": "/patient_dashboard/static/js/main.079f9b13.chunk.js",
-    "main.js.map": "/patient_dashboard/static/js/main.079f9b13.chunk.js.map",
+    "main.js": "/patient_dashboard/static/js/main.b2a7a252.chunk.js",
+    "main.js.map": "/patient_dashboard/static/js/main.b2a7a252.chunk.js.map",
     "runtime-main.js": "/patient_dashboard/static/js/runtime-main.4b17b686.js",
     "runtime-main.js.map": "/patient_dashboard/static/js/runtime-main.4b17b686.js.map",
     "static/css/2.159c86c4.chunk.css": "/patient_dashboard/static/css/2.159c86c4.chunk.css",
     "static/js/2.6777a990.chunk.js": "/patient_dashboard/static/js/2.6777a990.chunk.js",
     "static/js/2.6777a990.chunk.js.map": "/patient_dashboard/static/js/2.6777a990.chunk.js.map",
     "index.html": "/patient_dashboard/index.html",
-    "precache-manifest.c7c6c199fd3fd4236743f08ed7d5d4a3.js": "/patient_dashboard/precache-manifest.c7c6c199fd3fd4236743f08ed7d5d4a3.js",
+    "precache-manifest.d9eba1184e68f5ecfa8426eb13d6df21.js": "/patient_dashboard/precache-manifest.d9eba1184e68f5ecfa8426eb13d6df21.js",
     "service-worker.js": "/patient_dashboard/service-worker.js",
     "static/css/2.159c86c4.chunk.css.map": "/patient_dashboard/static/css/2.159c86c4.chunk.css.map",
     "static/css/main.c84168f5.chunk.css.map": "/patient_dashboard/static/css/main.c84168f5.chunk.css.map",
     "static/js/2.6777a990.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/2.6777a990.chunk.js.LICENSE.txt",
-    "static/js/main.079f9b13.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/main.079f9b13.chunk.js.LICENSE.txt",
+    "static/js/main.b2a7a252.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/main.b2a7a252.chunk.js.LICENSE.txt",
     "static/media/angular.jpg": "/patient_dashboard/static/media/angular.368685db.jpg",
     "static/media/argon-react-white.png": "/patient_dashboard/static/media/argon-react-white.275a2629.png",
     "static/media/argon-react.png": "/patient_dashboard/static/media/argon-react.f38ddea9.png",
@@ -40,6 +40,6 @@
     "static/css/2.159c86c4.chunk.css",
     "static/js/2.6777a990.chunk.js",
     "static/css/main.c84168f5.chunk.css",
-    "static/js/main.079f9b13.chunk.js"
+    "static/js/main.b2a7a252.chunk.js"
   ]
 }

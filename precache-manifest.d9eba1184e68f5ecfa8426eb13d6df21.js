@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "90ac873c370439a92f528bcc5f005614",
+    "revision": "784c59155cfc74063fcced0a528fee46",
     "url": "/patient_dashboard/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/patient_dashboard/static/css/2.159c86c4.chunk.css"
   },
   {
-    "revision": "379efa3868b00af3bfc4",
+    "revision": "49907bf61391aaa2dd25",
     "url": "/patient_dashboard/static/css/main.c84168f5.chunk.css"
   },
   {
@@ -20,12 +20,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/patient_dashboard/static/js/2.6777a990.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "379efa3868b00af3bfc4",
-    "url": "/patient_dashboard/static/js/main.079f9b13.chunk.js"
+    "revision": "49907bf61391aaa2dd25",
+    "url": "/patient_dashboard/static/js/main.b2a7a252.chunk.js"
   },
   {
     "revision": "8d0d562f4ec3c131ac27d52de65ecd17",
-    "url": "/patient_dashboard/static/js/main.079f9b13.chunk.js.LICENSE.txt"
+    "url": "/patient_dashboard/static/js/main.b2a7a252.chunk.js.LICENSE.txt"
   },
   {
     "revision": "4e6f3227a076b8e15c3b",
