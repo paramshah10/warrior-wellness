@@ -1,23 +1,21 @@
 {
   "files": {
-    "main.css": "/patient_dashboard/static/css/main.c84168f5.chunk.css",
-    "main.js": "/patient_dashboard/static/js/main.30d17827.chunk.js",
-    "main.js.map": "/patient_dashboard/static/js/main.30d17827.chunk.js.map",
+    "main.css": "/patient_dashboard/static/css/main.688c95dc.chunk.css",
+    "main.js": "/patient_dashboard/static/js/main.8799566e.chunk.js",
+    "main.js.map": "/patient_dashboard/static/js/main.8799566e.chunk.js.map",
     "runtime-main.js": "/patient_dashboard/static/js/runtime-main.4b17b686.js",
     "runtime-main.js.map": "/patient_dashboard/static/js/runtime-main.4b17b686.js.map",
     "static/css/2.5a8cb32a.chunk.css": "/patient_dashboard/static/css/2.5a8cb32a.chunk.css",
-    "static/js/2.8ae0a64f.chunk.js": "/patient_dashboard/static/js/2.8ae0a64f.chunk.js",
-    "static/js/2.8ae0a64f.chunk.js.map": "/patient_dashboard/static/js/2.8ae0a64f.chunk.js.map",
+    "static/js/2.fa54ec30.chunk.js": "/patient_dashboard/static/js/2.fa54ec30.chunk.js",
+    "static/js/2.fa54ec30.chunk.js.map": "/patient_dashboard/static/js/2.fa54ec30.chunk.js.map",
     "index.html": "/patient_dashboard/index.html",
-    "precache-manifest.adf4270b1df17aa9feb72c8a19365a08.js": "/patient_dashboard/precache-manifest.adf4270b1df17aa9feb72c8a19365a08.js",
+    "precache-manifest.47812d97c82781c607f59c70579142f7.js": "/patient_dashboard/precache-manifest.47812d97c82781c607f59c70579142f7.js",
     "service-worker.js": "/patient_dashboard/service-worker.js",
     "static/css/2.5a8cb32a.chunk.css.map": "/patient_dashboard/static/css/2.5a8cb32a.chunk.css.map",
-    "static/css/main.c84168f5.chunk.css.map": "/patient_dashboard/static/css/main.c84168f5.chunk.css.map",
-    "static/js/2.8ae0a64f.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/2.8ae0a64f.chunk.js.LICENSE.txt",
-    "static/js/main.30d17827.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/main.30d17827.chunk.js.LICENSE.txt",
+    "static/css/main.688c95dc.chunk.css.map": "/patient_dashboard/static/css/main.688c95dc.chunk.css.map",
+    "static/js/2.fa54ec30.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/2.fa54ec30.chunk.js.LICENSE.txt",
+    "static/js/main.8799566e.chunk.js.LICENSE.txt": "/patient_dashboard/static/js/main.8799566e.chunk.js.LICENSE.txt",
     "static/media/angular.jpg": "/patient_dashboard/static/media/angular.368685db.jpg",
-    "static/media/argon-react-white.png": "/patient_dashboard/static/media/argon-react-white.275a2629.png",
-    "static/media/argon-react.png": "/patient_dashboard/static/media/argon-react.f38ddea9.png",
     "static/media/bootstrap.jpg": "/patient_dashboard/static/media/bootstrap.ab904daa.jpg",
     "static/media/chat-icon.svg": "/patient_dashboard/static/media/chat-icon.e0d2b748.svg",
     "static/media/all.min.css": "/patient_dashboard/static/media/fa-solid-900.cdfec5cf.woff",
@@ -38,8 +36,8 @@
   "entrypoints": [
     "static/js/runtime-main.4b17b686.js",
     "static/css/2.5a8cb32a.chunk.css",
-    "static/js/2.8ae0a64f.chunk.js",
-    "static/css/main.c84168f5.chunk.css",
-    "static/js/main.30d17827.chunk.js"
+    "static/js/2.fa54ec30.chunk.js",
+    "static/css/main.688c95dc.chunk.css",
+    "static/js/main.8799566e.chunk.js"
   ]
 }
