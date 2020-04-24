@@ -41,12 +41,12 @@ class AdminNavbar extends React.Component {
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
           <Container fluid>
-            <Link
-              className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
+            <Link />
+              {/* className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
               to="/admin/index"
             >
               {this.props.brandText}
-            </Link>
+            </Link> */}
             {/* <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
               <FormGroup className="mb-0">
                 <InputGroup className="input-group-alternative">
@@ -88,16 +88,16 @@ class AdminNavbar extends React.Component {
                     <i className="ni ni-settings-gear-65" />
                     <span>Settings</span>
                   </DropdownItem>
-                  <DropdownItem to="/admin/user-profile" tag={Link}>
+                  {/* <DropdownItem to="/admin/user-profile" tag={Link}>
                     <i className="ni ni-calendar-grid-58" />
                     <span>Activity</span>
                   </DropdownItem>
                   <DropdownItem to="/admin/user-profile" tag={Link}>
                     <i className="ni ni-support-16" />
                     <span>Support</span>
-                  </DropdownItem>
+                  </DropdownItem> */}
                   <DropdownItem divider />
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+                  <DropdownItem to="/auth/login" tag={Link} onClick={e => {e.preventDefault(); window.location.href = "/auth/login"}}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
                   </DropdownItem>

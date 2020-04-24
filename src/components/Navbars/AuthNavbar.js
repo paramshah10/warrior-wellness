@@ -39,20 +39,23 @@ class AdminNavbar extends React.Component {
           expand="md"
         >
           <Container className="px-4">
-            <NavbarBrand to="/admin/index" tag={Link}>
-              <img alt="..." src={require("assets/img/brand/argon-react-white.png")} />
+            <NavbarBrand> {/* to="/admin/index" tag={Link} */}
+              <img alt="..." src={require("assets/img/theme/warrior_wellness.png")} />
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar-collapse-main">
               <span className="navbar-toggler-icon" />
             </button>
+            <NavLink className="ml-auto nav-link-icon">
+              <span className="nav-link-inner--text">Warrior Wellness</span>
+            </NavLink>
             <UncontrolledCollapse navbar toggler="#navbar-collapse-main">
               <div className="navbar-collapse-header d-md-none">
                 <Row>
                   <Col className="collapse-brand" xs="6">
-                    <Link to="/admin/index">
+                    <Link>
                       <img
                         alt="..."
-                        src={require("assets/img/brand/argon-react.png")}
+                        src={require("assets/img/theme/warrior_wellness.png")}
                       />
                     </Link>
                   </Col>
@@ -67,7 +70,7 @@ class AdminNavbar extends React.Component {
                   </Col>
                 </Row>
               </div>
-              <Nav className="ml-auto" navbar>
+              {/* <Nav className="ml-auto" navbar>
                 <NavItem>
                   <NavLink className="nav-link-icon" to="/admin/index" tag={Link}>
                     <i className="ni ni-planet" />
@@ -104,7 +107,7 @@ class AdminNavbar extends React.Component {
                     <span className="nav-link-inner--text">Profile</span>
                   </NavLink>
                 </NavItem>
-              </Nav>
+              </Nav> */}
             </UncontrolledCollapse>
           </Container>
         </Navbar>
