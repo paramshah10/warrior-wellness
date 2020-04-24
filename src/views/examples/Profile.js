@@ -58,7 +58,7 @@ class Profile extends React.Component {
                 </Row>
                 <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                   <div className="d-flex justify-content-between">
-                    <Button
+                    {/* <Button
                       className="mr-4"
                       color="info"
                       href="#pablo"
@@ -75,14 +75,14 @@ class Profile extends React.Component {
                       size="sm"
                     >
                       Message
-                    </Button>
+                    </Button> */}
                   </div>
                 </CardHeader>
                 <CardBody className="pt-0 pt-md-4">
                   <Row>
                     <div className="col">
                       <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                        <div>
+                        {/* <div>
                           <span className="heading">22</span>
                           <span className="description">Friends</span>
                         </div>
@@ -93,7 +93,7 @@ class Profile extends React.Component {
                         <div>
                           <span className="heading">89</span>
                           <span className="description">Comments</span>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </Row>
@@ -114,7 +114,7 @@ class Profile extends React.Component {
                       <i className="ni education_hat mr-2" />
                       University of California, Los Angeles
                     </div>
-                    <hr className="my-4" />
+                    {/* <hr className="my-4" />
                     <p>
                       Ryan — the name taken by Melbourne-raised, Brooklyn-based
                       Nick Murphy — writes, performs and records all of his own
@@ -122,7 +122,7 @@ class Profile extends React.Component {
                     </p>
                     <a href="#pablo" onClick={e => e.preventDefault()}>
                       Show more
-                    </a>
+                    </a> */}
                   </div>
                 </CardBody>
               </Card>
@@ -141,7 +141,7 @@ class Profile extends React.Component {
                         onClick={e => e.preventDefault()}
                         size="sm"
                       >
-                        Settings
+                        Save
                       </Button>
                     </Col>
                   </Row>
