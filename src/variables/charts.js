@@ -432,9 +432,59 @@ let chartExample2 = {
   }
 };
 
+let chartExample3 = {
+  options: {
+    legend: {
+      display: true,
+      position: "bottom",
+      labels: {
+        usePointStyle: true,
+        padding: 40
+      }
+    },
+  },
+  
+  data1: canvas => {
+    return {
+      labels: ["Very High", "High", "Moderate", "Low"],
+      datasets: [
+        {
+          label: "Stress count by category in the past month",
+          data: [1, 5, 4, 7],
+          backgroundColor: [
+            "#b50000",
+            '#ff4242',
+            '#36A2EB',
+            '#DCDCDC'
+            ],
+        }
+      ]
+    }
+  },
+  
+  data2: canvas => {
+    return {
+      labels: ["Very High", "High", "Moderate", "Low"],
+      datasets: [
+        {
+          label: "Stress count by category in the past month",
+          data: [3, 25, 34, 15],
+          backgroundColor: [
+            "#b50000",
+            '#ff4242',
+            '#36A2EB',
+            '#DCDCDC'
+            ],
+        }
+      ]
+    }
+  }
+}
+
 module.exports = {
   chartOptions, // used inside src/views/Index.js
   parseOptions, // used inside src/views/Index.js
   chartExample1, // used inside src/views/Index.js
-  chartExample2 // used inside src/views/Index.js
+  chartExample2, // used inside src/views/Index.js
+  chartExample3
 };
