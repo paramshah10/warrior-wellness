@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ChatWindow from './chat-window - Firebase.js';
+import ChatWindow from './chat-window.js';
 import ChatWidget from './chat-widget.js';
 import Messenger from './messenger.js';
 
