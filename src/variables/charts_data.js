@@ -111,9 +111,13 @@ options: {
                 return value;
             }
             }
+        },
+        stacked: true,
         }
-        }
-    ]
+    ],
+    xAxes: [{
+      stacked: true,
+    }]
     },
     tooltips: {
         callbacks: {
@@ -124,7 +128,7 @@ options: {
             if (data.datasets.length > 1) {
                 content += label;
             }
-            content += yLabel;
+            content += " " + yLabel;
             return content;
             }
     }
@@ -135,10 +139,22 @@ data1: canvas => {//Sleep by week
     labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
     datasets: [
         {
-        label: "Sleep by Week",
-        data: [7.2, 7, 7.5, 7.3, 7.9, 8.2, 8.3],
-        maxBarThickness: 10
-        }
+          label: "Awake",
+          data: [0.2, 0.7, 0.5, 0.3, 0.9, 0.2, 0.3],
+          maxBarThickness: 10,
+          backgroundColor: "#673AB7",
+        },
+        {
+          label: "Light Sleep",
+          data: [2.2, 2, 2.5, 2.3, 2.9, 2.2, 2.3],
+          maxBarThickness: 10,
+          backgroundColor: "#0dd406",
+        },
+        {
+          label: "Deep Sleep",
+          data: [4.2, 4, 4.5, 4.3, 4.1, 4.2, 4.3],
+          maxBarThickness: 10
+        },
     ]
     };
 },
@@ -147,10 +163,20 @@ data2: canvas => { //sleep by month
     labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
     datasets: [
         {
-        label: "Sleep by Month",
-        data: [8.2, 7.9, 8.1, 8.5],
+        label: "Awake",
+        data: [0.2, 0.3, 0.1, 0.5],
         maxBarThickness: 10
-        }
+        },
+        {
+          label: "Light Sleep",
+          data: [2.2, 2.4, 2.1, 2.5],
+          maxBarThickness: 10
+        },
+        {
+          label: "Deep Sleep",
+          data: [4.2, 4.7, 4.1, 4.5],
+          maxBarThickness: 10
+        },
     ]
     };
 }
