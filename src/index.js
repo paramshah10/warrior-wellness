@@ -18,7 +18,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, HashRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 
 import "assets/plugins/nucleo/css/nucleo.css";
@@ -29,17 +29,12 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <Switch>
       <Route path="/auth" render={props => <AuthLayout {...props} />} />
       <Route path="/admin" render={props => <AdminLayout {...props} />} />
-      <Redirect from="*" to="/auth" />
+      <Redirect from="/" to='/auth/login'/>
     </Switch>
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
