@@ -195,7 +195,7 @@ let chartExample3 = {
         tooltips: {
             callbacks: {
                 label: function(item, data) {
-                    return data.labels[item.index];
+                    return data.labels[item.index] + ": " + data.datasets[item.datasetIndex].data[item.index];
                 }
         }
         },
@@ -248,7 +248,7 @@ let chartExample4 = {
     position: "bottom",
     labels: {
         usePointStyle: true,
-        padding: 31
+        padding: 30
     }
     },
     tooltips: {
