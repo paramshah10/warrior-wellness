@@ -210,7 +210,7 @@ class Graphs extends Component {
                         </h6>
                         <h2 className="mb-0">Sleep</h2>
                         </div>
-                        <div className="col">
+                        <div>
                         <Nav className="justify-content-end" pills>
                             <NavItem>
                             <NavLink
