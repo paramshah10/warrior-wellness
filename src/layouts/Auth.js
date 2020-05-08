@@ -33,8 +33,14 @@ class Auth extends React.Component {
       loggedIn: false,
     }
   }
+  componentWillMount(){
+    if (localStorage.getItem('loggedIn') == 'true'){
+      window.location.href = '#/admin/index'
+    }
+  }
   componentDidMount() {
     document.body.classList.add("bg-default");
+    localStorage.setItem('loggedIn', false);
   }
   componentWillUnmount() {
     document.body.classList.remove("bg-default");
@@ -58,15 +64,7 @@ class Auth extends React.Component {
     window.scrollTo(0,0);
   }
 
-  logInSuccessful() {
-    console.log("Login Successful");
-    window.location.href = "/admin/index"
-  }
-
   render() {
-    if (this.state.loggedIn == true){
-      this.logInSuccessful();
-    }
     return (
       <>
         <div className="main-content">

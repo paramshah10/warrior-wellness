@@ -97,7 +97,7 @@ class AdminNavbar extends React.Component {
                     <span>Support</span>
                   </DropdownItem> */}
                   <DropdownItem divider />
-                  <DropdownItem to="/auth/login" tag={Link} onClick={e => {e.preventDefault(); window.location.href = "/auth/login"}}>
+                  <DropdownItem to="/auth/login" tag={Link} onClick={(e) => localStorage.setItem('loggedIn', false)}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
                   </DropdownItem>

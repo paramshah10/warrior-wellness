@@ -146,7 +146,7 @@ class Register extends React.Component {
                     className="nav-link-icon"
                     to="/admin/index"
                   >
-                    <Button className="mt-4" color="primary" type="button">
+                    <Button className="mt-4" color="primary" type="button" onClick={(e) => localStorage.setItem('loggedIn', true)}>
                       Create account
                     </Button>
                   </Link>

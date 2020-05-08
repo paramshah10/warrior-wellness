@@ -120,7 +120,8 @@ class Login extends React.Component {
                   className="nav-link-icon"
                   to="/admin/index"
                   >
-                    <Button className="my-4" color="primary" type="button">Sign In</Button>
+                    <Button className="my-4" color="primary" type="button" onClick={(e) => localStorage.setItem('loggedIn', true)}>
+                    Sign In</Button>
                   </Link>
                 </div>
               </Form>
