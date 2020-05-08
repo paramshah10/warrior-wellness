@@ -58,10 +58,6 @@ class Index extends React.Component {
     });
   }
 
-  componentDidMount() {
-    window.scrollTo(0,0);
-  }
-  
   render() {
     let descriptions = Array(6).fill(""); //this.state.stressIncidents.Description.slice();
     return (

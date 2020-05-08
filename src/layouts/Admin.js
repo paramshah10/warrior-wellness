@@ -34,7 +34,6 @@ class Admin extends React.Component {
     this.refs.mainContent.scrollTop = 0;
   }
   componentDidMount() {
-    window.scrollTo(0,0);
     localStorage.setItem('loggedIn', true);
   }
   getRoutes = routes => {
