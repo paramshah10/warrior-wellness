@@ -1,43 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1992af21c13ff8594757dba9476cd70e",
+    "revision": "602f60c606968282ab8a71f27a975faf",
     "url": "/index.html"
   },
   {
-    "revision": "cf93d0f1ccdbd014506f",
+    "revision": "1f1c3192c992958382b7",
     "url": "/static/css/2.8bbecfc2.chunk.css"
   },
   {
-    "revision": "b37e3cc59bd2bff00cb6",
+    "revision": "283964c093ba49d182f5",
     "url": "/static/css/main.67e0a067.chunk.css"
   },
   {
-    "revision": "cf93d0f1ccdbd014506f",
-    "url": "/static/js/2.5469f618.chunk.js"
+    "revision": "1f1c3192c992958382b7",
+    "url": "/static/js/2.4b9a7bc6.chunk.js"
   },
   {
     "revision": "259bbfe91f4712a1a3c0ef176eaae51f",
-    "url": "/static/js/2.5469f618.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.4b9a7bc6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b37e3cc59bd2bff00cb6",
-    "url": "/static/js/main.522a8784.chunk.js"
+    "revision": "283964c093ba49d182f5",
+    "url": "/static/js/main.2035691b.chunk.js"
   },
   {
     "revision": "8d0d562f4ec3c131ac27d52de65ecd17",
-    "url": "/static/js/main.522a8784.chunk.js.LICENSE.txt"
+    "url": "/static/js/main.2035691b.chunk.js.LICENSE.txt"
   },
   {
     "revision": "d9eb39ca27ffe68c7213",
     "url": "/static/js/runtime-main.62b44ee8.js"
-  },
-  {
-    "revision": "368685db949cddcd901ba54559a727d9",
-    "url": "/static/media/angular.368685db.jpg"
-  },
-  {
-    "revision": "ab904daa548967670847fc3929bf50f4",
-    "url": "/static/media/bootstrap.ab904daa.jpg"
   },
   {
     "revision": "e0d2b7486b532288a980d0cd5d535340",
@@ -144,32 +136,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/profile_background.cdbbf803.jpeg"
   },
   {
-    "revision": "c4eb3d0be0cf5a2d156a123bdf7fb40d",
-    "url": "/static/media/react.c4eb3d0b.jpg"
-  },
-  {
-    "revision": "e7c82e5c569db9d9761b13ef1384f702",
-    "url": "/static/media/sketch.e7c82e5c.jpg"
-  },
-  {
-    "revision": "53033970a416368da35794389680266f",
-    "url": "/static/media/team-1-800x800.53033970.jpg"
-  },
-  {
-    "revision": "dcfcf3b77210fe85b0abc8260e6fa70e",
-    "url": "/static/media/team-2-800x800.dcfcf3b7.jpg"
-  },
-  {
-    "revision": "497bb3590e24c9f8b645864bfffc39b8",
-    "url": "/static/media/team-3-800x800.497bb359.jpg"
-  },
-  {
     "revision": "942a8bda9b3731ed286c44409ed9b9ee",
     "url": "/static/media/team-4-800x800.942a8bda.jpg"
-  },
-  {
-    "revision": "9378e368a757bd0c7ca556a0258cb527",
-    "url": "/static/media/vue.9378e368.jpg"
   },
   {
     "revision": "72198801f4fbdd4267524cfa63721a60",
