@@ -59,7 +59,6 @@ class Index extends React.Component {
   }
 
   render() {
-    let descriptions = Array(6).fill(""); //this.state.stressIncidents.Description.slice();
     return (
       <>
         <Header />

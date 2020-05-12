@@ -37,9 +37,7 @@ let chartExample1 = {
             },
             ticks: {
               callback: function(value) {
-                if (!(value % 5)) {
-                  return value;
-                }
+                return value;
               }
             }
           }
@@ -63,35 +61,24 @@ let chartExample1 = {
         }
       }
     },
-    data1: canvas => {//Stress score by month
-      return {
-        labels: ["12am", "3am", "6am", "9am", "12am", "3pm", "6pm", "9pm", "12am"],
-        datasets: [
-          {
-            label: "Stress Score by Day",
-            data: [3, 0, 0, 3, 12, 22, 14, 10, 4]
-          }
-        ]
-      };
-    },
-    data2: canvas => {//Stress score by week
+    data1: canvas => {//sleep score by week
       return {
         labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         datasets: [
           {
             label: "Stress Score by Week",
-            data: [20, 18, 15, 20, 21, 24, 19]
+            data: [6.6, 6.7, 7.5, 7.2, 7.9, 6.8, 6.9]
           }
         ]
       };
     },
-    data3: canvas => {//Stress score by day
+    data2: canvas => {//sleep score by month
       return {
         labels: ["1st", "2nd", "4th", "6th", "8th", "10th", "12th", "14th", "16th", "18th", "20th", "22nd", "24th", "26th", "28th", "30th"],
         datasets: [
           {
             label: "Stress Score by Month",
-            data: [10, 16, 18, 15, 20, 21, 24, 19, 13, 14, 11, 20, 21, 24, 19, 13]
+            data: [7.5, 6.9, 7.2, 8, 8.1, 6.1, 6.4, 6.9, 7, 8, 7.6, 7.7, 8.1, 6.9, 7.3, 7.5]
           }
         ]
       };
@@ -106,7 +93,7 @@ options: {
         {
         ticks: {
             callback: function(value) {
-            if (!(value % 2)) {
+            if (!(value % 5)) {
                 //return '$' + value + 'k'
                 return value;
             }
@@ -139,22 +126,9 @@ data1: canvas => {//Sleep by week
     labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
     datasets: [
         {
-          label: "Awake",
-          data: [0.2, 0.7, 0.5, 0.3, 0.9, 0.2, 0.3],
-          maxBarThickness: 10,
-          backgroundColor: "#673AB7",
-        },
-        {
-          label: "Light Sleep",
-          data: [2.2, 2, 2.5, 2.3, 2.9, 2.2, 2.3],
-          maxBarThickness: 10,
-          backgroundColor: "#0dd406",
-        },
-        {
-          label: "Deep Sleep",
-          data: [4.2, 4, 4.5, 4.3, 4.1, 4.2, 4.3],
-          maxBarThickness: 10
-        },
+            label: "Stress Management Activites Minutes",
+            data: [13, 25, 41, 15, 35, 21, 28],
+        }
     ]
     };
 },
@@ -163,20 +137,9 @@ data2: canvas => { //sleep by month
     labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
     datasets: [
         {
-        label: "Awake",
-        data: [0.2, 0.3, 0.1, 0.5],
-        maxBarThickness: 10
-        },
-        {
-          label: "Light Sleep",
-          data: [2.2, 2.4, 2.1, 2.5],
-          maxBarThickness: 10
-        },
-        {
-          label: "Deep Sleep",
-          data: [4.2, 4.7, 4.1, 4.5],
-          maxBarThickness: 10
-        },
+            label: "Stress Management Activites Minutes",
+            data: [13, 25, 21, 28],
+        }
     ]
     };
 }
@@ -184,20 +147,27 @@ data2: canvas => { //sleep by month
 
 let chartExample3 = {
     options: {
-        legend: {
-        display: true,
-        position: "bottom",
-        labels: {
-            usePointStyle: true,
-            padding: 20
-        }
+        scales: {
+            yAxes: [
+                {
+                ticks: {
+                    callback: function(value) {
+                        return value;
+                    }
+                },
+                stacked: true,
+                }
+            ],
+            xAxes: [{
+              stacked: true,
+            }]
         },
         tooltips: {
             callbacks: {
                 label: function(item, data) {
-                    return data.labels[item.index].substring(0, data.labels[item.index].search('[(]')) + ": " + data.datasets[item.datasetIndex].data[item.index];
+                    return data.datasets[item.datasetIndex].data[item.index];
                 }
-        }
+            }
         },
       responsive: true,
       maintainAspectRatio: false,
@@ -205,7 +175,7 @@ let chartExample3 = {
 
     data1: canvas => {
         return {
-        labels: ["Very High (20-25)", "High (15-20)", "Moderate (10-15)", "Low (0-15)"],
+        labels: ["Very High (20-25)", "High (15-20)", "Moderate (10-15)", "Low (0-10)"],
         datasets: [
             {
             label: "Stress count by score in the past month",
@@ -223,7 +193,7 @@ let chartExample3 = {
 
     data2: canvas => {
         return {
-        labels: ["Very High (20-25)", "High (15-20)", "Moderate (10-15)", "Low (0-15)"],
+        labels: ["Very High", "High", "Moderate", "Low"],
         datasets: [
             {
             label: "Stress count by score in the past month",
@@ -243,18 +213,27 @@ let chartExample3 = {
 
 let chartExample4 = {
   options: {
-    legend: {
-    display: true,
-    position: "bottom",
-    labels: {
-        usePointStyle: true,
-        padding: 20
-    }
-    },
+    scales: {
+        yAxes: [
+            {
+            ticks: {
+                callback: function(value) {
+                if (!(value % 1)) {
+                    return value;
+                }
+                }
+            },
+            stacked: true,
+            }
+        ],
+        xAxes: [{
+          stacked: true,
+        }]
+        },
     tooltips: {
         callbacks: {
             label: function(item, data) {
-                return data.labels[item.index] + ": " + data.datasets[item.datasetIndex].data[item.index];
+                return data.datasets[item.datasetIndex].data[item.index];
             }
     }
     },
@@ -306,4 +285,4 @@ module.exports = {
     chartExample2,
     chartExample3,
     chartExample4,
-};  
+};

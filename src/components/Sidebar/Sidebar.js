@@ -81,7 +81,7 @@ class Sidebar extends React.Component {
   // creates the links that appear in the left menu / Sidebar
   createLinks = routes => {
     return routes.map((prop, key) => {
-      if (prop.name == "Dashboard" || prop.name == "User Profile"){     //don't want to create a sidebar link to login and register (can't delete from routes.js so this)
+      if (prop.name == "Dashboard" || prop.name == "User Profile" || prop.name == "Charts"){     //don't want to create a sidebar link to login and register (can't delete from routes.js so this)
         return (
           <NavItem key={key}>
             <NavLink
