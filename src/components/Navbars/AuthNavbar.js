@@ -22,9 +22,7 @@ import {
   UncontrolledCollapse,
   NavbarBrand,
   Navbar,
-  NavItem,
   NavLink,
-  Nav,
   Container,
   Row,
   Col
@@ -39,7 +37,7 @@ class AdminNavbar extends React.Component {
           expand="md"
         >
           <Container className="px-4">
-            <NavbarBrand> {/* to="/admin/index" tag={Link} */}
+            <NavbarBrand>
               <img alt="..." src={require("assets/img/theme/warrior_wellness.png")} />
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar-collapse-main">

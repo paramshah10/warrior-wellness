@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { StrictMode } from "react";
+import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -23,9 +23,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 
 // core components
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import AuthFooter from "components/Footers/AuthFooter.js";
-import AdminLayout from "./Admin.js";
+// import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import routes from "routes.js";
 
 class Auth extends React.Component {
@@ -72,8 +70,8 @@ class Auth extends React.Component {
           <Modal isOpen={this.state.modalOpen}>
             <ModalHeader toggle={this.state.modalOpen=false}>Welcome to Warrior Wellness!</ModalHeader>
             <ModalBody>
-              Thank you for visiting! This site is currently under production and you will not be able to use many of its functions. <br/>
-              To view the model website, just click on the button below! Or close this modal and just click on the sign in button within inputting any details!
+              Thank you for visiting! This site is currently under production and many functions may not be available. <br/>
+              To view the model website, click on the `Take Me There!` button below! Alternatively, close this modal and click on the sign in button within inputting any details!
             </ModalBody>
             <ModalFooter>
               <Link
@@ -124,7 +122,11 @@ class Auth extends React.Component {
             </Row>
           </Container>
         </div>
-        <AuthFooter />
+        <footer className="py-5">
+          <Container>
+            <Row className="align-items-center justify-content-xl-between" />
+          </Container>
+        </footer>
       </>
     );
   }

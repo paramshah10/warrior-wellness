@@ -23,36 +23,21 @@ import { PropTypes } from "prop-types";
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
   Collapse,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Media,
   NavbarBrand,
   Navbar,
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col
 } from "reactstrap";
-
-var ps;
 
 class Sidebar extends React.Component {
   state = {
@@ -139,21 +124,6 @@ class Sidebar extends React.Component {
           ) : null}
           {/* User */}
           <Nav className="align-items-center d-md-none">
-            {/* <UncontrolledDropdown nav>
-              <DropdownToggle nav className="nav-link-icon">
-                <i className="ni ni-bell-55" />
-              </DropdownToggle>
-              <DropdownMenu
-                aria-labelledby="navbar-default_dropdown_1"
-                className="dropdown-menu-arrow"
-                right
-              >
-                <DropdownItem>Action</DropdownItem>
-                <DropdownItem>Another action</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Something else here</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown> */}
             <UncontrolledDropdown nav>
               <DropdownToggle nav>
                 <Media className="align-items-center">
@@ -177,14 +147,6 @@ class Sidebar extends React.Component {
                   <i className="ni ni-settings-gear-65" />
                   <span>Settings</span>
                 </DropdownItem>
-                {/* <DropdownItem to="/admin/user-profile" tag={Link}>
-                  <i className="ni ni-calendar-grid-58" />
-                  <span>Activity</span>
-                </DropdownItem>
-                <DropdownItem to="/admin/user-profile" tag={Link}>
-                  <i className="ni ni-support-16" />
-                  <span>Support</span>
-                </DropdownItem> */}
                 <DropdownItem divider />
                 <DropdownItem to="/auth/login" tag={Link} onClick={e => {e.preventDefault(); window.location.href = "/auth/login"}}>
                   <i className="ni ni-user-run" />

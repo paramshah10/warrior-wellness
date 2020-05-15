@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   Button,
@@ -9,10 +9,7 @@ import {
   Row,
   Col,
   Input,
-  CustomInput,
   UncontrolledTooltip,
-  Collapse,
-  CardBody,
 } from "reactstrap";
 
 import Header from "components/Headers/Header.js";

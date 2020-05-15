@@ -23,12 +23,6 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Form,
-  FormGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  InputGroup,
   Navbar,
   Nav,
   Container,
@@ -41,24 +35,12 @@ class AdminNavbar extends React.Component {
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
           <Container fluid>
-            <Link />
-              {/* className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
+            <Link
+              className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
               to="/admin/index"
             >
               {this.props.brandText}
-            </Link> */}
-            {/* <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-              <FormGroup className="mb-0">
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="fas fa-search" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input placeholder="Search" type="text" />
-                </InputGroup>
-              </FormGroup>
-            </Form> */}
+            </Link>
             <Nav className="align-items-center d-none d-md-flex" navbar>
               <UncontrolledDropdown nav>
                 <DropdownToggle className="pr-0" nav>
@@ -88,14 +70,6 @@ class AdminNavbar extends React.Component {
                     <i className="ni ni-settings-gear-65" />
                     <span>Settings</span>
                   </DropdownItem>
-                  {/* <DropdownItem to="/admin/user-profile" tag={Link}>
-                    <i className="ni ni-calendar-grid-58" />
-                    <span>Activity</span>
-                  </DropdownItem>
-                  <DropdownItem to="/admin/user-profile" tag={Link}>
-                    <i className="ni ni-support-16" />
-                    <span>Support</span>
-                  </DropdownItem> */}
                   <DropdownItem divider />
                   <DropdownItem to="/auth/login" tag={Link} onClick={(e) => localStorage.setItem('loggedIn', false)}>
                     <i className="ni ni-user-run" />

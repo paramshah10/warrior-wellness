@@ -18,10 +18,9 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import App from '../App';
 
@@ -85,7 +84,15 @@ class Admin extends React.Component {
             <Redirect from="*" to="/admin/index" />
           </Switch>
           <Container fluid>
-            <AdminFooter />
+          <footer className="footer">
+            <Row className="align-items-center justify-content-xl-between">
+              <Col xl="6">
+                <div className="copyright text-center text-xl-left text-muted">
+                  <a className="font-weight-bold ml-1" />
+                </div>
+              </Col>
+            </Row>
+          </footer>
           </Container>
         </div>
         <App />
