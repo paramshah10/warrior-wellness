@@ -126,10 +126,10 @@ class Header extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            Performance
+                            High-Stress Events
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            89.65%
+                            8
                           </span>
                         </div>
                         <Col className="col-auto">
@@ -139,10 +139,10 @@ class Header extends React.Component {
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-success mr-2">
-                          <i className="fas fa-arrow-up" /> 1.2%
+                        <span className="text-danger mr-2">
+                          <i className="fas fa-arrow-up" /> 12%
                         </span>{" "}
-                        <span className="text-nowrap">Since last week</span>
+                        <span className="text-nowrap">Since last month</span>
                       </p>
                     </CardBody>
                   </Card>

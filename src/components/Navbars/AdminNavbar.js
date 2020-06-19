@@ -35,12 +35,11 @@ class AdminNavbar extends React.Component {
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
           <Container fluid>
-            <Link
+            <span
               className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-              to="/admin/index"
             >
               {this.props.brandText}
-            </Link>
+            </span>
             <Nav className="align-items-center d-none d-md-flex" navbar>
               <UncontrolledDropdown nav>
                 <DropdownToggle className="pr-0" nav>
