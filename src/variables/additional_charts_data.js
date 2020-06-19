@@ -181,11 +181,11 @@ let chartExample3 = {
             label: "Stress count by score in the past month",
             data: [1, 5, 4, 7],
             backgroundColor: [
-                "#b50000",
-                '#ff4242',
-                '#36A2EB',
-                '#DCDCDC'
-                ],
+              "#A91E2A",
+              '#ff4242',
+              '#002867',
+              '#DCDCDC'
+              ],
             }
         ],
         }
@@ -193,17 +193,17 @@ let chartExample3 = {
 
     data2: canvas => {
         return {
-        labels: ["Very High", "High", "Moderate", "Low"],
+        labels: ["Very High (20-25)", "High (15-20)", "Moderate (10-15)", "Low (0-10)"],
         datasets: [
             {
             label: "Stress count by score in the past month",
             data: [3, 25, 61, 15],
             backgroundColor: [
-                "#b50000",
-                '#ff4242',
-                '#36A2ED',
-                '#DCDCDC'
-                ],
+              "#A91E2A",
+              '#ff4242',
+              '#002867',
+              '#DCDCDC'
+              ],
             }
         ],
         innerWidth: 100,
@@ -249,12 +249,12 @@ let chartExample4 = {
           label: "Stress count by category in the past month",
           data: [2, 4, 1, 2, 3],
           backgroundColor: [
-              "#0dd406",
-              '#ff4242',
-              '#36A2ED',
-              '#DCDCDC',
-              "#f79216",
-              ],
+            "#0dd406",
+            '#A91E2A',
+            '#002867',
+            '#FEB300',
+            '#DCDCDC',
+            ],
           }
       ]
       }
@@ -269,10 +269,10 @@ let chartExample4 = {
           data: [7, 13, 10, 5, 15],
           backgroundColor: [
               "#0dd406",
-              '#ff4242',
-              '#36A2ED',
+              '#A91E2A',
+              '#002867',
+              '#FEB300',
               '#DCDCDC',
-              "#f79216",
               ],
           }
       ]

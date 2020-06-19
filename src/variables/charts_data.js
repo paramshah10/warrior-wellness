@@ -142,18 +142,19 @@ data1: canvas => {//Sleep by week
           label: "Awake",
           data: [0.2, 0.7, 0.5, 0.3, 0.9, 0.2, 0.3],
           maxBarThickness: 10,
-          backgroundColor: "#673AB7",
+          backgroundColor: "#A91E2A"
         },
         {
           label: "Light Sleep",
           data: [2.2, 2, 2.5, 2.3, 2.9, 2.2, 2.3],
           maxBarThickness: 10,
-          backgroundColor: "#0dd406",
+          backgroundColor: '#FEB300', //"#673AB7",
         },
         {
           label: "Deep Sleep",
           data: [4.2, 4, 4.5, 4.3, 4.1, 4.2, 4.3],
-          maxBarThickness: 10
+          maxBarThickness: 10,
+          backgroundColor: "#0dd406",
         },
     ]
     };
@@ -163,9 +164,9 @@ data2: canvas => { //sleep by month
     labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
     datasets: [
         {
-        label: "Awake",
-        data: [0.2, 0.3, 0.1, 0.5],
-        maxBarThickness: 10
+          label: "Awake",
+          data: [0.2, 0.3, 0.1, 0.5],
+          maxBarThickness: 10
         },
         {
           label: "Light Sleep",
@@ -211,9 +212,9 @@ let chartExample3 = {
             label: "Stress count by score in the past month",
             data: [1, 5, 4, 7],
             backgroundColor: [
-                "#b50000",
+                "#A91E2A",
                 '#ff4242',
-                '#36A2EB',
+                '#002867',
                 '#DCDCDC'
                 ],
             }
@@ -229,9 +230,9 @@ let chartExample3 = {
             label: "Stress count by score in the past month",
             data: [3, 25, 61, 15],
             backgroundColor: [
-                "#b50000",
+                "#A91E2A",
                 '#ff4242',
-                '#36A2ED',
+                '#002867',
                 '#DCDCDC'
                 ],
             }
@@ -270,12 +271,13 @@ let chartExample4 = {
           label: "Stress count by category in the past month",
           data: [2, 4, 1, 2, 3],
           backgroundColor: [
-              "#0dd406",
-              '#ff4242',
-              '#36A2ED',
-              '#DCDCDC',
-              "#f79216",
-              ],
+            "#0dd406",
+            '#A91E2A',
+            '#002867',
+            '#DCDCDC',
+            '#FEB300',
+            // "#f79216",
+            ],
           }
       ]
       }
@@ -289,12 +291,13 @@ let chartExample4 = {
           label: "Stress count by category in the past month",
           data: [7, 13, 10, 5, 15],
           backgroundColor: [
-              "#0dd406",
-              '#ff4242',
-              '#36A2ED',
-              '#DCDCDC',
-              "#f79216",
-              ],
+            "#0dd406",
+            '#A91E2A',
+            '#002867',
+            '#DCDCDC',
+            '#FEB300',
+            // "#f79216",
+            ],
           }
       ]
       }
