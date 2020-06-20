@@ -25,6 +25,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 import App from '../App';
 
 import routes from "routes.js";
+import JournalIcon from "views/examples/Journal/Journal_icon";
 
 class Admin extends React.Component {
   componentDidUpdate(e) {
@@ -96,6 +97,7 @@ class Admin extends React.Component {
           </Container>
         </div>
         <App />
+        <JournalIcon/>
       </>
     );
   }

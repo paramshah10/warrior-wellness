@@ -19,7 +19,8 @@ import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
-import Charts from "views/examples/Charts_page.js"
+import Charts from "views/examples/Charts_page.js";
+import Journal from "views/examples/Journal/Journal.js";
 
 var routes = [
   {
@@ -56,6 +57,13 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: Register,
     layout: "/auth"
+  },
+  {
+    path: "/journal",
+    name: "Journal",
+    icon: "ni ni-circle-08 text-pink",
+    component: Journal,
+    layout: "/admin"
   }
 ];
 export default routes;
