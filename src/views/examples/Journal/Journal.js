@@ -3,8 +3,6 @@ import {
     Container,
     Card,
     CardHeader,
-    CardBody,
-    Badge,
     Button,
     ListGroupItem,
     ListGroup,
@@ -21,10 +19,6 @@ class Journal extends React.Component {
         super(props);
         this.state = {
             journal_entries: journal_entries,
-        //   stressIncidents: stressIncidents.sort((a,b) => parseInt(b.Date) - parseInt(a.Date)),
-        //   dateSort: true,
-        //   stressSort: true,
-        //   showTextBox: Array(6).fill(false),
         }
       }
     render() {
@@ -46,7 +40,9 @@ class Journal extends React.Component {
                             <NavItem className="py-2 px-3">
                             <Button
                                 color="primary"
-                                onClick={e => e.preventDefault()}
+                                onClick={e => {e.preventDefault();  this.setState({
+                                    journal_entries: this.state.journal_entries.reverse()
+                                })}}
                                 size="sm"
                             >
                                 Date Created
@@ -66,7 +62,7 @@ class Journal extends React.Component {
                     </Row>
                 </CardHeader>
                 <ListGroup flush>
-                    { this.state.journal_entries.map(entry =>
+                    { journal_entries.reverse().map(entry =>
                     <ListGroupItem
                     className="list-group-item-action flex-column align-items-start py-4 px-4"
                     href="#pablo"
