@@ -135,7 +135,7 @@ class ChatWindow extends Component {
 
   render() {
     return (
-    <div>
+    <div style={{position:'relative', zIndex: '1'}}>
       <Launcher
         agentProfile={{
           teamName: 'react-chat-window-param',
