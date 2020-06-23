@@ -13,6 +13,8 @@ import {
     CardHeader,
     Row
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import { addEntry } from 'lib/redux/actions/journal';
 
 class JournalIcon extends React.Component {
     constructor(props){
@@ -28,16 +30,16 @@ class JournalIcon extends React.Component {
         const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         var date = new Date()
         var today = monthName[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear()
-        var entry = {
-            Created: today,
-            Last_edited: today,
-            Subject: this.state.subject,
-            Content: this.state.content,
-        }
+
+        let entry_num = localStorage.getItem('num_journal_entries') ? parseInt(localStorage.getItem('num_journal_entries')) + 1 : (0)
+        localStorage.setItem('num_journal_entries', entry_num + 1)
+        
+        this.props.addEntry(entry_num, this.state.subject, this.state.content, today)
 
         this.setState({
             subject: '',
-            content: ''
+            content: '',
+            open: false,
         })
     }
 
@@ -95,7 +97,7 @@ class JournalIcon extends React.Component {
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button color='primary' className='mt--2' onClick={() => {this.journalSubmit(); this.setState({open: false})}}> Save </Button>
+                            <Button color='primary' className='mt--2' onClick={() => this.journalSubmit()}> Save </Button>
                         </ModalFooter>
                     </Card>
                 </Modal>
@@ -104,4 +106,15 @@ class JournalIcon extends React.Component {
     }
 }
 
-export default JournalIcon;
+const mapDispatchToProps = dispatch => {
+    return {
+        addEntry: (id, subject, content, date) => dispatch(addEntry(id, subject, content, date))
+    }
+}
+  
+export default connect(
+    null,
+    mapDispatchToProps
+)(JournalIcon)
+
+// export default JournalIcon;

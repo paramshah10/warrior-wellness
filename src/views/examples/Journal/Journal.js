@@ -12,14 +12,13 @@ import {
     NavItem
 } from 'reactstrap'
 
-import journal_entries from './Journal_entries';
+//redux
+import { connect } from 'react-redux';
+import { receiveEntries } from 'lib/redux/actions/journal';
 
 class Journal extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            journal_entries: journal_entries,
-        }
       }
     render() {
       return(
@@ -62,7 +61,8 @@ class Journal extends React.Component {
                     </Row>
                 </CardHeader>
                 <ListGroup flush>
-                    { journal_entries.reverse().map(entry =>
+                    {/* Add hover over feature to display an edit and delete button */}
+                    { this.props.entries.length != 0 && this.props.entries.reverse().map(entry =>
                     <ListGroupItem
                     className="list-group-item-action flex-column align-items-start py-4 px-4"
                     href="#pablo"
@@ -85,6 +85,14 @@ class Journal extends React.Component {
                         <p className="text-sm mb-0">{entry.Content}</p>
                     </ListGroupItem>    
                     )}
+
+                    {this.props.entries.length == 0 &&
+                    <ListGroupItem
+                        className="list-group-item-action flex-column align-items-start py-4 px-4"
+                    >
+                        <p className="text-md mb-0">Notes created will be displayed here!</p>
+                    </ListGroupItem>
+                    }
                 </ListGroup>
             </Card>
         </Container>
@@ -92,5 +100,22 @@ class Journal extends React.Component {
       )
   }
 }
+const mapStateToProps = state => {
+    return {
+      entries: state.entries
+    }
+}
 
-export default Journal;
+const mapDispatchToProps = dispatch => {
+    return {
+        receiveEntries: () => dispatch(receiveEntries())
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Journal)
+
+
+// export default Journal;
