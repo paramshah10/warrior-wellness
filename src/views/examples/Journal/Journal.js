@@ -39,9 +39,7 @@ class Journal extends React.Component {
                             <NavItem className="py-2 px-3">
                             <Button
                                 color="primary"
-                                onClick={e => {e.preventDefault();  this.setState({
-                                    journal_entries: this.state.journal_entries.reverse()
-                                })}}
+                                onClick={e => {e.preventDefault();  this.forceUpdate()}}
                                 size="sm"
                             >
                                 Date Created
@@ -62,7 +60,7 @@ class Journal extends React.Component {
                 </CardHeader>
                 <ListGroup flush>
                     {/* Add hover over feature to display an edit and delete button */}
-                    { this.props.entries.length != 0 && this.props.entries.reverse().map(entry =>
+                    { this.props.entries.length != 0 && this.props.entries.map(entry =>
                     <ListGroupItem
                     className="list-group-item-action flex-column align-items-start py-4 px-4"
                     href="#pablo"

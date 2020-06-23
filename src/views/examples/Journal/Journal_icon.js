@@ -31,7 +31,7 @@ class JournalIcon extends React.Component {
         var date = new Date()
         var today = monthName[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear()
 
-        let entry_num = localStorage.getItem('num_journal_entries') ? parseInt(localStorage.getItem('num_journal_entries')) + 1 : (0)
+        let entry_num = localStorage.getItem('num_journal_entries') ? parseInt(localStorage.getItem('num_journal_entries')) : (0)
         localStorage.setItem('num_journal_entries', entry_num + 1)
         
         this.props.addEntry(entry_num, this.state.subject, this.state.content, today)

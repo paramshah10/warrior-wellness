@@ -1,3 +1,5 @@
+//TODO: add SORT_ENTRIES_DATE and SORT_ENTRIES_EDITED actions and corresponding reducers
+
 const journalReducer = (state = [], action) => {
     switch (action.type) {
         case 'ADD_ENTRY':
