@@ -33,8 +33,6 @@ import {
   Col,
   Alert,
   Modal,
-  ModalBody,
-  Spinner,
 } from "reactstrap";
 
 import * as firebase from "firebase/app";
@@ -92,6 +90,58 @@ class Login extends React.Component {
     }
   }
 
+  tryGoogleSignIn() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+      console.log("token =", token, "user =", user)
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+      console.log("Error with error code =", errorCode, "and error message =", errorMessage)
+    });
+  }
+
+  tryFacebookSignIn() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+
+    firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+      console.log("email =", user.email, "name =", user.displayName)
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      this.setState({
+        invalid_credentials: true,
+      })
+      console.log("Error with error code =", errorCode, "and error message =", errorMessage)
+    });
+  }
+
   render() {
     if (this.state.loggedIn) {
       localStorage.setItem('loggedIn', true);
@@ -112,21 +162,21 @@ class Login extends React.Component {
                   className="btn-neutral btn-icon"
                   color="default"
                   href="#pablo"
-                  onClick={e => e.preventDefault()}
+                  onClick={() => this.tryFacebookSignIn()}
                 >
                   <span className="btn-inner--icon">
                     <img
                       alt="..."
-                      src={require("assets/img/icons/common/github.svg")}
+                      src={require("assets/img/icons/common/facebook.svg")}
                     />
                   </span>
-                  <span className="btn-inner--text">Github</span>
+                  <span className="btn-inner--text">Facebook</span>
                 </Button>
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
                   href="#pablo"
-                  onClick={e => e.preventDefault()}
+                  onClick={() => this.tryGoogleSignIn()}
                 >
                   <span className="btn-inner--icon">
                     <img
@@ -141,6 +191,9 @@ class Login extends React.Component {
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
                 <small>Or sign in with credentials</small>
+              </div>
+              <div className="text-center text-muted mb-4">
+                <small>To view the model website, <Button style={{boxShadow: "none"}} className="px-0" onClick={() => this.tryLogInUser('model@model.com','123456789')}>click here</Button></small>
               </div>
               {
                 this.state.invalid_credentials && 

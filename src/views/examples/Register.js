@@ -52,6 +52,8 @@ class Register extends React.Component {
       showSpinner: false,
       email_already_in_use: false,
     }
+
+    this.tryGoogleSignIn = this.tryGoogleSignIn.bind(this)
   }
 
   componentDidMount() {
@@ -101,6 +103,58 @@ class Register extends React.Component {
     }
   }
 
+  tryGoogleSignIn() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    
+    firebase.auth().signInWithPopup(provider)
+    .then(function(result) {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+      console.log("token =", token, "user =", user)
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+      console.log("Error with error code =", errorCode, "and error message =", errorMessage)
+    });
+  }
+
+  tryFacebookSignIn() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+
+    firebase.auth().signInWithPopup(provider)
+    .then(function(result) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+      console.log("email =", user.email, "name =", user.displayName)
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      this.setState({
+        invalid_credentials: true,
+      })
+      console.log("Error with error code =", errorCode, "and error message =", errorMessage)
+    });
+  }
+
   render() {
     if (this.state.account_created) {
       localStorage.setItem('loggedIn', true)
@@ -121,21 +175,21 @@ class Register extends React.Component {
                   className="btn-neutral btn-icon mr-4"
                   color="default"
                   href="#pablo"
-                  onClick={e => e.preventDefault()}
+                  onClick={() => this.tryFacebookSignIn()}
                 >
                   <span className="btn-inner--icon">
                     <img
                       alt="..."
-                      src={require("assets/img/icons/common/github.svg")}
+                      src={require("assets/img/icons/common/facebook.svg")}
                     />
                   </span>
-                  <span className="btn-inner--text">Github</span>
+                  <span className="btn-inner--text">Facebook</span>
                 </Button>
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
                   href="#pablo"
-                  onClick={e => e.preventDefault()}
+                  onClick={() => this.tryGoogleSignIn()}
                 >
                   <span className="btn-inner--icon">
                     <img
