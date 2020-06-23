@@ -28,13 +28,16 @@ import routes from "routes.js";
 import JournalIcon from "views/examples/Journal/Journal_icon";
 
 class Admin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: localStorage.getItem('loggedIn') == 'true'
+    }
+  }
   componentDidUpdate(e) {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.mainContent.scrollTop = 0;
-  }
-  componentDidMount() {
-    localStorage.setItem('loggedIn', true);
   }
   getRoutes = routes => {
     return routes.map((prop, key) => {
@@ -64,6 +67,9 @@ class Admin extends React.Component {
     return "Brand";
   };
   render() {
+    if (!this.state.isLoggedIn) {
+      return <Redirect to="/auth/login" />
+    }
     return (
       <>
         <Sidebar

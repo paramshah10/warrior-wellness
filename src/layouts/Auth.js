@@ -30,18 +30,12 @@ class Auth extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      loggedIn: false,
+      isLoggedIn: localStorage.getItem('loggedIn') == 'true',
       modalOpen: true,
-    }
-  }
-  componentWillMount(){
-    if (localStorage.getItem('loggedIn') == 'true'){
-      window.location.href = '#/admin/index'
     }
   }
   componentDidMount() {
     document.body.classList.add("bg-default");
-    localStorage.setItem('loggedIn', false);
   }
   componentWillUnmount() {
     document.body.classList.remove("bg-default");
@@ -63,24 +57,29 @@ class Auth extends React.Component {
   };
 
   render() {
+    if (this.state.isLoggedIn) {
+      localStorage.setItem('loggedIn', 'true')
+      return <Redirect to="/admin/index"/>
+    }
     return (
       <>
+        {localStorage.setItem('loggedIn', false)}
         <div className="main-content">
           {/* <AuthNavbar /> */}
           <Modal isOpen={this.state.modalOpen}>
-            <ModalHeader toggle={this.state.modalOpen=false}>Welcome to Warrior Wellness!</ModalHeader>
+            <ModalHeader>Welcome to Warrior Wellness!</ModalHeader>
             <ModalBody>
               Thank you for visiting! This site is currently under production and many functions may not be available. <br/>
               To view the model website, click on the `Take Me There!` button below! Alternatively, close this modal and click on the sign in button within inputting any details!
             </ModalBody>
             <ModalFooter>
-              <Link
+              {/* <Link
                 className='nav-link-icon'
                 to='/admin/index'
-              >
-              <Button className='mt-4' color='primary' onClick={this.state.modalOpen=false}>Take me there!</Button>
-              </Link>
-              <Button className='mt-4' onClick={() => {this.state.modalOpen=false; this.forceUpdate()} }>Close</Button>
+              > */}
+              <Button className='mt-4' color='primary' onClick={() => this.setState({modalOpen: false, isLoggedIn: true})}>Take me there!</Button>
+              {/* </Link> */}
+              <Button className='mt-4' onClick={() => this.setState({modalOpen: false}) }>Close</Button>
             </ModalFooter>
           </Modal>
           <div className="header bg-gradient-info py-7 py-lg-8">

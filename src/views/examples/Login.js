@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -30,16 +30,77 @@ import {
   InputGroupText,
   InputGroup,
   Row,
-  Col
+  Col,
+  Alert,
+  Modal,
+  ModalBody,
+  Spinner,
 } from "reactstrap";
 
+import * as firebase from "firebase/app";
+import "firebase/auth";
+
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      invalid_credentials: false,
+      loggedIn: false,
+      email: '',
+      password: '',
+      showSpinner: false,
+    }
+  }
+
   componentDidMount() {
     window.scrollTo(0,0);
   }
+
+  tryLogInUser(email, password) {
+    
+    if (email == '' || password == '') {
+      this.setState({
+        invalid_credentials: true,
+      })
+    }
+    
+    else {
+      this.setState({
+        showSpinner: true,
+      })
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ 
+          invalid_credentials: false,
+          loggedIn: true,
+          email: '',
+          password: '',
+          showSpinner: false
+        });
+        localStorage.setItem('loggedIn', true);
+        console.log("Logged In Succesfully!")
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        this.setState({ 
+          invalid_credentials: true,
+          showSpinner: false,
+        });
+        console.error(`Error code: ${error.code}. Error message: ${error.message}`)
+      });
+    }
+  }
+
   render() {
+    if (this.state.loggedIn) {
+      localStorage.setItem('loggedIn', true);
+      return <Redirect to="/admin/index"/>
+    }
+
     return (
       <>
+        <Modal style={{opacity: "0%"}} isOpen={this.state.showSpinner} />
         <Col lg="5" md="7">
           <Card className="bg-secondary shadow border-0">
             <CardHeader className="bg-transparent pb-5">
@@ -81,6 +142,12 @@ class Login extends React.Component {
               <div className="text-center text-muted mb-4">
                 <small>Or sign in with credentials</small>
               </div>
+              {
+                this.state.invalid_credentials && 
+                <div className="text-center text-muted mb-4">
+                  <Alert color="danger">Please check your email and password and try again!</Alert>
+                </div>
+              }
               <Form role="form">
                 <FormGroup className="mb-3">
                   <InputGroup className="input-group-alternative">
@@ -89,7 +156,7 @@ class Login extends React.Component {
                         <i className="ni ni-email-83" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Email" type="email" autoComplete="new-email"/>
+                    <Input placeholder="Email" type="email" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -99,7 +166,7 @@ class Login extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password" autoComplete="new-password"/>
+                    <Input placeholder="Password" type="password" autoComplete="new-password" value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
                   </InputGroup>
                 </FormGroup>
                 <div className="custom-control custom-control-alternative custom-checkbox">
@@ -116,13 +183,13 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Link
+                  {/* <Link
                   className="nav-link-icon"
                   to="/admin/index"
-                  >
-                    <Button className="my-4" color="primary" type="button" onClick={(e) => localStorage.setItem('loggedIn', true)}>
+                  > */}
+                    <Button className="my-4" color="primary" onClick={() => this.tryLogInUser(this.state.email, this.state.password)}>
                     Sign In</Button>
-                  </Link>
+                  {/* </Link> */}
                 </div>
               </Form>
             </CardBody>
