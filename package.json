@@ -14,7 +14,7 @@
     "firebase": "^7.14.0",
     "load-script": "^1.0.0",
     "moment": "2.24.0",
-    "node-sass": "4.13.1",
+    "node-sass": "^4.13.1",
     "nouislider": "14.1.1",
     "npm-upgrade": "^2.0.3",
     "react": "^16.13.1",
@@ -27,10 +27,12 @@
     "react-google-maps": "9.4.5",
     "react-messenger-customer-chat": "^0.7.2",
     "react-messenger-send-to-messenger": "^0.2.0",
+    "react-redux": "^7.2.0",
     "react-relay": "^9.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "reactstrap": "8.4.1"
+    "reactstrap": "8.4.1",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
