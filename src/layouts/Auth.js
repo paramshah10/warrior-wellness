@@ -17,10 +17,9 @@
 */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 // reactstrap components
-import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 // core components
 // import AuthNavbar from "components/Navbars/AuthNavbar.js";
@@ -60,22 +59,6 @@ class Auth extends React.Component {
       <>
         <div className="main-content">
           {/* <AuthNavbar /> */}
-          <Modal isOpen={this.state.modalOpen}>
-            <ModalHeader>Welcome to Warrior Wellness!</ModalHeader>
-            <ModalBody>
-              Thank you for visiting! This site is currently under production and many functions may not be available. <br/>
-              To view the model website, click on the `Take Me There!` button below! Alternatively, close this modal and click on the sign in button within inputting any details!
-            </ModalBody>
-            <ModalFooter>
-              {/* <Link
-                className='nav-link-icon'
-                to='/admin/index'
-              > */}
-              <Button className='mt-4' color='primary' onClick={() => this.setState({modalOpen: false, isLoggedIn: true})}>Take me there!</Button>
-              {/* </Link> */}
-              <Button className='mt-4' onClick={() => this.setState({modalOpen: false}) }>Close</Button>
-            </ModalFooter>
-          </Modal>
           <div className="header bg-gradient-info py-7 py-lg-8">
             <Container>
               <div className="header-body text-center mb-7">
