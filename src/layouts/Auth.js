@@ -30,7 +30,6 @@ class Auth extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isLoggedIn: localStorage.getItem('loggedIn') == 'true',
       modalOpen: true,
     }
   }
@@ -57,13 +56,8 @@ class Auth extends React.Component {
   };
 
   render() {
-    if (this.state.isLoggedIn) {
-      localStorage.setItem('loggedIn', 'true')
-      return <Redirect to="/admin/index"/>
-    }
     return (
       <>
-        {localStorage.setItem('loggedIn', false)}
         <div className="main-content">
           {/* <AuthNavbar /> */}
           <Modal isOpen={this.state.modalOpen}>

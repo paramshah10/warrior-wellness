@@ -48,10 +48,24 @@ class Login extends React.Component {
       password: '',
       showSpinner: false,
     }
+    this.authListener = () => {return;};
   }
 
   componentDidMount() {
     window.scrollTo(0,0);
+    this.authListener = firebase.auth().onAuthStateChanged(async (user) => {
+      await this.onAuthHandler(user);
+    });
+  }
+
+  onAuthHandler(user) {
+    if (user) {
+      console.log(user)
+      localStorage.setItem("email", user.email)
+      this.setState({
+        loggedIn: true,
+      })
+    }
   }
 
   tryLogInUser(email, password) {
@@ -77,7 +91,7 @@ class Login extends React.Component {
           showSpinner: false
         });
         localStorage.setItem('loggedIn', true);
-        console.log("Logged In Succesfully!")
+        localStorage.setItem('email', email);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -145,7 +159,7 @@ class Login extends React.Component {
   render() {
     if (this.state.loggedIn) {
       localStorage.setItem('loggedIn', true);
-      return <Redirect to="/admin/index"/>
+      return <Redirect push to="/admin/index"/>
     }
 
     return (

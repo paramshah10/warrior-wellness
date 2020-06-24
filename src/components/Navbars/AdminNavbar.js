@@ -29,7 +29,15 @@ import {
   Media
 } from "reactstrap";
 
+import * as firebase from "firebase/app";
+import "firebase/auth";
+
 class AdminNavbar extends React.Component {
+  tryLogOut() {
+    localStorage.setItem('loggedIn', false)
+    firebase.auth().signOut();
+  }
+
   render() {
     return (
       <>
@@ -70,7 +78,7 @@ class AdminNavbar extends React.Component {
                     <span>Settings</span>
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem to="/auth/login" tag={Link} onClick={(e) => localStorage.setItem('loggedIn', false)}>
+                  <DropdownItem to="/auth/login" tag={Link} onClick={(e) => this.tryLogOut()}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
                   </DropdownItem>

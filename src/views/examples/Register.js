@@ -54,10 +54,24 @@ class Register extends React.Component {
     }
 
     this.tryGoogleSignIn = this.tryGoogleSignIn.bind(this)
+    this.authListener = () => {return;};
   }
 
   componentDidMount() {
     window.scrollTo(0,0);
+    this.authListener = firebase.auth().onAuthStateChanged(async (user) => {
+      await this.onAuthHandler(user);
+    });
+  }
+
+  onAuthHandler(user) {
+    if (user) {
+      console.log(user)
+      localStorage.setItem("email", user.email)
+      this.setState({
+        account_created: true,
+      })
+    }
   }
 
   tryCreateAccount(email, password, first_name, last_name) {
@@ -155,10 +169,37 @@ class Register extends React.Component {
     });
   }
 
+  tryLogInUser(email, password) {
+    this.setState({
+      showSpinner: true,
+    })
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+      this.setState({ 
+        invalid_credentials: false,
+        account_created: true,
+        email: '',
+        password: '',
+        showSpinner: false
+      });
+      localStorage.setItem('loggedIn', true);
+      localStorage.setItem('email', email);
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      this.setState({ 
+        invalid_credentials: true,
+        showSpinner: false,
+      });
+      console.error(`Error code: ${error.code}. Error message: ${error.message}`)
+    });
+  }
+
   render() {
     if (this.state.account_created) {
       localStorage.setItem('loggedIn', true)
-      return <Redirect to="/admin/index" />
+      return <Redirect push to="/admin/index" />
     }
 
     return (
@@ -204,6 +245,9 @@ class Register extends React.Component {
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
                 <small>Or sign up with credentials</small>
+              </div>
+              <div className="text-center text-muted mb-4">
+                <small>To view the model website, <Button style={{boxShadow: "none"}} className="px-0" onClick={() => this.tryLogInUser('model@model.com','123456789')}>click here</Button></small>
               </div>
               {
                 this.state.invalid_credentials && 
