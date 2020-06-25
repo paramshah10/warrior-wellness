@@ -32,15 +32,6 @@ import { createStore } from 'redux';
 import journalReducer from 'lib/redux/reducers/journal.js';
 import { Provider } from 'react-redux';
 
-//firebase
-import config from './lib/firebase';
-
-const firebase = require("firebase");
-require("firebase/firestore");
-
-firebase.initializeApp(config);
-let db = firebase.firestore();
-
 const initialState = {
   fetchedInitial: false,
   entries: [],
@@ -57,7 +48,7 @@ ReactDOM.render(
     <HashRouter>
       <Switch>
         <Route path="/auth" render={props => <AuthLayout {...props} />} />
-        <Route path="/admin" render={props => <AdminLayout {...props} {...db} />} />
+        <Route path="/admin" render={props => <AdminLayout {...props}/>} />
         <Redirect from="/" to='/auth/login'/>
       </Switch>
     </HashRouter>
