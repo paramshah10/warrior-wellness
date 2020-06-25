@@ -16,6 +16,9 @@ import {
 import { connect } from 'react-redux';
 import { addEntry } from 'lib/redux/actions/journal';
 
+const firebase = require("firebase");
+require("firebase/firestore");
+
 class JournalIcon extends React.Component {
     constructor(props){
         super(props);
@@ -36,10 +39,30 @@ class JournalIcon extends React.Component {
         
         this.props.addEntry(entry_num, this.state.subject, this.state.content, today)
 
-        this.setState({
-            subject: '',
-            content: '',
-            open: false,
+        this.updateFirestore(entry_num, this.state.subject, this.state.content, today)
+    }
+
+    updateFirestore(entry_num, subject, content, today) {
+        let db = firebase.firestore();
+
+        const email = localStorage.getItem("email")
+        let docRef = db.collection("users").doc(email).collection("journal")
+        docRef.add({
+            content: content,
+            date_created: today,
+            date_edited: today,
+            id: entry_num,
+            subject: subject,
+        })
+        .then(() => {
+            this.setState({
+                subject: '',
+                content: '',
+                open: false,
+            })
+        })
+        .catch((error) => {
+            console.log("Could not update firestore with new journal entry. Error =", error)
         })
     }
 
@@ -116,5 +139,3 @@ export default connect(
     null,
     mapDispatchToProps
 )(JournalIcon)
-
-// export default JournalIcon;

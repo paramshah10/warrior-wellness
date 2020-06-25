@@ -16,10 +16,33 @@ import {
 import { connect } from 'react-redux';
 import { receiveEntries } from 'lib/redux/actions/journal';
 
+const firebase = require("firebase");
+require("firebase/firestore");
+
 class Journal extends React.Component {
     constructor(props){
         super(props);
       }
+
+    componentDidMount() {
+        if (!this.props.fetchedInitial){
+            let db = firebase.firestore();
+
+            const email = localStorage.getItem("email")
+            let docRef = db.collection("users").doc(email).collection("journal")
+            docRef.get().then((doc) => {
+                var data = doc.docs.map(doc => doc.data())
+                this.props.receiveEntries(data)
+                this.setState({
+                    fetchedInitial: true
+                })
+            })
+            .catch((error) => {
+                console.log("Couldn't fetch journal entries. Error: ", error)
+            })
+        }
+    }
+
     render() {
       return(
         <>
@@ -74,14 +97,14 @@ class Journal extends React.Component {
                                 className="avatar avatar-xs mr-2"
                                 src={require("assets/img/theme/journal.png")}
                             />
-                            <h4 className="mb-1">{entry.Subject}</h4>
+                            <h4 className="mb-1">{entry.subject}</h4>
                             </div>
                         </div>
-                        <small>Last Edited {entry.Last_edited}</small>
+                        <small>Last Edited {entry.date_edited}</small>
                         </div>
-                        <h6 className="mt-4 mb-2">Created {entry.Created} </h6>
-                        <p className="text-sm mb-0">{entry.Content}</p>
-                    </ListGroupItem>    
+                        <h6 className="mt-4 mb-2">Created {entry.date_created} </h6>
+                        <p className="text-sm mb-0">{entry.content}</p>
+                    </ListGroupItem>
                     )}
 
                     {this.props.entries.length == 0 &&
@@ -98,15 +121,16 @@ class Journal extends React.Component {
       )
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-      entries: state.entries
+      entries: state.entries,
+      fetchedInitial: state.fetchedInitial,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        receiveEntries: () => dispatch(receiveEntries())
+        receiveEntries: (entries) => dispatch(receiveEntries(entries))
     }
 }
 
