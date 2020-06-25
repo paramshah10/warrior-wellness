@@ -7,11 +7,11 @@ const journalReducer = (state = [], action) => {
                 entries: [
                     ...state.entries,
                     {
-                        ID: action.id,
-                        Created: action.created,
-                        Last_edited: action.last_edited,
-                        Subject: action.subject,
-                        Content: action.content
+                        id: action.id,
+                        date_created: action.created,
+                        date_edited: action.last_edited,
+                        subject: action.subject,
+                        content: action.content
                     }
                 ],
             });
@@ -30,11 +30,11 @@ const journalReducer = (state = [], action) => {
                 entries: [
                     ...excluded,
                     {
-                        ID: action.id,
-                        Subject: action.subject,
-                        Content: action.content,
-                        Created: action.created,
-                        Last_edited: action.edited,
+                        id: action.id,
+                        subject: action.subject,
+                        content: action.content,
+                        date_created: action.created,
+                        date_edited: action.edited,
                     },
                 ],
             });
@@ -45,6 +45,7 @@ const journalReducer = (state = [], action) => {
             }
 
             return Object.assign({}, state, {
+                fetchedInitial: true,
                 entries: [
                     ...action.entries
                 ],
