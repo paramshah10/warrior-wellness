@@ -25,6 +25,28 @@ var colors = {
     transparent: "transparent"
 };
 
+const config = require('../lib/firebase');
+
+const firebase = require("firebase");
+require("firebase/firestore");
+
+firebase.initializeApp(config.default);
+let db = firebase.firestore();
+
+let global_data = {"stress_bar": {"day": []}}
+
+const getChartData = async () => {
+  const email = localStorage.getItem("email")
+
+  var docRef = db.collection("users").doc(email).collection("charts")
+  var doc = await docRef.get()
+
+  doc.docs.map(doc => {global_data[doc.id] = doc.data()})
+  console.log("global data is =", global_data)
+}
+
+getChartData()
+
 // Example 1 of Chart inside src/views/Index.js (Sales value - Card)
 let chartExample1 = {
     options: {
@@ -63,13 +85,13 @@ let chartExample1 = {
         }
       }
     },
-    data1: canvas => {//Stress score by month
+    data1: canvas => {//Stress score by day
       return {
         labels: ["12am", "3am", "6am", "9am", "12am", "3pm", "6pm", "9pm", "12am"],
         datasets: [
           {
             label: "Stress Score by Day",
-            data: [3, 0, 0, 3, 12, 22, 14, 10, 4]
+            data: global_data["stress_bar"]["day"] //[3, 0, 0, 3, 12, 22, 14, 10, 4]
           }
         ]
       };
@@ -80,18 +102,18 @@ let chartExample1 = {
         datasets: [
           {
             label: "Stress Score by Week",
-            data: [20, 18, 15, 20, 21, 24, 19]
+            data: global_data["stress_bar"]["week"]//[20, 18, 15, 20, 21, 24, 19]
           }
         ]
       };
     },
-    data3: canvas => {//Stress score by day
+    data3: canvas => {//Stress score by month
       return {
         labels: ["1st", "2nd", "4th", "6th", "8th", "10th", "12th", "14th", "16th", "18th", "20th", "22nd", "24th", "26th", "28th", "30th"],
         datasets: [
           {
             label: "Stress Score by Month",
-            data: [10, 16, 18, 15, 20, 21, 24, 19, 13, 14, 11, 20, 21, 24, 19, 13]
+            data: global_data["stress_bar"]["month"]//[10, 16, 18, 15, 20, 21, 24, 19, 13, 14, 11, 20, 21, 24, 19, 13]
           }
         ]
       };

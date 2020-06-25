@@ -46,6 +46,14 @@ class Graphs extends Component {
       }
     }
 
+    componentDidMount() {
+      setTimeout(() => {
+        this.setState({
+          activeNav1: 1,
+        })
+      }, 2500)
+    }
+
     toggleNavs = (e, row, col, data) => {
       e.preventDefault();
       if (row == 1) {
