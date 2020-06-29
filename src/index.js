@@ -29,17 +29,11 @@ import AuthLayout from "layouts/Auth.js";
 
 //redux
 import { createStore } from 'redux';
-import journalReducer from 'lib/redux/reducers/journal.js';
+import allReducer from 'lib/redux/reducers'
 import { Provider } from 'react-redux';
 
-const initialState = {
-  fetchedInitial: false,
-  entries: [],
-};
-
 const store = createStore(
-    journalReducer,
-    initialState,
+    allReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
@@ -55,3 +49,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+export default store;

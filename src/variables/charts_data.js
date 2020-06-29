@@ -1,3 +1,6 @@
+import store from '../index'
+import { fetchedChartsData } from 'lib/redux/actions/charts';
+
 // Colors
 var colors = {
     gray: {
@@ -69,9 +72,13 @@ const getChartData = async () => {
 
   doc.docs.map(doc => {global_data[doc.id] = doc.data()})
   console.log("global data is =", global_data)
+
+  store.dispatch(fetchedChartsData())
 }
 
 getChartData()
+
+//TODO: USE REDUX TO TELL THE CHART'S COMPONENT THAT LOADING DATA HAS FINISHED
 
 // Example 1 of Chart inside src/views/Index.js (Sales value - Card)
 let chartExample1 = {

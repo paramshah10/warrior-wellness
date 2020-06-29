@@ -29,6 +29,8 @@ import {
   chartExample4,
 } from "variables/charts_data.js"
 
+import { connect } from 'react-redux';
+
 class Graphs extends Component {
     constructor(props){
       super(props);
@@ -41,19 +43,10 @@ class Graphs extends Component {
         chartExample2Data: "data1",
         chartExample3Data: "data1",
         chartExample4Data: "data1",
-        showSpinner: true,
       };
       if (window.Chart) {
         parseOptions(Chart, chartOptions());
       }
-    }
-
-    componentDidMount() {
-      setTimeout(() => {
-        this.setState({
-          showSpinner: false,
-        })
-      }, 2500)
     }
 
     toggleNavs = (e, row, col, data) => {
@@ -141,7 +134,7 @@ class Graphs extends Component {
     render() {
       return (
         <>
-          { this.state.showSpinner &&
+          { !this.props.fetchedInitial &&
             <div className="loading-spinner">
               <Spinner style={{width: '5rem', height: '5rem'}} color="primary" size='lg'/>
             </div>
@@ -381,4 +374,12 @@ class Graphs extends Component {
   }
 }
 
-export default Graphs;
+const mapStateToProps = (state) => {
+  return {
+    fetchedInitial: state.charts.fetchedChartsData,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(Graphs)

@@ -1,18 +1,22 @@
 //TODO: add SORT_ENTRIES_DATE and SORT_ENTRIES_EDITED actions and corresponding reducers
+const initialState = {
+    fetchedInitial: false,
+    entries: [],
+  };
 
-const journalReducer = (state = [], action) => {
+const journalReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_ENTRY':
             return Object.assign({}, state, {
                 entries: [
-                    ...state.entries,
                     {
                         id: action.id,
                         date_created: action.created,
                         date_edited: action.last_edited,
                         subject: action.subject,
                         content: action.content
-                    }
+                    },
+                    ...state.entries
                 ],
             });
 
@@ -47,7 +51,7 @@ const journalReducer = (state = [], action) => {
             return Object.assign({}, state, {
                 fetchedInitial: true,
                 entries: [
-                    ...action.entries
+                    ...action.entries.reverse()
                 ],
             });
 
