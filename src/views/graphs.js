@@ -14,6 +14,7 @@ import {
     Nav,
     Row,
     Col,
+    Spinner,
   } from "reactstrap";
 
 import {
@@ -40,6 +41,7 @@ class Graphs extends Component {
         chartExample2Data: "data1",
         chartExample3Data: "data1",
         chartExample4Data: "data1",
+        showSpinner: true,
       };
       if (window.Chart) {
         parseOptions(Chart, chartOptions());
@@ -49,7 +51,7 @@ class Graphs extends Component {
     componentDidMount() {
       setTimeout(() => {
         this.setState({
-          activeNav1: 1,
+          showSpinner: false,
         })
       }, 2500)
     }
@@ -139,6 +141,11 @@ class Graphs extends Component {
     render() {
       return (
         <>
+          { this.state.showSpinner &&
+            <div className="loading-spinner">
+              <Spinner style={{width: '5rem', height: '5rem'}} color="primary" size='lg'/>
+            </div>
+          }
           <Row>
               <Col className="mb-5 mb-xl-0" xl="8">
               <Card className="bg-gradient-default shadow">

@@ -33,7 +33,33 @@ require("firebase/firestore");
 firebase.initializeApp(config.default);
 let db = firebase.firestore();
 
-let global_data = {"stress_bar": {"day": []}}
+let global_data = {
+  "stress_bar": {
+    "day": [],
+    "week": [],
+    "month": []
+  },
+  "sleep": {
+    "week": {
+      "awake": [],
+      "light": [],
+      "deep": [],
+    },
+    "month": {
+      "awake": [],
+      "light": [],
+      "deep": [],
+    }
+  },
+  "stress_pie_score": {
+    "week": [],
+    "month": [],
+  },
+  "stress_pie_type": {
+    "week": [],
+    "month": [],
+  }
+}
 
 const getChartData = async () => {
   const email = localStorage.getItem("email")
@@ -162,19 +188,19 @@ data1: canvas => {//Sleep by week
     datasets: [
         {
           label: "Awake",
-          data: [0.2, 0.7, 0.5, 0.3, 0.9, 0.2, 0.3],
+          data: global_data["sleep"]["week"]["awake"], //[0.2, 0.7, 0.5, 0.3, 0.9, 0.2, 0.3],
           maxBarThickness: 10,
           backgroundColor: "#A91E2A"
         },
         {
           label: "Light Sleep",
-          data: [2.2, 2, 2.5, 2.3, 2.9, 2.2, 2.3],
+          data: global_data["sleep"]["week"]["light"], //[2.2, 2, 2.5, 2.3, 2.9, 2.2, 2.3],
           maxBarThickness: 10,
           backgroundColor: '#FEB300', //"#673AB7",
         },
         {
           label: "Deep Sleep",
-          data: [4.2, 4, 4.5, 4.3, 4.1, 4.2, 4.3],
+          data: global_data["sleep"]["week"]["deep"],//[4.2, 4, 4.5, 4.3, 4.1, 4.2, 4.3],
           maxBarThickness: 10,
           backgroundColor: "#0dd406",
         },
@@ -187,17 +213,17 @@ data2: canvas => { //sleep by month
     datasets: [
         {
           label: "Awake",
-          data: [0.2, 0.3, 0.1, 0.5],
+          data: global_data["sleep"]["month"]["awake"],//[0.2, 0.3, 0.1, 0.5],
           maxBarThickness: 10
         },
         {
           label: "Light Sleep",
-          data: [2.2, 2.4, 2.1, 2.5],
+          data: global_data["sleep"]["month"]["light"],//[2.2, 2.4, 2.1, 2.5],
           maxBarThickness: 10
         },
         {
           label: "Deep Sleep",
-          data: [4.2, 4.7, 4.1, 4.5],
+          data: global_data["sleep"]["month"]["deep"],//[4.2, 4.7, 4.1, 4.5],
           maxBarThickness: 10
         },
     ]
@@ -232,7 +258,7 @@ let chartExample3 = {
         datasets: [
             {
             label: "Stress count by score in the past month",
-            data: [1, 5, 4, 7],
+            data: global_data["stress_pie_score"]["week"],//[1, 5, 4, 7],
             backgroundColor: [
                 "#A91E2A",
                 '#ff4242',
@@ -250,7 +276,7 @@ let chartExample3 = {
         datasets: [
             {
             label: "Stress count by score in the past month",
-            data: [3, 25, 61, 15],
+            data: global_data["stress_pie_score"]["month"],//[3, 25, 61, 15],
             backgroundColor: [
                 "#A91E2A",
                 '#ff4242',
@@ -291,7 +317,7 @@ let chartExample4 = {
       datasets: [
           {
           label: "Stress count by category in the past month",
-          data: [2, 4, 1, 2, 3],
+          data: global_data["stress_pie_type"]["week"],//[2, 4, 1, 2, 3],
           backgroundColor: [
             "#0dd406",
             '#A91E2A',
@@ -311,7 +337,7 @@ let chartExample4 = {
       datasets: [
           {
           label: "Stress count by category in the past month",
-          data: [7, 13, 10, 5, 15],
+          data: global_data["stress_pie_type"]["month"],//[7, 13, 10, 5, 15],
           backgroundColor: [
             "#0dd406",
             '#A91E2A',
@@ -326,9 +352,4 @@ let chartExample4 = {
     }
   }
 
-module.exports = {
-    chartExample1,
-    chartExample2,
-    chartExample3,
-    chartExample4,
-};  
+export {chartExample1, chartExample2, chartExample3, chartExample4}
