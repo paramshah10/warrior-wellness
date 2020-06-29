@@ -207,7 +207,7 @@ class Login extends React.Component {
                 <small>Or sign in with credentials</small>
               </div>
               <div className="text-center text-muted mb-4">
-                <small>To view the model website, <Button style={{boxShadow: "none"}} className="px-0" onClick={() => this.tryLogInUser('model@model.com','123456789')}>click here</Button></small>
+                <small>To view the model website, <Button style={{boxShadow: "none"}} className="px-0" onClick={() => this.tryLogInUser('paramshah09@gmail.com','123456789')}>click here</Button></small>
               </div>
               {
                 this.state.invalid_credentials && 
