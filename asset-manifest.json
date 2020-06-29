@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.2229eaba.chunk.css",
-    "main.js": "/static/js/main.960c13dc.chunk.js",
-    "main.js.map": "/static/js/main.960c13dc.chunk.js.map",
+    "main.css": "/static/css/main.09a1ac47.chunk.css",
+    "main.js": "/static/js/main.0f05b82d.chunk.js",
+    "main.js.map": "/static/js/main.0f05b82d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.62b44ee8.js",
     "runtime-main.js.map": "/static/js/runtime-main.62b44ee8.js.map",
     "static/css/2.79ff0959.chunk.css": "/static/css/2.79ff0959.chunk.css",
-    "static/js/2.b54690ec.chunk.js": "/static/js/2.b54690ec.chunk.js",
-    "static/js/2.b54690ec.chunk.js.map": "/static/js/2.b54690ec.chunk.js.map",
+    "static/js/2.72569fd1.chunk.js": "/static/js/2.72569fd1.chunk.js",
+    "static/js/2.72569fd1.chunk.js.map": "/static/js/2.72569fd1.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.25acbbd9c14d7aceebfb571b085bbb30.js": "/precache-manifest.25acbbd9c14d7aceebfb571b085bbb30.js",
+    "precache-manifest.7b04a78cbc52c7c15aef006f74f5d33c.js": "/precache-manifest.7b04a78cbc52c7c15aef006f74f5d33c.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.79ff0959.chunk.css.map": "/static/css/2.79ff0959.chunk.css.map",
-    "static/css/main.2229eaba.chunk.css.map": "/static/css/main.2229eaba.chunk.css.map",
-    "static/js/2.b54690ec.chunk.js.LICENSE.txt": "/static/js/2.b54690ec.chunk.js.LICENSE.txt",
-    "static/js/main.960c13dc.chunk.js.LICENSE.txt": "/static/js/main.960c13dc.chunk.js.LICENSE.txt",
+    "static/css/main.09a1ac47.chunk.css.map": "/static/css/main.09a1ac47.chunk.css.map",
+    "static/js/2.72569fd1.chunk.js.LICENSE.txt": "/static/js/2.72569fd1.chunk.js.LICENSE.txt",
+    "static/js/main.0f05b82d.chunk.js.LICENSE.txt": "/static/js/main.0f05b82d.chunk.js.LICENSE.txt",
     "static/media/chat-icon.svg": "/static/media/chat-icon.e0d2b748.svg",
     "static/media/all.min.css": "/static/media/fa-solid-900.cdfec5cf.woff",
     "static/media/facebook.svg": "/static/media/facebook.a64a1d0a.svg",
@@ -30,8 +30,8 @@
   "entrypoints": [
     "static/js/runtime-main.62b44ee8.js",
     "static/css/2.79ff0959.chunk.css",
-    "static/js/2.b54690ec.chunk.js",
-    "static/css/main.2229eaba.chunk.css",
-    "static/js/main.960c13dc.chunk.js"
+    "static/js/2.72569fd1.chunk.js",
+    "static/css/main.09a1ac47.chunk.css",
+    "static/js/main.0f05b82d.chunk.js"
   ]
 }
