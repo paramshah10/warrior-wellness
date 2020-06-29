@@ -15,6 +15,7 @@ import {
 //redux
 import { connect } from 'react-redux';
 import { receiveEntries } from 'lib/redux/actions/journal';
+import { removeEntry } from 'lib/redux/actions/journal';
 
 const firebase = require("firebase");
 require("firebase/firestore");
@@ -22,14 +23,17 @@ require("firebase/firestore");
 class Journal extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            showED: {}
+        }
       }
 
-    componentDidMount() {
-        if (!this.props.fetchedInitial){
-            let db = firebase.firestore();
+    db = firebase.firestore();
+    email = localStorage.getItem("email")
 
-            const email = localStorage.getItem("email")
-            let docRef = db.collection("users").doc(email).collection("journal")
+    componentDidMount() {
+        if (!this.props.fetchedInitial){        
+            let docRef = this.db.collection("users").doc(this.email).collection("journal").orderBy('id')
             docRef.get().then((doc) => {
                 var data = doc.docs.map(doc => doc.data())
                 this.props.receiveEntries(data)
@@ -41,6 +45,24 @@ class Journal extends React.Component {
                 console.log("Couldn't fetch journal entries. Error: ", error)
             })
         }
+    }
+
+    onEntryDelete(id) {
+        let docRef = this.db.collection("users").doc(this.email).collection("journal").where("id", "==", id)
+        docRef.get().then((snapshot) => {
+            snapshot.forEach((doc) => {
+                doc.ref.delete()
+            })
+            this.props.removeEntry(id)
+            this.forceUpdate()
+        })
+        .catch((error) => {
+            console.log("Could not delete the entry! ERROR:", error);
+        })
+    }
+
+    onEntryEdit() {
+        console.log("Edited")
     }
 
     render() {
@@ -88,6 +110,8 @@ class Journal extends React.Component {
                     className="list-group-item-action flex-column align-items-start py-4 px-4"
                     href="#pablo"
                     onClick={e => e.preventDefault()}
+                    onMouseEnter={() => {this.state.showED[entry.id] = true; this.forceUpdate()}}
+                    onMouseLeave={() => {this.state.showED[entry.id] = false; this.forceUpdate()}}
                     >
                         <div className="d-flex w-100 justify-content-between">
                         <div>
@@ -102,8 +126,22 @@ class Journal extends React.Component {
                         </div>
                         <small>Last Edited {entry.date_edited}</small>
                         </div>
-                        <h6 className="mt-4 mb-2">Created {entry.date_created} </h6>
-                        <p className="text-sm mb-0">{entry.content}</p>
+                        <Row>
+                            <Col xs="11">
+                                <h6 className="mt-4 mb-2">Created {entry.date_created} </h6>
+                                <p className="text-sm mb-0">{entry.content}</p>
+                            </Col>
+                        {
+                            this.state.showED[entry.id] &&
+                            <Col xs="1">
+                                <Button className="col mt-4 d-none d-md-block" style={{bottom: 5}} color="default" size="sm" onClick={() => this.onEntryEdit()}>Edit</Button>
+                                <Button className="col mt-4 d-md-none" style={{bottom: 2}} color="default" size="sm" onClick={() => this.onEntryEdit()}>E</Button>
+
+                                <Button className="col mt-1 d-none d-md-block" style={{bottom: 0}} color="default" size="sm" onClick={() => this.onEntryDelete(entry.id)}>Delete</Button>
+                                <Button className="col mt-1 d-md-none" style={{bottom: 0}} color="default" size="sm" onClick={() => this.onEntryDelete(entry.id)}>D</Button>
+                            </Col>
+                        }
+                        </Row>
                     </ListGroupItem>
                     )}
 
@@ -123,14 +161,15 @@ class Journal extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-      entries: state.entries,
-      fetchedInitial: state.fetchedInitial,
+      entries: state.journal.entries,
+      fetchedInitial: state.journal.fetchedInitial,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        receiveEntries: (entries) => dispatch(receiveEntries(entries))
+        receiveEntries: (entries) => dispatch(receiveEntries(entries)),
+        removeEntry: (id) => dispatch(removeEntry(id))
     }
 }
 

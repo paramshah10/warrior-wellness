@@ -22,7 +22,7 @@ export const updateEntry = (id, subject, content, created, edited) => {
 
 export const removeEntry = (id) => {
     return {
-        type: 'DELETE_ENTRY',
+        type: 'REMOVE_ENTRY',
         id,
     };
 }
