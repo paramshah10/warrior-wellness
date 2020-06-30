@@ -15,7 +15,7 @@ import {
 import Header from "components/Headers/Header.js";
 import Graphs from "./graphs.js"
 
-const firebase = require("firebase");
+const firebase = require("firebase/app");
 require("firebase/firestore");
 
 class Index extends React.Component {

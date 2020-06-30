@@ -16,7 +16,7 @@ import {
 import { connect } from 'react-redux';
 import { addEntry } from 'lib/redux/actions/journal';
 
-const firebase = require("firebase");
+const firebase = require("firebase/app");
 require("firebase/firestore");
 
 class JournalIcon extends React.Component {

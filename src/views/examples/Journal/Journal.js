@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import { receiveEntries } from 'lib/redux/actions/journal';
 import { removeEntry } from 'lib/redux/actions/journal';
 
-const firebase = require("firebase");
+const firebase = require("firebase/app");
 require("firebase/firestore");
 
 class Journal extends React.Component {

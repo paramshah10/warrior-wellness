@@ -30,7 +30,7 @@ var colors = {
 
 const config = require('../lib/firebase');
 
-const firebase = require("firebase");
+const firebase = require("firebase/app");
 require("firebase/firestore");
 
 firebase.initializeApp(config.default);
