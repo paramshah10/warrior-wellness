@@ -14,17 +14,32 @@ import {
 
 import Header from "components/Headers/Header.js";
 import Graphs from "./graphs.js"
-import stressIncidents from "./stress_incidents.js";
+
+const firebase = require("firebase");
+require("firebase/firestore");
 
 class Index extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      stressIncidents: stressIncidents.sort((a,b) => parseInt(b.Date) - parseInt(a.Date)),
+      stressIncidents: [],
       dateSort: true,
       stressSort: true,
       showTextBox: Array(6).fill(false),
     }
+  }
+
+  componentDidMount() {
+    const email = localStorage.getItem("email")
+    let db = firebase.firestore();
+
+    let docRef = db.collection("users").doc(email).collection("stress_incidents").orderBy("index")
+    docRef.get().then((doc) => {
+      var data = doc.docs.map(d => d.data())
+      this.setState({
+        stressIncidents: data,
+      })
+    })
   }
 
   onDateToggle(e){
@@ -34,12 +49,12 @@ class Index extends React.Component {
       dateSort: !this.state.dateSort,
       stressIncidents: sort ?
         this.state.stressIncidents.sort(function (a, b) {
-          a = a.Date.split('/');
-          b = b.Date.split('/');
+          a = a.date.split('/');
+          b = b.date.split('/');
           return b[2] - a[2] || b[0] - a[0] || b[1] - a[1];
         }) : this.state.stressIncidents.sort(function (a, b) {
-          a = a.Date.split('/');
-          b = b.Date.split('/');
+          a = a.date.split('/');
+          b = b.date.split('/');
           return a[2] - b[2] || a[0] - b[0] || a[1] - b[1];
         })
     });
@@ -51,7 +66,7 @@ class Index extends React.Component {
     this.setState({
       stressSort: !this.state.stressSort,
       stressIncidents: sort ? 
-        this.state.stressIncidents.sort((a,b) => b.StressScore - a.StressScore) : this.state.stressIncidents.sort((a,b) => a.StressScore - b.StressScore),
+        this.state.stressIncidents.sort((a,b) => b.stress_score - a.stress_score) : this.state.stressIncidents.sort((a,b) => a.stress_score - b.stress_score),
     });
   }
 
@@ -85,10 +100,10 @@ class Index extends React.Component {
                   <tbody>
                     {this.state.stressIncidents.map(incident => 
                       <tr>
-                        <td key={incident.Reason}>
+                        <td key={String(incident.index)+String(incident.index)}>
                           <Input 
                             type="select" 
-                            defaultValue={incident.Reason}
+                            defaultValue={incident.reason}
                             onChange={(e) => console.log(`stress reason changed to ${e.target.value}`)}
                           >
                             <option>Work</option>
@@ -98,32 +113,31 @@ class Index extends React.Component {
                             <option>Other</option>
                           </Input>
                         </td>
-                        <td>{incident.Stress}</td>
-                        <td>{incident.Date}</td>
-                        <td>{incident.Time}</td>
-                        <td key={incident.Index}>
+                        <td>{incident.stress}</td>
+                        <td>{incident.date}</td>
+                        <td>{incident.time}</td>
+                        <td key={incident.index}>
                           <Input type="textarea"
-                            defaultValue={`${incident.Description} on ${incident.Date}`}
-                            id={'Box'+incident.Index}
-                            plaintext={!this.state.showTextBox[incident.Index]}
+                            defaultValue={`${incident.description} on ${incident.date}`}
+                            id={'Box'+incident.index}
+                            plaintext={!this.state.showTextBox[incident.index]}
                             onDoubleClick={(e) => {
                               e.preventDefault();
-                              this.state.showTextBox[incident.Index] = true; 
+                              this.state.showTextBox[incident.index] = true; 
                               this.forceUpdate();
                             }}
-                            // onChange={(e) => {console.log(`changed to ${e.target.value}`); descriptions[incident.Index] = e.target.value;}}
                           />
-                          <UncontrolledTooltip delay={0} placement='right' trigger="hover focus" target={'Box'+incident.Index}>
+                          <UncontrolledTooltip delay={0} placement='right' trigger="hover focus" target={'Box'+incident.index}>
                             Double Click Me to Edit!
                           </UncontrolledTooltip>                          
                           {
-                            this.state.showTextBox[incident.Index] && 
+                            this.state.showTextBox[incident.index] && 
                             <Button
                               color='default'
                               size="sm"
                               onClick={(e) => {
                                 e.preventDefault();
-                                this.state.showTextBox[incident.Index] = false;
+                                this.state.showTextBox[incident.index] = false;
                                 this.forceUpdate();
                               }}
                             >Save</Button>
