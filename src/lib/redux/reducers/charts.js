@@ -1,5 +1,6 @@
 const initialState = {
-    fetchedChartsData: false
+    fetchedChartsData: false,
+    overalls: {},
 }
 
 const chartsReducer = (state = initialState, action) => {
@@ -9,6 +10,11 @@ const chartsReducer = (state = initialState, action) => {
                 fetchedChartsData: true
             })
 
+        case "ADD_OVERALLS":
+            return Object.assign({}, state, {
+                overalls: action.overalls
+            })
+        
         default:
             return state
     }

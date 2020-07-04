@@ -10,11 +10,11 @@ import {
 } from "variables/charts.js";
 
 import {
-    chartExample1,
-    chartExample2,
-    chartExample3,
-    chartExample4,
-} from "variables/additional_charts_data.js"
+    chartExample5 as chartExample1,
+    chartExample6 as chartExample2,
+    chartExample7 as chartExample3,
+    chartExample8 as chartExample4,
+} from "variables/charts_data.js"
 
 import {
     Row,
@@ -26,7 +26,10 @@ import {
     Card,
     CardHeader,
     CardBody,
+    Spinner
 } from 'reactstrap'
+
+import { connect } from 'react-redux';
 
 class Charts extends React.Component {
     constructor(props){
@@ -128,7 +131,7 @@ class Charts extends React.Component {
         <div className="header bg-gradient-info pb-8 pt-5 pt-md-8"/>
         <Container className="mt--7" fluid>
             <Row>
-                <Col xl="5">
+                <Col className="mb-5 mb-xl-0" xl="5">
                 <Card className="shadow">
                     <CardHeader className="bg-transparent">
                     <Row className="align-items-center">
@@ -355,4 +358,12 @@ class Charts extends React.Component {
   }
 }
 
-export default Charts;
+const mapStateToProps = (state) => {
+  return {
+    fetchedInitial: state.charts.fetchedChartsData,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(Charts)

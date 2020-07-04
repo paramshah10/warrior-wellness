@@ -1,5 +1,5 @@
 import store from '../index'
-import { fetchedChartsData } from 'lib/redux/actions/charts';
+import { fetchedChartsData, addOveralls } from 'lib/redux/actions/charts';
 
 // Colors
 var colors = {
@@ -44,11 +44,13 @@ let global_data = {
   },
   "sleep": {
     "week": {
+      "total": [],
       "awake": [],
       "light": [],
       "deep": [],
     },
     "month": {
+      "total": [],
       "awake": [],
       "light": [],
       "deep": [],
@@ -61,6 +63,18 @@ let global_data = {
   "stress_pie_type": {
     "week": [],
     "month": [],
+  },
+  "stress_bar_score": {
+    "week": [],
+    "month": [],
+  },
+  "stress_bar_type": {
+    "week": [],
+    "month": [],
+  },
+  "stress_management": {
+    "week": [],
+    "month": []
   }
 }
 
@@ -71,14 +85,15 @@ const getChartData = async () => {
   var doc = await docRef.get()
 
   doc.docs.map(doc => {global_data[doc.id] = doc.data()})
-  console.log("global data is =", global_data)
+
+  global_data["stress_bar_score"] = global_data["stress_pie_score"]
+  global_data["stress_bar_type"] = global_data["stress_pie_type"]
 
   store.dispatch(fetchedChartsData())
+  store.dispatch(addOveralls(global_data["overalls"]))
 }
 
 getChartData()
-
-//TODO: USE REDUX TO TELL THE CHART'S COMPONENT THAT LOADING DATA HAS FINISHED
 
 // Example 1 of Chart inside src/views/Index.js (Sales value - Card)
 let chartExample1 = {
@@ -359,4 +374,267 @@ let chartExample4 = {
     }
   }
 
-export {chartExample1, chartExample2, chartExample3, chartExample4}
+let chartExample5 = {
+  options: {
+    scales: {
+      yAxes: [
+        {
+          gridLines: {
+            color: colors.gray[900],
+            zeroLineColor: colors.gray[900]
+          },
+          ticks: {
+            callback: function(value) {
+              return value;
+            }
+          }
+        }
+      ]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(item, data) {
+          var label = data.datasets[item.datasetIndex].label || "";
+          var yLabel = item.yLabel;
+          var content = "";
+
+          if (data.datasets.length > 1) {
+            content += label;
+          }
+
+          // content += '$' + yLabel + 'k';
+          content += yLabel;
+          return content;
+        }
+      }
+    }
+  },
+  data1: canvas => {//sleep score by week
+    return {
+      labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      datasets: [
+        {
+          label: "Sleep by Week",
+          data: global_data["sleep"]["week"]["total"],//[6.6, 6.7, 7.5, 7.2, 7.9, 6.8, 6.9]
+        }
+      ]
+    };
+  },
+  data2: canvas => {//sleep score by month
+    return {
+      labels: ["1st", "2nd", "4th", "6th", "8th", "10th", "12th", "14th", "16th", "18th", "20th", "22nd", "24th", "26th", "28th", "30th"],
+      datasets: [
+        {
+          label: "Sleep by Month",
+          data: global_data["sleep"]["month"]["total"],//[7.5, 6.9, 7.2, 8, 8.1, 6.1, 6.4, 6.9, 7, 8, 7.6, 7.7, 8.1, 6.9, 7.3, 7.5]
+        }
+      ]
+    };
+  }
+};
+  
+  // Example 2 of Chart inside src/views/Index.js (Total orders - Card)
+let chartExample6 = {
+options: {
+    scales: {
+    yAxes: [
+        {
+        ticks: {
+            callback: function(value) {
+            if (!(value % 5)) {
+                //return '$' + value + 'k'
+                return value;
+            }
+            }
+        },
+        stacked: true,
+        }
+    ],
+    xAxes: [{
+      stacked: true,
+    }]
+    },
+    tooltips: {
+        callbacks: {
+            label: function(item, data) {
+            var label = data.datasets[item.datasetIndex].label || "";
+            var yLabel = item.yLabel;
+            var content = "";
+            if (data.datasets.length > 1) {
+                content += label;
+            }
+            content += " " + yLabel;
+            return content;
+            }
+    }
+    }
+},
+data1: canvas => {
+    return {
+    labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
+    datasets: [
+        {
+            label: "Stress Management Activites Minutes",
+            data: global_data["stress_management"]["week"],//[13, 25, 41, 15, 35, 21, 28],
+        }
+    ]
+    };
+},
+data2: canvas => {
+    return {  
+    labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+    datasets: [
+        {
+            label: "Stress Management Activites Minutes",
+            data: global_data["stress_management"]["month"]//[13, 25, 21, 28],
+        }
+    ]
+    };
+}
+};
+
+let chartExample7 = {
+    options: {
+        scales: {
+            yAxes: [
+                {
+                ticks: {
+                    callback: function(value) {
+                        return value;
+                    }
+                },
+                stacked: true,
+                }
+            ],
+            xAxes: [{
+              stacked: true,
+            }]
+        },
+        tooltips: {
+            callbacks: {
+                label: function(item, data) {
+                    return data.datasets[item.datasetIndex].data[item.index];
+                }
+            }
+        },
+      responsive: true,
+      maintainAspectRatio: false,
+    },
+
+    data1: canvas => {
+        return {
+        labels: ["Very High (20-25)", "High (15-20)", "Moderate (10-15)", "Low (0-10)"],
+        datasets: [
+            {
+            label: "Stress count by score in the past month",
+            data: global_data["stress_bar_score"]["week"],//[1, 5, 4, 7],
+            backgroundColor: [
+              "#A91E2A",
+              '#ff4242',
+              '#002867',
+              '#DCDCDC'
+              ],
+            }
+        ],
+        }
+    },
+
+    data2: canvas => {
+        return {
+        labels: ["Very High (20-25)", "High (15-20)", "Moderate (10-15)", "Low (0-10)"],
+        datasets: [
+            {
+            label: "Stress count by score in the past month",
+            data: global_data["stress_bar_score"]["month"],//[3, 25, 61, 15],
+            backgroundColor: [
+              "#A91E2A",
+              '#ff4242',
+              '#002867',
+              '#DCDCDC'
+              ],
+            }
+        ],
+        innerWidth: 100,
+        }
+    }
+}
+
+let chartExample8 = {
+  options: {
+    scales: {
+        yAxes: [
+            {
+            ticks: {
+                callback: function(value) {
+                if (!(value % 1)) {
+                    return value;
+                }
+                }
+            },
+            stacked: true,
+            }
+        ],
+        xAxes: [{
+          stacked: true,
+        }]
+        },
+    tooltips: {
+        callbacks: {
+            label: function(item, data) {
+                return data.datasets[item.datasetIndex].data[item.index];
+            }
+    }
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+  },
+
+  data1: canvas => {
+      return {
+      labels: ["Work (Admin)", "Work (Field)" , "Social", "Family", "Financial"],
+      datasets: [
+          {
+          label: "Stress count by category in the past month",
+          data: global_data["stress_bar_type"]["week"],//[2, 4, 1, 2, 3],
+          backgroundColor: [
+            "#0dd406",
+            '#A91E2A',
+            '#002867',
+            '#FEB300',
+            '#DCDCDC',
+            ],
+          }
+      ]
+      }
+  },
+
+  data2: canvas => {
+      return {
+      labels: ["Work (Admin)", "Work (Field)" , "Social", "Family", "Financial"],
+      datasets: [
+          {
+          label: "Stress count by category in the past month",
+          data: global_data["stress_bar_type"]["month"],//[7, 13, 10, 5, 15],
+          backgroundColor: [
+              "#0dd406",
+              '#A91E2A',
+              '#002867',
+              '#FEB300',
+              '#DCDCDC',
+              ],
+          }
+      ]
+      }
+    }
+  }
+
+export {
+  chartExample1, 
+  chartExample2, 
+  chartExample3, 
+  chartExample4, 
+  chartExample5, 
+  chartExample6, 
+  chartExample7, 
+  chartExample8
+}
