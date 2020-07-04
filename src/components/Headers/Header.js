@@ -1,24 +1,9 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+
+import {connect} from 'react-redux'
 
 class Header extends React.Component {
   render() {
@@ -41,7 +26,7 @@ class Header extends React.Component {
                             Stress Score
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            19.5
+                            {this.props.overalls["stress"] && this.props.overalls["stress"]["score"]}
                           </span>
                         </div>
                         <Col className="col-auto">
@@ -51,9 +36,15 @@ class Header extends React.Component {
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-danger mr-2">
-                          <i className="fa fa-arrow-up" /> 3.48%
-                        </span>{" "}
+                        {this.props.overalls["stress"] && this.props.overalls["stress"]["value_change"] == "up" ?
+                          (<span className="text-danger mr-2">
+                            <i className="fa fa-arrow-up" /> {this.props.overalls["stress"]["percent_change"]}%
+                          </span>) 
+                          : 
+                          (<span className="text-success mr-2">
+                            <i className="fa fa-arrow-down" /> {this.props.overalls["stress"] && this.props.overalls["stress"]["percent_change"]}%
+                          </span>)
+                          }{" "}
                         <span className="text-nowrap">Since last week</span>
                       </p>
                     </CardBody>
@@ -71,7 +62,7 @@ class Header extends React.Component {
                             Sleep
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            8.5 hours/night
+                            {this.props.overalls["sleep"] && this.props.overalls["sleep"]["score"] } hours/night
                           </span>
                         </div>
                         <Col className="col-auto">
@@ -81,9 +72,15 @@ class Header extends React.Component {
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-success mr-2">
-                          <i className="fas fa-arrow-up" /> 4.79%
-                        </span>{" "}
+                        {this.props.overalls["sleep"] && this.props.overalls["sleep"]["value_change"] == "up" ?
+                          (<span className="text-success mr-2">
+                            <i className="fa fa-arrow-up" /> {this.props.overalls["sleep"]["percent_change"]}%
+                          </span>) 
+                          : 
+                          (<span className="text-danger mr-2">
+                            <i className="fa fa-arrow-down" /> {this.props.overalls["sleep"] && this.props.overalls["sleep"]["percent_change"]}%
+                          </span>)
+                          }{" "}
                         <span className="text-nowrap">Since last week</span>
                       </p>
                     </CardBody>
@@ -100,7 +97,9 @@ class Header extends React.Component {
                           >
                             Stress Management
                           </CardTitle>
-                          <span className="h2 font-weight-bold mb-0">31 mins/day</span>
+                          <span className="h2 font-weight-bold mb-0">
+                            {this.props.overalls["stress_management"] && this.props.overalls["stress_management"]["score"]} mins/day
+                          </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -109,9 +108,15 @@ class Header extends React.Component {
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-danger mr-2">
-                          <i className="fas fa-arrow-down" /> 1.10%
-                        </span>{" "}
+                        {this.props.overalls["stress_management"] && this.props.overalls["stress_management"]["value_change"] == "up" ?
+                          (<span className="text-success mr-2">
+                            <i className="fa fa-arrow-up" /> {this.props.overalls["stress_management"]["percent_change"]}%
+                          </span>) 
+                          : 
+                          (<span className="text-danger mr-2">
+                            <i className="fa fa-arrow-down" /> {this.props.overalls["stress_management"] && this.props.overalls["stress_management"]["percent_change"]}%
+                          </span>)
+                          }{" "}
                         <span className="text-nowrap">Since last week</span>
                       </p>
                     </CardBody>
@@ -129,7 +134,7 @@ class Header extends React.Component {
                             High-Stress Events
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            8
+                            {this.props.overalls["stress_events"] && this.props.overalls["stress_events"]["score"]}
                           </span>
                         </div>
                         <Col className="col-auto">
@@ -139,9 +144,15 @@ class Header extends React.Component {
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-danger mr-2">
-                          <i className="fas fa-arrow-up" /> 12%
-                        </span>{" "}
+                        {this.props.overalls["stress_events"] && this.props.overalls["stress_events"]["value_change"] == "up" ?
+                          (<span className="text-danger mr-2">
+                            <i className="fa fa-arrow-up" /> {this.props.overalls["stress_events"]["percent_change"]}%
+                          </span>) 
+                          : 
+                          (<span className="text-success mr-2">
+                            <i className="fa fa-arrow-down" /> {this.props.overalls["stress_events"] && this.props.overalls["stress_events"]["percent_change"]}%
+                          </span>)
+                          }{" "}
                         <span className="text-nowrap">Since last month</span>
                       </p>
                     </CardBody>
@@ -156,4 +167,13 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    fetchedInitial: state.charts.fetchedChartsData,
+    overalls: state.charts.overalls
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(Header)
