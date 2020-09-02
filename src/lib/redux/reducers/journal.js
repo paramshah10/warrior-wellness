@@ -2,6 +2,7 @@
 const initialState = {
     fetchedInitial: false,
     entries: [],
+    num_entries: 0
   };
 
 const journalReducer = (state = initialState, action) => {
@@ -18,6 +19,7 @@ const journalReducer = (state = initialState, action) => {
                     },
                     ...state.entries
                 ],
+                num_entries: state.num_entries + 1
             });
 
         case 'REMOVE_ENTRY':
@@ -25,6 +27,7 @@ const journalReducer = (state = initialState, action) => {
 
             return Object.assign({}, state, {
                 entries: filtered,
+                num_entries: state.num_entries - 1
             });
 
         case 'UPDATE_ENTRY':
@@ -50,6 +53,7 @@ const journalReducer = (state = initialState, action) => {
 
             return Object.assign({}, state, {
                 fetchedInitial: true,
+                num_entries: action.num_entries,
                 entries: [
                     ...action.entries.reverse()
                 ],

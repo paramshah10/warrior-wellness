@@ -27,9 +27,10 @@ export const removeEntry = (id) => {
     };
 }
 
-export const receiveEntries = (entries) => {
+export const receiveEntries = (entries, num_entries) => {
     return {
         type: 'RECEIVE_ENTRIES',
-        entries
+        entries,
+        num_entries
     };
 }

@@ -34,8 +34,8 @@ class JournalIcon extends React.Component {
         var date = new Date()
         var today = monthName[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear()
 
-        let entry_num = localStorage.getItem('num_journal_entries') ? parseInt(localStorage.getItem('num_journal_entries')) : (0)
-        localStorage.setItem('num_journal_entries', entry_num + 1)
+        let entry_num = this.props.num_entries + 1
+        localStorage.setItem('num_journal_entries', entry_num)
         
         this.props.addEntry(entry_num, this.state.subject, this.state.content, today)
 
@@ -45,8 +45,8 @@ class JournalIcon extends React.Component {
     updateFirestore(entry_num, subject, content, today) {
         let db = firebase.firestore();
 
-        const email = localStorage.getItem("email")
-        let docRef = db.collection("users").doc(email).collection("journal")
+        const uid = localStorage.getItem("uid")
+        let docRef = db.collection("users").doc(uid).collection("journal")
         docRef.add({
             content: content,
             date_created: today,
@@ -128,7 +128,11 @@ class JournalIcon extends React.Component {
         )
     }
 }
-
+const mapStateToProps = (state) => {
+    return {
+        num_entries: state.journal.num_entries
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
         addEntry: (id, subject, content, date) => dispatch(addEntry(id, subject, content, date))
@@ -136,6 +140,6 @@ const mapDispatchToProps = dispatch => {
 }
   
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(JournalIcon)

@@ -29,14 +29,14 @@ class Journal extends React.Component {
       }
 
     db = firebase.firestore();
-    email = localStorage.getItem("email")
+    uid = localStorage.getItem("uid")
 
     componentDidMount() {
         if (!this.props.fetchedInitial){        
-            let docRef = this.db.collection("users").doc(this.email).collection("journal").orderBy('id')
+            let docRef = this.db.collection("users").doc(this.uid).collection("journal").orderBy('id')
             docRef.get().then((doc) => {
                 var data = doc.docs.map(doc => doc.data())
-                this.props.receiveEntries(data)
+                this.props.receiveEntries(data, data.length)
                 this.setState({
                     fetchedInitial: true
                 })
@@ -48,7 +48,7 @@ class Journal extends React.Component {
     }
 
     onEntryDelete(id) {
-        let docRef = this.db.collection("users").doc(this.email).collection("journal").where("id", "==", id)
+        let docRef = this.db.collection("users").doc(this.uid).collection("journal").where("id", "==", id)
         docRef.get().then((snapshot) => {
             snapshot.forEach((doc) => {
                 doc.ref.delete()
@@ -163,12 +163,13 @@ const mapStateToProps = (state) => {
     return {
       entries: state.journal.entries,
       fetchedInitial: state.journal.fetchedInitial,
+      num_entries: state.journal.num_entries
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        receiveEntries: (entries) => dispatch(receiveEntries(entries)),
+        receiveEntries: (entries, num_entries) => dispatch(receiveEntries(entries, num_entries)),
         removeEntry: (id) => dispatch(removeEntry(id))
     }
 }
