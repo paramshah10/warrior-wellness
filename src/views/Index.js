@@ -30,10 +30,10 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    const email = localStorage.getItem("email")
+    const uid = localStorage.getItem("uid")
     let db = firebase.firestore();
 
-    let docRef = db.collection("users").doc(email).collection("stress_incidents").orderBy("index")
+    let docRef = db.collection("users").doc(uid).collection("stress_incidents").orderBy("index")
     docRef.get().then((doc) => {
       var data = doc.docs.map(d => d.data())
       this.setState({

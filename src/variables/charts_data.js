@@ -79,9 +79,9 @@ let global_data = {
 }
 
 const getChartData = async () => {
-  const email = localStorage.getItem("email")
+  const uid = localStorage.getItem("uid")
 
-  var docRef = db.collection("users").doc(email).collection("charts")
+  var docRef = db.collection("users").doc(uid).collection("charts")
   var doc = await docRef.get()
 
   doc.docs.map(doc => {global_data[doc.id] = doc.data()})

@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 // reactstrap components
@@ -53,15 +36,15 @@ class Login extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0,0);
-    this.authListener = firebase.auth().onAuthStateChanged(async (user) => {
-      await this.onAuthHandler(user);
+    this.authListener = firebase.auth().onAuthStateChanged((user) => {
+      this.onAuthHandler(user);
     });
   }
 
   onAuthHandler(user) {
     if (user) {
       console.log(user)
-      localStorage.setItem("email", user.email)
+      localStorage.setItem("uid", user.uid)
       this.setState({
         loggedIn: true,
       })
@@ -82,7 +65,7 @@ class Login extends React.Component {
       })
 
       firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((user) => {
         this.setState({ 
           invalid_credentials: false,
           loggedIn: true,
@@ -91,7 +74,7 @@ class Login extends React.Component {
           showSpinner: false
         });
         localStorage.setItem('loggedIn', true);
-        localStorage.setItem('email', email);
+        localStorage.setItem('uid', user.user.uid)
       })
       .catch((error) => {
         // Handle Errors here.
