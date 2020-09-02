@@ -15,6 +15,9 @@ import {
 import Header from "components/Headers/Header.js";
 import Graphs from "./graphs.js"
 
+import { connect } from 'react-redux';
+import { addUserData } from 'lib/redux/actions/app';
+
 const firebase = require("firebase/app");
 require("firebase/firestore");
 
@@ -39,6 +42,11 @@ class Index extends React.Component {
       this.setState({
         stressIncidents: data,
       })
+    })
+
+    db.collection("users").doc(uid).get()
+    .then((doc) => {
+      this.props.addUserData(doc.data())
     })
   }
 
@@ -156,4 +164,13 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+const mapDispatchToProps = dispatch => {
+  return {
+      addUserData: (userData) => dispatch(addUserData(userData)),
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Index);
