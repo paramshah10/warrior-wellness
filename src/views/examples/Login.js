@@ -66,6 +66,10 @@ class Login extends React.Component {
 
       firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
+        console.log(user.user.uid)
+        localStorage.setItem('uid', user.user.uid)
+        localStorage.setItem('loggedIn', true);
+        
         this.setState({ 
           invalid_credentials: false,
           loggedIn: true,
@@ -73,8 +77,6 @@ class Login extends React.Component {
           password: '',
           showSpinner: false
         });
-        localStorage.setItem('loggedIn', true);
-        localStorage.setItem('uid', user.user.uid)
       })
       .catch((error) => {
         // Handle Errors here.

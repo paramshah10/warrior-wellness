@@ -1,5 +1,6 @@
-import store from '../index'
 import { fetchedChartsData, addOveralls } from 'lib/redux/actions/charts';
+import React from 'react'
+import { connect } from 'react-redux';
 
 // Colors
 var colors = {
@@ -77,23 +78,6 @@ let global_data = {
     "month": []
   }
 }
-
-const getChartData = async () => {
-  const uid = localStorage.getItem("uid")
-
-  var docRef = db.collection("users").doc(uid).collection("charts")
-  var doc = await docRef.get()
-
-  doc.docs.map(doc => {global_data[doc.id] = doc.data()})
-
-  global_data["stress_bar_score"] = global_data["stress_pie_score"]
-  global_data["stress_bar_type"] = global_data["stress_pie_type"]
-
-  store.dispatch(fetchedChartsData())
-  store.dispatch(addOveralls(global_data["overalls"]))
-}
-
-getChartData()
 
 // Example 1 of Chart inside src/views/Index.js (Sales value - Card)
 let chartExample1 = {
@@ -627,6 +611,58 @@ let chartExample8 = {
       }
     }
   }
+
+/* dummy class to do basically the same thing that the previous code was doing
+   but inside a class. This is to prevent premature running of the getChartData
+   function when this file is loaded by the browser.
+   
+   Problem: since the function was not in a component, it ran as soon as the file
+   loaded (when the website is loaded) and this makes it run when the credentials 
+   needed to pull data from firstore are not yet available.
+
+   Solution: put the code in a dummy class so that it is only loaded when the parent
+   class loads (and when the data needed is available). Put the class in any of the top
+   level components and this is good to go
+*/
+class ChartsData extends React.Component {
+  getChartData = async () => {
+    const uid = localStorage.getItem("uid")
+    console.log('localstorage uid inside charts_data class: ', uid)
+  
+    var docRef = db.collection("users").doc(uid).collection("charts")
+    var doc = await docRef.get()
+  
+    doc.docs.map(doc => {global_data[doc.id] = doc.data()})
+  
+    global_data["stress_bar_score"] = global_data["stress_pie_score"]
+    global_data["stress_bar_type"] = global_data["stress_pie_type"]
+
+    this.props.fetchedChartsData()
+    this.props.addOveralls(global_data["overalls"])
+  }
+
+  async componentDidMount() {
+    await this.getChartData()
+  }
+
+  render() {
+    return (
+      <></>
+    )
+  }
+}
+
+const mapDispathToProps = (dispatch) => {
+  return {
+    addOveralls: (data) => dispatch(addOveralls(data)),
+    fetchedChartsData: () => dispatch(fetchedChartsData())
+  }
+};
+
+export default connect(
+ null,
+ mapDispathToProps
+)(ChartsData);
 
 export {
   chartExample1, 

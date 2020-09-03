@@ -26,6 +26,7 @@ import App from '../App';
 
 import routes from "routes.js";
 import JournalIcon from "views/examples/Journal/Journal_icon";
+import ChartsData from "variables/charts_data";
 
 class Admin extends React.Component {
   constructor(props) {
@@ -104,6 +105,7 @@ class Admin extends React.Component {
         </div>
         <App />
         <JournalIcon/>
+        <ChartsData />
       </>
     );
   }
