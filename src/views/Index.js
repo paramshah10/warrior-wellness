@@ -36,8 +36,9 @@ class Index extends React.Component {
     const uid = localStorage.getItem("uid")
     let db = firebase.firestore();
 
+    //when writing code to update data (description data) from website, no need to update the component manually. the below code will make the component update
     let docRef = db.collection("users").doc(uid).collection("stress_incidents").orderBy("index")
-    docRef.get().then((doc) => {
+    docRef.onSnapshot((doc) => {
       var data = doc.docs.map(d => d.data())
       this.setState({
         stressIncidents: data,
