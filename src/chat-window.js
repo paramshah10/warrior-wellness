@@ -22,7 +22,7 @@ class ChatWindow extends Component {
     var appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
     CometChat.init(appID, appSetting).then(
       () => {
-        console.log("Initialization completed successfully");
+        // console.log("Initialization completed successfully");
         // You can now call login function.
       },
       error => {
@@ -52,7 +52,7 @@ class ChatWindow extends Component {
     /////////login
     CometChat.login(UID, apiKey).then(
       user => {
-        console.log("Login Successful:", { user });    
+        // console.log("Login Successful:", { user });    
       },
       error => {
         console.log("Login failed with exception:", { error });    

@@ -43,7 +43,7 @@ class Login extends React.Component {
 
   onAuthHandler(user) {
     if (user) {
-      console.log(user)
+      // console.log(user)
       localStorage.setItem("uid", user.uid)
       this.setState({
         loggedIn: true,
@@ -66,7 +66,6 @@ class Login extends React.Component {
 
       firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
-        console.log(user.user.uid)
         localStorage.setItem('uid', user.user.uid)
         localStorage.setItem('loggedIn', true);
         

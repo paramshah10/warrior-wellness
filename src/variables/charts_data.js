@@ -627,7 +627,6 @@ let chartExample8 = {
 class ChartsData extends React.Component {
   getChartData = async () => {
     const uid = localStorage.getItem("uid")
-    console.log('localstorage uid inside charts_data class: ', uid)
   
     var docRef = db.collection("users").doc(uid).collection("charts")
     var doc = await docRef.get()

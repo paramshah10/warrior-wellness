@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 
@@ -37,7 +20,7 @@ import {
 } from "reactstrap";
 
 import * as firebase from "firebase/app";
-import "firebase/auth"
+import Axios from "axios";
 
 class Register extends React.Component {
   constructor(props) {
@@ -66,11 +49,11 @@ class Register extends React.Component {
 
   onAuthHandler(user) {
     if (user) {
-      console.log(user)
-      localStorage.setItem("email", user.email)
+      // console.log(user)
+      localStorage.setItem("uid", user.uid);
       this.setState({
         account_created: true,
-      })
+      });
     }
   }
 
@@ -78,24 +61,31 @@ class Register extends React.Component {
     if( !email|| !password || !first_name || !last_name ) {
       this.setState({
         invalid_credentials: true
-      })
+      });
     }
 
     else {
       this.setState({
         showSpinner: true
-      })
+      });
 
       firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        // want to do user ops here, but no way to consistently query UID outside of auth handler
-        this.setState({
-          invalid_credentials: false,
-          account_created: true,
-          showSpinner: false
-        })
-        localStorage.setItem('loggedIn', true)
-        console.log('User Created!');
+      .then(async (user) => {
+        const uid = user.user.uid;
+        
+        const response = await Axios.post('http://localhost:5000/mentalhealth-2e530/us-central1/createNewAccountTemplate',
+          { uid: uid, firstName: this.state.first_name, lastName: this.state.last_name, email: this.state.email }
+        );
+
+        if (response.code == 200 || response.message == 'Success') {
+          localStorage.setItem('loggedIn', true);
+          console.log('User Created!');
+          this.setState({
+            invalid_credentials: false,
+            account_created: true,
+            showSpinner: false
+          });
+        }
       })
       .catch((error) => {
         // Handle Errors here.
@@ -103,14 +93,14 @@ class Register extends React.Component {
           this.setState({
             email_already_in_use: true,
             showSpinner: false
-          })
+          });
         }
 
         else {
           this.setState({
             invalid_credentials: true,
             showSpinner: false,
-          })
+          });
         }
         console.error(`Error code: ${error.code}. Error message: ${error.message}`)
       });
