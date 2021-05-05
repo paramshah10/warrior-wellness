@@ -33,7 +33,47 @@ import {
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      firstName: "",
+      lastName: "",
+    }
+  }
+
+  componentDidMount() {
+    let db = firebase.firestore();
+
+    let getUserData = async () => {
+      const uid = localStorage.getItem("uid");
+      let docRef = db.collection("users").doc(uid);
+
+      await docRef.get()
+        .then(doc => {
+          this.setState(doc.data());
+        });
+      
+      console.log(this.state);
+    }
+
+    // need to create a separate function to fetch user data since we cannot have an sync componentDidMount function
+    // this is basically a dummy function
+    getUserData();
+  }
+  
+  saveAccountInfo(e) {
+    e.preventDefault();
+    let db = firebase.firestore();
+    const uid = localStorage.getItem("uid");
+    
+    void db.collection("users").doc(uid).update(this.state);
+  }
+
   render() {
     return (
       <>
@@ -99,20 +139,12 @@ class Profile extends React.Component {
                   </Row>
                   <div className="text-center">
                     <h3>
-                      Your Name
+                      {this.state.firstName + " " + this.state.lastName}
                       <span className="font-weight-light">, 19</span>
                     </h3>
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2" />
                       Los Angeles, United States
-                    </div>
-                    <div className="h5 mt-4">
-                      <i className="ni business_briefcase-24 mr-2" />
-                      Your Work Title
-                    </div>
-                    <div>
-                      <i className="ni education_hat mr-2" />
-                      University of California, Los Angeles
                     </div>
                     {/* <hr className="my-4" />
                     <p>
@@ -138,7 +170,7 @@ class Profile extends React.Component {
                       <Button
                         color="primary"
                         href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={e => this.saveAccountInfo(e)}
                         size="sm"
                       >
                         Save
@@ -182,6 +214,9 @@ class Profile extends React.Component {
                               id="input-email"
                               placeholder="example@example.com"
                               type="email"
+                              value={this.state.email}
+                              // email should not be a modifiable value
+                              // onChange={e => this.setState({email: e.target.value})}
                             />
                           </FormGroup>
                         </Col>
@@ -200,6 +235,8 @@ class Profile extends React.Component {
                               id="input-first-name"
                               placeholder="First name"
                               type="text"
+                              value={this.state.firstName}
+                              onChange={e => this.setState({firstName: e.target.value})}
                             />
                           </FormGroup>
                         </Col>
@@ -216,81 +253,8 @@ class Profile extends React.Component {
                               id="input-last-name"
                               placeholder="Last name"
                               type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </div>
-                    <hr className="my-4" />
-                    {/* Address */}
-                    <h6 className="heading-small text-muted mb-4">
-                      Contact information
-                    </h6>
-                    <div className="pl-lg-4">
-                      <Row>
-                        <Col md="12">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-address"
-                            >
-                              Address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-address"
-                              placeholder="Home Address"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="4">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-city"
-                            >
-                              City
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-city"
-                              placeholder="City"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="4">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-country"
-                            >
-                              Country
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-country"
-                              placeholder="Country"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="4">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-country"
-                            >
-                              Postal code
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-postal-code"
-                              placeholder="Postal code"
-                              type="number"
+                              value={this.state.lastName}
+                              onChange={e => this.setState({lastName: e.target.value})}
                             />
                           </FormGroup>
                         </Col>
