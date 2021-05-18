@@ -28,6 +28,11 @@
     }
 }
 
+@media (max-width: 800px) {
+  .mt-sticky-7 {
+    margin-top: 5rem !important; }
+  }
+
 .toc-entry {
     display: block;
     font-size: 1rem;
