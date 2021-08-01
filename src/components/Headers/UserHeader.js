@@ -42,7 +42,7 @@ class UserHeader extends React.Component {
               <Col lg="12" md="10">
                 <h1 className="display-2 text-white">Hello Param</h1>
                 <p className="text-white mt-0 mb-5">
-                  Welcome to VetThrive. Let us know a little about yourself.
+                  Welcome to Naval Special Warfare - Technology Assisted Stress Control. Let us know a little about yourself.
                 </p>
               </Col>
             </Row>
