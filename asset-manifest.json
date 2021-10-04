@@ -1,22 +1,26 @@
 {
   "files": {
     "main.css": "/warrior-wellness/static/css/main.7c1caff9.chunk.css",
-    "main.js": "/warrior-wellness/static/js/main.c0613f7d.chunk.js",
-    "main.js.map": "/warrior-wellness/static/js/main.c0613f7d.chunk.js.map",
+    "main.js": "/warrior-wellness/static/js/main.42f8caa0.chunk.js",
+    "main.js.map": "/warrior-wellness/static/js/main.42f8caa0.chunk.js.map",
     "runtime-main.js": "/warrior-wellness/static/js/runtime-main.7a84a28a.js",
     "runtime-main.js.map": "/warrior-wellness/static/js/runtime-main.7a84a28a.js.map",
     "static/css/2.c6392e98.chunk.css": "/warrior-wellness/static/css/2.c6392e98.chunk.css",
-    "static/js/2.56e18156.chunk.js": "/warrior-wellness/static/js/2.56e18156.chunk.js",
-    "static/js/2.56e18156.chunk.js.map": "/warrior-wellness/static/js/2.56e18156.chunk.js.map",
+    "static/js/2.457450f1.chunk.js": "/warrior-wellness/static/js/2.457450f1.chunk.js",
+    "static/js/2.457450f1.chunk.js.map": "/warrior-wellness/static/js/2.457450f1.chunk.js.map",
     "index.html": "/warrior-wellness/index.html",
-    "precache-manifest.b26c7f3be36af24648c690d76b96b5a3.js": "/warrior-wellness/precache-manifest.b26c7f3be36af24648c690d76b96b5a3.js",
+    "precache-manifest.dd24d8635019cdd7a3a41e0ea288ee39.js": "/warrior-wellness/precache-manifest.dd24d8635019cdd7a3a41e0ea288ee39.js",
     "service-worker.js": "/warrior-wellness/service-worker.js",
     "static/css/2.c6392e98.chunk.css.map": "/warrior-wellness/static/css/2.c6392e98.chunk.css.map",
     "static/css/main.7c1caff9.chunk.css.map": "/warrior-wellness/static/css/main.7c1caff9.chunk.css.map",
-    "static/js/2.56e18156.chunk.js.LICENSE.txt": "/warrior-wellness/static/js/2.56e18156.chunk.js.LICENSE.txt",
-    "static/js/main.c0613f7d.chunk.js.LICENSE.txt": "/warrior-wellness/static/js/main.c0613f7d.chunk.js.LICENSE.txt",
+    "static/js/2.457450f1.chunk.js.LICENSE.txt": "/warrior-wellness/static/js/2.457450f1.chunk.js.LICENSE.txt",
+    "static/js/main.42f8caa0.chunk.js.LICENSE.txt": "/warrior-wellness/static/js/main.42f8caa0.chunk.js.LICENSE.txt",
     "static/media/NSW.png": "/warrior-wellness/static/media/NSW.df56189c.png",
     "static/media/chat-icon.svg": "/warrior-wellness/static/media/chat-icon.e0d2b748.svg",
+    "static/media/dog1.jpeg": "/warrior-wellness/static/media/dog1.525ddb6b.jpeg",
+    "static/media/dog2.jpeg": "/warrior-wellness/static/media/dog2.6bdb3c04.jpeg",
+    "static/media/dog3.jpeg": "/warrior-wellness/static/media/dog3.f4f86bf6.jpeg",
+    "static/media/dog4.jpeg": "/warrior-wellness/static/media/dog4.4315f210.jpeg",
     "static/media/all.min.css": "/warrior-wellness/static/media/fa-solid-900.cdfec5cf.woff",
     "static/media/facebook.svg": "/warrior-wellness/static/media/facebook.a64a1d0a.svg",
     "static/media/google.svg": "/warrior-wellness/static/media/google.87be59a1.svg",
@@ -30,8 +34,8 @@
   "entrypoints": [
     "static/js/runtime-main.7a84a28a.js",
     "static/css/2.c6392e98.chunk.css",
-    "static/js/2.56e18156.chunk.js",
+    "static/js/2.457450f1.chunk.js",
     "static/css/main.7c1caff9.chunk.css",
-    "static/js/main.c0613f7d.chunk.js"
+    "static/js/main.42f8caa0.chunk.js"
   ]
 }

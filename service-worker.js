@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/warrior-wellness/precache-manifest.b26c7f3be36af24648c690d76b96b5a3.js"
+  "/warrior-wellness/precache-manifest.dd24d8635019cdd7a3a41e0ea288ee39.js"
 );
 
 self.addEventListener('message', (event) => {
