@@ -10,6 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.21.1",
+    "caniuse-lite": "^1.0.30001248",
     "chart.js": "2.9.3",
     "classnames": "2.2.6",
     "firebase": "^7.14.0",
@@ -58,11 +59,11 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0",
     "@types/googlemaps": "3.39.2",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.9.19",
     "eslint-plugin-flowtype": "3.13.0",
+    "gh-pages": "^3.2.3",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "typescript": "3.7.5"

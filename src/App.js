@@ -5,10 +5,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ChatWindow />
+        {/* <ChatWindow /> */}
       </div>
     );
   }
 }
 
 export default App;
+
+
+
+// command-k-c: comment block
+// command-k-u: uncomment

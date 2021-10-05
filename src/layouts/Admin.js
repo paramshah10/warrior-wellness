@@ -18,7 +18,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, CardImg } from "reactstrap";
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
@@ -78,8 +78,8 @@ class Admin extends React.Component {
           routes={routes}
           logo={{
             innerLink: "/admin/index",
-            imgSrc: require("assets/img/theme/warrior_wellness.png"),
-            imgAlt: "..."
+            imgSrc: require("assets/img/theme/NSW.png"),
+            imgAlt: "logo",
           }}
         />
         <div className="main-content" ref="mainContent">

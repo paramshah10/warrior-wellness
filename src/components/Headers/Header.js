@@ -11,7 +11,7 @@ class Header extends React.Component {
       <>
         <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
           <Container fluid>
-            <div className="header-body">
+            <div className="header-body mt-sticky-7">
               {/* Card stats */}
               <Row>
                 <Col lg="6" xl="3">
@@ -62,7 +62,7 @@ class Header extends React.Component {
                             Sleep
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            {this.props.overalls["sleep"] && this.props.overalls["sleep"]["score"] } hours/night
+                            {this.props.overalls["sleep"] && this.props.overalls["sleep"]["score"] } hours
                           </span>
                         </div>
                         <Col className="col-auto">

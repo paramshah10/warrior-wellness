@@ -134,7 +134,7 @@ let chartExample1 = {
         datasets: [
           {
             label: "Stress Score by Week",
-            data: global_data["stress_bar"]["week"]//[20, 18, 15, 20, 21, 24, 19]
+            data: ["stress_bar"]["week"]//[20, 18, 15, 20, 21, 24, 19]
           }
         ]
       };
@@ -190,7 +190,11 @@ options: {
 },
 data1: canvas => {//Sleep by week
     return {
-    labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
+    //labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun","temp"],
+    // get today's date
+    // 
+    labels: global_data["sleep"]["week"]["day"],
+
     datasets: [
         {
           label: "Awake",
@@ -215,7 +219,7 @@ data1: canvas => {//Sleep by week
 },
 data2: canvas => { //sleep by month
     return {  
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+    labels: ["Week 1", "Week 2", "Week 3", "Week 4","temp"],
     datasets: [
         {
           label: "Awake",

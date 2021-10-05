@@ -36,6 +36,20 @@ import UserHeader from "components/Headers/UserHeader.js";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 
+//var pic = document.getElementById('input-image');
+//var pic=new Image();
+//var pp="";
+//var pic = document.getElementsByClassName("card-profile-image");
+function changeImage(a) {
+  document.getElementById("img").src=a;
+}
+
+function imageClick(e) {
+  changeImage(e)
+}
+
+const SearchContext = React.createContext();
+
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -90,7 +104,9 @@ class Profile extends React.Component {
                         <img
                           alt="..."
                           className="rounded-circle"
-                          src={require("assets/img/theme/team-4-800x800.jpg")}
+                          id="img"
+                          //src={pic}
+                          //src={require("assets/img/avatar/ppl1.png")}
                         />
                       </a>
                     </div>
@@ -259,6 +275,59 @@ class Profile extends React.Component {
                           </FormGroup>
                         </Col>
                       </Row>
+
+                      <Row>
+                      <Col lg="6">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-image"
+                            >
+                              Profile Picture
+                            </label>
+                            <Input
+                              className="form-control-alternative"
+                              id="input-image"
+                              type="url"
+                              onChange={e => changeImage(e.target.value)}
+                            />
+                            <img
+                          alt="..."
+                          style={{width:80, height:80, borderRadius:'50%'}}
+                          //className="rounded-circle"
+                          id="ava0"
+                          src={require("assets/img/avatar/dog1.jpeg")}
+                        />
+                        <img
+                          alt="..."
+                          style={{width:80, height:80, borderRadius:'50%'}}
+                          //width='60'
+                          //height='60'
+                          //className="rounded-circle"
+                          id="ava1"
+                          src={require("assets/img/avatar/dog2.jpeg")}
+                          onClick={console.log("click image")}
+                        />
+                        <img
+                          alt="..."
+                          width='80'
+                          height='80'
+                          className="rounded-circle"
+                          id="ava2"
+                          src={require("assets/img/avatar/dog3.jpeg")}
+                        />
+                        <img
+                          alt="..."
+                          style={{width:80, height:80, borderRadius:40}}
+                          //className="rounded-circle"
+                          id="ava3"
+                          src={require("assets/img/avatar/dog4.jpeg")}
+                        />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+
+
                     </div>
                     <hr className="my-4" />
                     {/* Description */}
@@ -286,3 +355,4 @@ class Profile extends React.Component {
 }
 
 export default Profile;
+//export {firstName,lastName};

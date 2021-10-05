@@ -32,7 +32,39 @@ import {
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
+//const firebase = require("firebase/app");
+require("firebase/firestore");
+
 class AdminNavbar extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+    }
+  }
+
+  componentDidMount() {
+    let db = firebase.firestore();
+
+    let getUserData = async () => {
+      const uid = localStorage.getItem("uid");
+      let docRef = db.collection("users").doc(uid);
+
+      await docRef.get()
+        .then(doc => {
+          this.setState(doc.data());
+        });
+      
+      console.log(this.state);
+    }
+    
+    getUserData();
+  }
+
+
+
   tryLogOut() {
     localStorage.setItem('loggedIn', false)
     firebase.auth().signOut();
@@ -60,7 +92,7 @@ class AdminNavbar extends React.Component {
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
-                        Param Shah
+                        {this.state.firstName + " " + this.state.lastName}
                       </span>
                     </Media>
                   </Media>

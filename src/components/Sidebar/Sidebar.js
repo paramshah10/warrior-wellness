@@ -99,7 +99,7 @@ class Sidebar extends React.Component {
     }
     return (
       <Navbar
-        className="navbar-vertical fixed-left navbar-light bg-white"
+        className="navbar-vertical fixed-left navbar-light bg-white fixed-top"
         expand="md"
         id="sidenav-main"
       >
@@ -130,7 +130,7 @@ class Sidebar extends React.Component {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={require("assets/img/theme/team-4-800x800.jpg")}
+                      src={require("assets/img/avatar/ppl1.png")}
                     />
                   </span>
                 </Media>

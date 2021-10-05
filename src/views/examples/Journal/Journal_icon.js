@@ -29,17 +29,39 @@ class JournalIcon extends React.Component {
         }
     }
 
-    journalSubmit = () => {
+    db = firebase.firestore();
+    uid = localStorage.getItem("uid");
+
+    createJournal=()=>{
+        //get ID first
+        var maxx=0 //difference between "let" and "var"
+
+       let docRef = this.db.collection("users").doc(this.uid).collection("journal") //.doc()?
+       
+       docRef.get().then((snapshot) => {
+        snapshot.forEach((doc) => {
+            if (doc.data().id > maxx) {
+                maxx=doc.data().id
+            }
+        })
+        let entry_id=maxx+1
+
+        this.journalSubmit(entry_id)
+        })
+    }
+
+    journalSubmit = (entry_id) => {
         const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         var date = new Date()
         var today = monthName[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear()
 
         let entry_num = this.props.num_entries + 1
         localStorage.setItem('num_journal_entries', entry_num)
-        
-        this.props.addEntry(entry_num, this.state.subject, this.state.content, today)
 
-        this.updateFirestore(entry_num, this.state.subject, this.state.content, today)
+        this.props.addEntry(entry_id, this.state.subject, this.state.content, today)
+
+        this.updateFirestore(entry_id, this.state.subject, this.state.content, today) 
+        //changed "entry_num" to "entry_id"
     }
 
     updateFirestore(entry_num, subject, content, today) {
@@ -87,7 +109,7 @@ class JournalIcon extends React.Component {
                                     <h3> Create a Journal Entry! </h3>
                                 </Col>
                                 <Col xs="5" className="mt-2">
-                                    <Button close onClick={() => {this.state.open=false; this.forceUpdate()}}/>
+                                    <Button close onClick={() => {this.state.open=false; this.forceUpdate()}}/> 
                                 </Col>
                             </Row>
                         </CardHeader>
@@ -120,7 +142,7 @@ class JournalIcon extends React.Component {
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button color='primary' className='mt--2' onClick={() => this.journalSubmit()}> Save </Button>
+                            <Button color='primary' className='mt--2' onClick={() => {this.createJournal()}}> Save </Button>
                         </ModalFooter>
                     </Card>
                 </Modal>

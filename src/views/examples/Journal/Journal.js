@@ -9,7 +9,14 @@ import {
     Row,
     Col,
     Nav,
-    NavItem
+    NavItem,
+    //added
+    Modal,
+    ModalBody,
+    ModalFooter,
+    FormGroup,
+    Form,
+    Input
 } from 'reactstrap'
 
 //redux
@@ -24,12 +31,17 @@ class Journal extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            showED: {}
+            subject: '',
+            content: '',
+            showED: {},
+            open: false,
+            curr_id: -1
         }
       }
 
     db = firebase.firestore();
     uid = localStorage.getItem("uid")
+
 
     componentDidMount() {
         if (!this.props.fetchedInitial){        
@@ -53,6 +65,7 @@ class Journal extends React.Component {
             snapshot.forEach((doc) => {
                 doc.ref.delete()
             })
+            //this part id, entry number needs to be fixed!!!!
             this.props.removeEntry(id)
             this.forceUpdate()
         })
@@ -61,9 +74,57 @@ class Journal extends React.Component {
         })
     }
 
-    onEntryEdit() {
-        console.log("Edited")
+    onEntryEdit(id) {
+        let docRef = this.db.collection("users").doc(this.uid).collection("journal").where("id", "==", id)
+
+        docRef.get().then((snapshot) => {
+            snapshot.forEach((doc) => {
+                //  HOW TO RETRIEVE DATA FROM FIREBASE?? THIS CODE IS WORKING BUT I FEEL THERE'S SOMETHING WRONG
+                //  HOW DO I GET SPECIFIC COMPONENT IN THIS DOCREF??????
+                //  WOULD I BE ABLE TO ONLY EXTRACT "SUBJECT" FOR EXAMPLE???????
+                this.setState(doc.data()) 
+            })
+            //this.forceUpdate()
+        })
+
+        console.log("Edited");
     }
+
+    journalSubmit = (curr_id) => {
+        const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        var date = new Date()
+        var today = monthName[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear()
+        this.updateFirestore(this.state.subject, this.state.content, today, curr_id)
+    }
+
+    updateFirestore(subject, content, today, curr_id) {
+        let docRef = this.db.collection("users").doc(this.uid).collection("journal").where("id", "==", curr_id)
+        //update entry content in Firebase
+        docRef.get().then((snapshot) => {
+            snapshot.forEach((doc) => {
+                doc.ref.update({
+                        content: content,
+                        date_edited: today,
+                        subject: subject,
+                    })
+            })
+            //this.forceUpdate()
+        })
+
+        .then(() => {
+            this.setState({
+                subject: '',
+                content: '',
+                open: false,
+                curr_id: -1
+            })
+        })
+        .catch((error) => {
+            console.log("Could not update firestore with new journal entry. Error =", error)
+        })
+    }
+
+    reload=()=>window.location.reload() // won't store new edits, would reload to 
 
     render() {
       return(
@@ -121,6 +182,7 @@ class Journal extends React.Component {
                                 className="avatar avatar-xs mr-2"
                                 src={require("assets/img/theme/journal.png")}
                             />
+                            {/*subject display!!!*/}
                             <h4 className="mb-1">{entry.subject}</h4>
                             </div>
                         </div>
@@ -128,14 +190,15 @@ class Journal extends React.Component {
                         </div>
                         <Row>
                             <Col xs="11">
+                                {/* content display */}
                                 <h6 className="mt-4 mb-2">Created {entry.date_created} </h6>
-                                <p className="text-sm mb-0">{entry.content}</p>
+                                <p className="text-sm mb-0">{entry.content}</p> 
                             </Col>
                         {
                             this.state.showED[entry.id] &&
                             <Col xs="1">
-                                <Button className="col mt-4 d-none d-md-block" style={{bottom: 5}} color="default" size="sm" onClick={() => this.onEntryEdit()}>Edit</Button>
-                                <Button className="col mt-4 d-md-none" style={{bottom: 2}} color="default" size="sm" onClick={() => this.onEntryEdit()}>E</Button>
+                                <Button className="col mt-4 d-none d-md-block" style={{bottom: 5}} color="default" size="sm" onClick={() => {this.onEntryEdit(entry.id); this.state.curr_id=entry.id; this.state.open=true}}>Edit</Button>
+                                <Button className="col mt-4 d-md-none" style={{bottom: 2}} color="default" size="sm" onClick={() => this.onEntryEdit(entry.id)}>E</Button>
 
                                 <Button className="col mt-1 d-none d-md-block" style={{bottom: 0}} color="default" size="sm" onClick={() => this.onEntryDelete(entry.id)}>Delete</Button>
                                 <Button className="col mt-1 d-md-none" style={{bottom: 0}} color="default" size="sm" onClick={() => this.onEntryDelete(entry.id)}>D</Button>
@@ -154,7 +217,55 @@ class Journal extends React.Component {
                     }
                 </ListGroup>
             </Card>
+
+            <Modal isOpen={this.state.open} modalTransition={{timeout: 0}}>
+                    <Card className="bg-secondary shadow bg-white border-0">
+                        <CardHeader className="align-items-end">
+                            <Row>
+                                <Col xs="7" className="mt-2">
+                                    <h3> Edit the entry </h3>
+                                </Col>
+                                <Col xs="5" className="mt-2">
+                                    <Button close onClick={() => {this.state.open=false; this.forceUpdate()}}/>
+                                </Col>
+                            </Row>
+                        </CardHeader>
+                        <ModalBody>
+                            <div className="pl-lg-2">
+                                <Form>
+                                    <FormGroup>
+                                        <label>Subject</label>
+                                        <Input
+                                            className="form-control-alternative"
+                                            placeholder="Subject"
+                                            rows="1"
+                                            type="textarea"
+                                            value={this.state.subject} //{"warrior"} //fixed "warrior", can't change
+                                            onChange={e => this.setState({subject: e.target.value})}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label>Content</label>
+                                        <Input
+                                            className="form-control-alternative"
+                                            placeholder="Edit your entry here ..."
+                                            rows="4"
+                                            type="textarea"
+                                            value={this.state.content}
+                                            onChange={e => this.setState({content: e.target.value})}
+                                        />
+                                    </FormGroup>
+                                </Form>
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color='primary' className='mt--2' onClick={() => {this.journalSubmit(this.state.curr_id)}}> Save </Button>
+                        </ModalFooter>
+                    </Card>
+                </Modal>
+
         </Container>
+
         </>
       )
   }

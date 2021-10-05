@@ -20,7 +20,46 @@ import React from "react";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
 
+//import {firstName,lastName} from "views/examples/Profile.js";
+//const searchResults = React.useContext(SearchContext);
+
+const firebase = require("firebase/app");
+require("firebase/firestore");
+
 class UserHeader extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+    }
+  }
+
+  //db = firebase.firestore();
+  //uid = localStorage.getItem("uid")
+
+  componentDidMount() {
+    let db = firebase.firestore();
+
+    let getUserData = async () => {
+      const uid = localStorage.getItem("uid");
+      let docRef = db.collection("users").doc(uid);
+
+      await docRef.get()
+        .then(doc => {
+          this.setState(doc.data());
+        });
+      
+      console.log(this.state);
+    }
+    
+    getUserData();
+  }
+
+
+
   render() {
     return (
       <>
@@ -40,9 +79,9 @@ class UserHeader extends React.Component {
           <Container className="d-flex align-items-center" fluid>
             <Row>
               <Col lg="12" md="10">
-                <h1 className="display-2 text-white">Hello Param</h1>
+                <h1 className="display-2 text-white">{"Hello " + this.state.firstName}</h1>
                 <p className="text-white mt-0 mb-5">
-                  Welcome to VetThrive. Let us know a little about yourself.
+                  Welcome to Naval Special Warfare - Technology Assisted Stress Control. Let us know a little about yourself.
                 </p>
               </Col>
             </Row>
