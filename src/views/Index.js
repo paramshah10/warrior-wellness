@@ -42,6 +42,7 @@ class Index extends React.Component {
       curr_id:-1,
 
       open:false,
+      open2:false,
       reason:'',
       stress:'',
       //data:moment().format('MM/DD/YYYY'),
@@ -103,51 +104,6 @@ class Index extends React.Component {
     });
   }
 
-  //HOW TO COMBINE THE TWO UPDATES INTO ONE FUNCTION????
-updateFirestore(des, curr_id) {
-  let docRef = this.db.collection("users").doc(this.uid).collection("stress_incidents").where("index", "==", curr_id)
-    //update entry content in Firebase
-    docRef.get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-            doc.ref.update({
-                    description: des,
-                })
-        })
-    })
-
-    .then(() => {
-        this.setState({
-            description:'',
-            curr_id: -1
-        })
-        this.forceUpdate()
-    })
-    .catch((error) => {
-        console.log("Could not update firestore with new entry. Error =", error)
-    })
-}
-
-updateReason(des, curr_id) {
-  let docRef = this.db.collection("users").doc(this.uid).collection("stress_incidents").where("index", "==", curr_id)
-    //update entry content in Firebase
-    docRef.get().then((snapshot) => {
-        snapshot.forEach((doc) => {
-            doc.ref.update({
-                    reason: des,
-                })
-        })
-    })
-    .then(() => {
-        this.setState({
-            curr_id: -1
-        })
-        this.forceUpdate()
-    })
-    .catch((error) => {
-        console.log("Could not update firestore with new entry. Error =", error)
-    })
-}
-
 
 //add new incident
 createIncident=()=>{
@@ -205,6 +161,71 @@ add2Firestore(entry_id, reason, stress,date,time,description) {
 }
 
 
+onEntryDelete(id) {
+  let docRef = this.db.collection("users").doc(this.uid).collection("stress_incidents").where("index", "==", id)
+  docRef.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+          doc.ref.delete()
+      })
+      //this part id, entry number needs to be fixed!!!!
+      this.props.removeEntry(id)
+      this.forceUpdate()
+  })
+  .catch((error) => {
+      console.log("Could not delete the entry! ERROR:", error);
+  })
+}
+
+onEntryEdit(id) {
+  let docRef = this.db.collection("users").doc(this.uid).collection("stress_incidents").where("index", "==", id)
+
+  docRef.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+          this.setState(doc.data()) 
+      })
+      //this.forceUpdate()
+  })
+
+  console.log("Edited");
+}
+
+EditSubmit = (curr_id) => {
+  this.updateFirestore(curr_id, this.state.reason, this.state.stress, this.state.date,this.state.time,
+      this.state.description) 
+}
+
+updateFirestore(curr_id, reason, stress,date,time,description) {
+  let docRef = this.db.collection("users").doc(this.uid).collection("stress_incidents").where("index", "==", curr_id)
+
+  docRef.get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+        doc.ref.update({
+          reason:reason,
+          stress:stress,
+          date:date,
+          time:time,
+          description:description,
+            })
+    })
+    //this.forceUpdate()
+})
+
+  .then(() => {
+      this.setState({
+          open2: false,
+          reason: '',
+          stress: '',
+          date: '',
+          time: '',
+          description: '',
+          curr_id: -1,
+        })
+      })
+      .catch((error) => {
+          console.log("edit updates", error)
+      })
+  }
+
   render() {
     return (
       <>
@@ -232,75 +253,24 @@ add2Firestore(entry_id, reason, stress,date,time,description) {
                       <th scope="col"><Button onClick={e => this.onDateToggle(e)}>Date</Button></th>
                       <th scope="col"><Button>Time</Button></th>
                       <th scope="col"><Button>Description</Button></th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
                     {this.state.stressIncidents.map(incident => 
                       <tr>
-                        <td key={String(incident.index)+String(incident.index)}>
-                          <Input 
-                            type="select" 
-                            defaultValue={incident.reason}
-                            //onChange={(e) => console.log(`stress reason changed to ${e.target.value}`)}
-                            onChange={(e) => {this.updateReason(e.target.value,incident.index)}}
-                          >
-                            <option>Work</option>
-                            <option>Social</option>
-                            <option>Money</option>
-                            <option>Family</option>
-                            <option>Other</option>
-                          </Input>
-                        </td>
+                        <td key={String(incident.index)+String(incident.index)}>{incident.reason}</td>
                         <td>{incident.stress}</td>
                         <td>{incident.date}</td>
                         <td>{incident.time}</td>
-                        <td key={incident.index}>
-                          <Input type="textarea"
-                            //defaultValue={`${incident.description} on ${incident.date}`}
-                            defaultValue={incident.description}
-                            //defaultValue={this.props.description}
-                            id={'Box'+incident.index}
-                            plaintext={!this.state.showTextBox[incident.index]}
-                            onDoubleClick={(e) => {
-                              e.preventDefault();
-                              this.state.showTextBox[incident.index] = true; 
-                              this.state.description=`${incident.description}`; //added here
-                              this.forceUpdate();
-                            }}
-                            onChange={e => this.setState({description: e.target.value})} //editing
-                          />
-                          <UncontrolledTooltip delay={0} placement='right' trigger="hover focus" target={'Box'+incident.index}>
-                            Double Click Me to Edit!
-                          </UncontrolledTooltip>                          
-                          {
-                            this.state.showTextBox[incident.index] && 
-                            <div>
-                            <Button
-                              //style={{left:"0%"}}
-                              color='default'
-                              size="sm"
-                              onClick={(e) => {
-                                e.preventDefault(); // what does it do?
-                                this.state.description='';
-                                this.state.showTextBox[incident.index] = false;
-                                this.forceUpdate();
-                              }}
-                            >Save</Button>
-
-                             <Button
-                            style={{right:"0%"}}
-                            color='default'
-                            size="sm"
-                            onClick={(e) => {
-                              e.preventDefault(); // what does it do?
-                              this.updateFirestore(this.state.description, incident.index);
-                              this.state.showTextBox[incident.index] = false;
-                              this.state.description='';
-                              this.forceUpdate();
-                            }}
-                          >Cancel</Button>
-                          </div>
-                          }
+                        <td>{incident.description}</td>
+                        <td>
+                        {
+                        <div>
+                          <Button size="sm" onClick={() => {this.onEntryEdit(incident.index); this.state.curr_id=incident.index; this.state.open2=true}}>Edit</Button>
+                          <Button size="sm" onClick={() => this.onEntryDelete(incident.index)}>Del</Button>
+                        </div>
+                        }
                         </td>
                       </tr>
                       )}
@@ -390,6 +360,87 @@ add2Firestore(entry_id, reason, stress,date,time,description) {
                         </ModalBody>
                         <ModalFooter>
                             <Button color='primary' className='mt--2' onClick={() => {this.createIncident()}}> Save </Button>
+                        </ModalFooter>
+                    </Card>
+                </Modal>
+
+                <Modal isOpen={this.state.open2} modalTransition={{timeout: 0}}>
+                    <Card className="bg-secondary shadow bg-white border-0">
+                        <CardHeader className="align-items-end">
+                            <Row>
+                                <Col xs="7" className="mt-2">
+                                    <h3> Edit stress incident </h3>
+                                </Col>
+                                <Col xs="5" className="mt-2">
+                                    <Button close onClick={() => {this.state.open2=false; this.forceUpdate()}}/> 
+                                </Col>
+                            </Row>
+                        </CardHeader>
+                        <ModalBody>
+                            <div className="pl-lg-2">
+                                <Form>
+                                    <FormGroup>
+                                        <label>Reason</label>
+                                        <Input 
+                                            type="select" 
+                                            defaultValue={this.state.reason}
+                                            onChange={(e) => {this.setState({reason:e.target.value})}}
+                                        >
+                                            <option> </option>
+                                            <option>Work</option>
+                                            <option>Social</option>
+                                            <option>Money</option>
+                                            <option>Family</option>
+                                            <option>Other</option>
+                                        </Input>
+                                        <label>Stress Score</label>
+                                        <Input 
+                                            type="select" 
+                                            defaultValue={this.state.stress}
+                                            onChange={(e) => {this.setState({stress:e.target.value})}}
+                                        >
+                                            <option> </option>
+                                            <option>High</option>
+                                            <option>Moderate</option>
+                                            <option>Low</option>
+                                        </Input>
+                                        
+                                        <label>Date</label>
+                                        <Input 
+                                            class="form-control"
+                                            type="date" 
+                                            id="date-input"
+
+                                            defaultValue={this.state.date}
+                                            onChange={(e) => {this.setState({date:e.target.value})}}
+                                        />
+                                        <label>Time</label>
+                                        <Input 
+                                            class="form-control"
+                                            //format="hh:mm A"
+                                            type="time" 
+                                            id="time-input"
+                                            defaultValue={this.state.time}
+                                            onChange={(e) => {this.setState({time:e.target.value})}}
+                                        />
+
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label>Description</label>
+                                        <Input
+                                            className="form-control-alternative"
+                                            placeholder="Start your entry here ..."
+                                            rows="4"
+                                            type="textarea"
+                                            value={this.state.description}
+                                            onChange={e => this.setState({description: e.target.value})}
+                                        />
+                                    </FormGroup>
+                                </Form>
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color='primary' className='mt--2' onClick={() => {this.EditSubmit(this.state.curr_id)}}> Save </Button>
                         </ModalFooter>
                     </Card>
                 </Modal>

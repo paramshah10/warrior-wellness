@@ -16,6 +16,7 @@
 
 */
 import React from "react";
+//import "./profile-pic.scss";
 
 // reactstrap components
 import {
@@ -40,6 +41,7 @@ import "firebase/firestore";
 //var pic=new Image();
 //var pp="";
 //var pic = document.getElementsByClassName("card-profile-image");
+/*
 function changeImage(a) {
   document.getElementById("img").src=a;
 }
@@ -47,6 +49,10 @@ function changeImage(a) {
 function imageClick(e) {
   changeImage(e)
 }
+*/
+
+//var curr_pic=5;
+
 
 const SearchContext = React.createContext();
 
@@ -57,6 +63,7 @@ class Profile extends React.Component {
       email: "",
       firstName: "",
       lastName: "",
+      profilePic:1,
     }
   }
 
@@ -73,6 +80,8 @@ class Profile extends React.Component {
         });
       
       console.log(this.state);
+     // console.log("TESTING HERE!!!");
+     // console.log(this.state.profilePic);
     }
 
     // need to create a separate function to fetch user data since we cannot have an sync componentDidMount function
@@ -86,6 +95,14 @@ class Profile extends React.Component {
     const uid = localStorage.getItem("uid");
     
     void db.collection("users").doc(uid).update(this.state);
+  }
+
+  chooseAvatar(index) {
+    console.log("find ID: "+index)
+    document.getElementById("dog"+this.state.profilePic.toString()).className="pic";
+    document.getElementById("dog"+index.toString()).className="green";
+    //curr_pic=index;
+    this.forceUpdate();
   }
 
   render() {
@@ -105,6 +122,7 @@ class Profile extends React.Component {
                           alt="..."
                           className="rounded-circle"
                           id="img"
+                          src={require("assets/img/avatar/dog"+this.state.profilePic+".jpeg")}
                           //src={pic}
                           //src={require("assets/img/avatar/ppl1.png")}
                         />
@@ -156,13 +174,16 @@ class Profile extends React.Component {
                   <div className="text-center">
                     <h3>
                       {this.state.firstName + " " + this.state.lastName}
-                      <span className="font-weight-light">, 19</span>
+                      {/*<span className="font-weight-light">, 19</span>*/}
                     </h3>
+                    
+                    {/* 
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2" />
                       Los Angeles, United States
                     </div>
-                    {/* <hr className="my-4" />
+
+                    <hr className="my-4" />
                     <p>
                       Ryan — the name taken by Melbourne-raised, Brooklyn-based
                       Nick Murphy — writes, performs and records all of his own
@@ -276,56 +297,96 @@ class Profile extends React.Component {
                         </Col>
                       </Row>
 
-                      <Row>
-                      <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-image"
-                            >
-                              Profile Picture
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-image"
-                              type="url"
-                              onChange={e => changeImage(e.target.value)}
-                            />
-                            <img
-                          alt="..."
-                          style={{width:80, height:80, borderRadius:'50%'}}
-                          //className="rounded-circle"
-                          id="ava0"
+
+                    <hr className="my-4" />
+                    <h6 className="heading-small text-muted mb-4">Profile Picture</h6>
+                    <row>
+                    <div class="pic-group">
+                    <div id="dog1" class="pic" >
+                      <img
                           src={require("assets/img/avatar/dog1.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(1);
+                            this.setState({profilePic:1})}}
                         />
+                    </div>
+                    <div class="pic" id="dog2">
                         <img
-                          alt="..."
-                          style={{width:80, height:80, borderRadius:'50%'}}
-                          //width='60'
-                          //height='60'
-                          //className="rounded-circle"
-                          id="ava1"
                           src={require("assets/img/avatar/dog2.jpeg")}
-                          onClick={console.log("click image")}
+                          onClick={()=>{
+                            this.chooseAvatar(2);
+                            this.setState({profilePic:2})}}
                         />
+                    </div>
+                    <div className="pic"id="dog3">
                         <img
-                          alt="..."
-                          width='80'
-                          height='80'
-                          className="rounded-circle"
-                          id="ava2"
                           src={require("assets/img/avatar/dog3.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(3);
+                            this.setState({profilePic:3})}}
                         />
+                    </div>
+                    <div className="pic"id="dog4">
                         <img
-                          alt="..."
-                          style={{width:80, height:80, borderRadius:40}}
-                          //className="rounded-circle"
-                          id="ava3"
                           src={require("assets/img/avatar/dog4.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(4);
+                            this.setState({profilePic:4})}}
                         />
-                          </FormGroup>
-                        </Col>
-                      </Row>
+                    </div>
+                    <div className="pic" id="dog5">
+                      <img
+                          src={require("assets/img/avatar/dog5.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(5);
+                            this.setState({profilePic:5})}}
+                        />
+                    </div>
+                    </div>
+
+                    <div class="pic-group">
+                    <div className="pic" id="dog6">
+                        <img
+                          src={require("assets/img/avatar/dog6.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(6);
+                            this.setState({profilePic:6})}}
+                        />
+                    </div>
+                    <div className="pic"id="dog7">
+                        <img
+                          src={require("assets/img/avatar/dog7.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(7);
+                            this.setState({profilePic:7})}}
+                        />
+                    </div>
+                    <div className="pic"id="dog8">
+                        <img
+                          src={require("assets/img/avatar/dog8.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(8);
+                            this.setState({profilePic:8})}}
+                        />
+                    </div>
+                    <div className="pic" id="dog9">
+                      <img
+                          src={require("assets/img/avatar/dog9.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(9);
+                            this.setState({profilePic:9})}}
+                        />
+                    </div>
+                    <div className="pic" id="dog10">
+                      <img
+                          src={require("assets/img/avatar/dog10.jpeg")}
+                          onClick={()=>{
+                            this.chooseAvatar(10);
+                            this.setState({profilePic:10})}}
+                        />
+                    </div>
+                    </div>
+                    </row>
 
 
                     </div>
@@ -353,6 +414,7 @@ class Profile extends React.Component {
     );
   }
 }
+
 
 export default Profile;
 //export {firstName,lastName};

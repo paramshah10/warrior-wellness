@@ -106,7 +106,7 @@ class Journal extends React.Component {
                         content: content,
                         date_edited: today,
                         subject: subject,
-                    })
+                    }).then(result => {window.location.reload(true)})
             })
             //this.forceUpdate()
         })
@@ -124,7 +124,7 @@ class Journal extends React.Component {
         })
     }
 
-    reload=()=>window.location.reload() // won't store new edits, would reload to 
+    //reload=()=>window.location.reload() // won't store new edits, would reload to 
 
     render() {
       return(
